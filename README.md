@@ -24,12 +24,19 @@ A web‑based carbon modelling tool (Java Spring) to show customers potential de
 <details>
   <summary>Table of Contents</summary>
   <ol>
-    <!-- <li>
+    <li>
       <a href="#about-the-project">About The Project</a>
       <ul>
-        <li><a href="#built-with">Built With</a></li>
+        <!-- <li><a href="#built-with">Built With</a></li> -->
+        <li>
+        <a href="#system-design-document">System Design Document</a>
+            <ul>
+            <li><a href="#skills-matrix">Skills Matrix</a></li>
+            </ul>
+        </li>
+        <!-- <li><a href="#built-with">Built With</a></li> -->
       </ul>
-    </li> -->
+    </li>
     <!-- <li>
       <a href="#getting-started">Getting Started</a>
       <ul>
@@ -44,9 +51,9 @@ A web‑based carbon modelling tool (Java Spring) to show customers potential de
 
 <!-- ABOUT THE PROJECT -->
 
-<!-- ## About The Project
+## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+<!-- [![Product Name Screen Shot][product-screenshot]](https://example.com)
 
 Here's a blank template to get started. To avoid retyping too much info, do a search and replace with your text editor for the following: `github_username`, `repo_name`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `project_title`, `project_description`, `project_license`
 
@@ -64,6 +71,18 @@ Here's a blank template to get started. To avoid retyping too much info, do a se
 - [![JQuery][JQuery.com]][JQuery-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p> -->
+
+### System Design Document
+
+System Design Document (SDD) outlines specifications used to build the system; a high-level overview of the system architecture; and data design of the system.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+#### Skills Matrix
+
+![skills matrix](/images/skills_matrix.png)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- GETTING STARTED -->
 
