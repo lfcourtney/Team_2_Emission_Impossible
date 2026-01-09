@@ -132,20 +132,20 @@ This is an example of how to list things you need to use the software and how to
 
 ## Roadmap
 
-- [] System Design Document (SDD)
-  - [] Database Design ie, Entity-relationship diagram (ERD)
-  - [] PEST analysis; possible VMOST and SWOT analysis too
-  - [] Prototype Design, eg, wireframe
+- [ ] System Design Document (SDD)
+  - [ ] Database Design ie, Entity-relationship diagram (ERD)
+  - [ ] PEST analysis; possible VMOST and SWOT analysis too
+  - [ ] Prototype Design, eg, wireframe
   - [x] Risk Matrix
-  - [] Risk Register
+  - [ ] Risk Register
   - [x] Skills matrix
-  - [] User stories; at least 3 personas
-  - [] Work Breakdown Structure (WBS)
-  - [] Swim-lane diagram (or UML activity diagram)
-  - [] UML class diagram
-  - [] Gantt chart (alternatively burnup or burndown chart)
-  - [] Consider technical debts. Need to mention this in presentation.
-- [] Set up Sprint Boot project
+  - [ ] User stories; at least 3 personas
+  - [ ] Work Breakdown Structure (WBS)
+  - [ ] Swim-lane diagram (or UML activity diagram)
+  - [ ] UML class diagram
+  - [ ] Gantt chart (alternatively burnup or burndown chart)
+  - [ ] Consider technical debts. Need to mention this in presentation.
+- [ ] Set up Sprint Boot project
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
