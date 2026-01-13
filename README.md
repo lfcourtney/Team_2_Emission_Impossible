@@ -65,6 +65,7 @@ Here's a blank template to get started. To avoid retyping too much info, do a se
 - ![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white "Java 25")
 - ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB "React.js")
 - ![Spring](https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white "Spring Boot")
+- ![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white "Vite")
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -104,7 +105,11 @@ This is an example of how to list things you need to use the software and how to
 
 ### Installation
 
-1. Run `npm install` in `./frontend`
+- Frontend Vite React Project
+
+1. Change directory `cd` to `./frontend`
+2. Install dependencies: `npm install`
+3. Start development server: `npm run dev`
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
