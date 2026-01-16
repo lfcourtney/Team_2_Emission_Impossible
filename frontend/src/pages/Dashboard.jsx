@@ -7,6 +7,9 @@ import { kpiData, emissionsBySource, recentActivity } from '../data/mockData';
 const Dashboard = () => {
   return (
     <div className="p-8 space-y-8">
+      {/* Client Name */}
+      <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Stratix Solutions LLC</h1>
+
       {/* Filter Bar */}
       <FilterBar />
 
