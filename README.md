@@ -31,8 +31,14 @@ A web‑based carbon modelling tool (Java Spring) to show customers potential de
         <li>
         <a href="#system-design-document">System Design Document</a>
             <ul>
+            <li><a href="#pestle-analysis">PESTLE Analysis</a></li>
+            <li><a href="#vmost-analysis">VMOST Analysis</a></li>
             <li><a href="#risk-matrix">Risk Matrix</a></li>
+            <li><a href="#risk-register">Risk Register</a></li>
             <li><a href="#skills-matrix">Skills Matrix</a></li>
+            <!-- <li><a href="#user-personas">User Personas</a></li> -->
+            <li><a href="#user-stories">User Stories</a></li>
+            <li><a href="#work-breakdown-structure-wbs">Work Breakdown Structure (WBS)</a></li>
             </ul>
         </li>
       </ul>
@@ -75,15 +81,51 @@ System Design Document (SDD) outlines specifications used to build the system; a
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+#### PESTLE Analysis
+
+![pestle analysis](/images/pestle_analysis.png)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+#### VMOST Analysis
+
+![vmost analysis](/images/vmost_analysis.png)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 #### Risk Matrix
 
 ![risk matrix](/images/risk_matrix.png)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+#### Risk Register
+
+![risk register](/images/risk_register.png)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 #### Skills Matrix
 
 ![skills matrix](/images/skills_matrix.png)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- #### User Personas
+
+![skills matrix](/images/skills_matrix.png)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p> -->
+
+#### User Stories
+
+![user stories](/images/user_stories.png)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+#### Work Breakdown Structure (WBS)
+
+![work breakdown structure](/images/work_breakdown_structure.png)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -117,18 +159,18 @@ This is an example of how to list things you need to use the software and how to
 
 - [ ] System Design Document (SDD)
   - [ ] Database Design ie, Entity-relationship diagram (ERD)
-  - [ ] PEST analysis; possible VMOST and SWOT analysis too
+  - [x] PEST analysis; possible VMOST and SWOT analysis too
   - [ ] Prototype Design, eg, wireframe
   - [x] Risk Matrix
-  - [ ] Risk Register
+  - [x] Risk Register
   - [x] Skills matrix
-  - [ ] User stories; at least 3 personas
-  - [ ] Work Breakdown Structure (WBS)
+  - [x] User stories; at least 3 personas
+  - [x] Work Breakdown Structure (WBS)
   - [ ] Swim-lane diagram (or UML activity diagram)
   - [ ] UML class diagram
   - [ ] Gantt chart (alternatively burnup or burndown chart)
   - [ ] Consider technical debts. Need to mention this in presentation.
-- [ ] Set up Sprint Boot project
+- [x] Set up Sprint Boot project
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
