@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Leaf } from 'lucide-react';
 
 const Login = ({ onLogin }) => {
   const [email, setEmail] = useState('');
@@ -16,7 +17,7 @@ const Login = ({ onLogin }) => {
       <div className="max-w-md w-full bg-white dark:bg-gray-800 rounded-xl shadow-2xl p-8 border border-gray-700">
         <div className="text-center mb-8">
              <div className="w-16 h-16 bg-green-500/10 rounded-2xl mx-auto flex items-center justify-center mb-4">
-                <span className="text-3xl">🌿</span>
+                <span className="text-3xl"><Leaf className="w-6" /></span>
              </div>
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white">Welcome Back</h2>
             <p className="text-gray-500 mt-2">Sign in to your GreenOps Dashboard</p>

@@ -1,16 +1,37 @@
-# React + Vite
+# Dashboard Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the interactive frontend for the Emissions tool. It's built to be fast, modern, and demonstrate "GreenOps" concepts with live visualizations.
 
-Currently, two official plugins are available:
+## 🚀 Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Core Framework
+*   **Vite**: The build tool. It makes the dev server instant and the production build tiny.
+*   **React 19**: The UI library. We're using functional components and Hooks (`useState`, `useEffect`, `useMemo`).
 
-## React Compiler
+### Styling & UI
+*   **Tailwind CSS 4**: For CSS Styling.
+*   **Lucide React**: Icon set used across the Front-End.
+*   **Framer Motion**: Handles animations used to keep the dashboard feeling dynamic.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Data & Visualization
+*   **Recharts**: The charting library. Used for the real-time "Emissions vs. Prediction" area chart. It handles the gradients and tooltips.
+*   **Mock Data Pattern**: Currently, data is simulated in `src/data/mockData.js` to demonstrate the UI before the backend is ready.
 
-## Expanding the ESLint configuration
+## 🛠️ Key Features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+1.  **Dashboard**: A responsive grid layout with KPI cards and charts.
+2.  **Simulator Panel**: A sidebar that lets you toggle GreenOps levers (Time Shifting, Region Shifting) and see the immediate impact on the charts.
+3.  **Live Data Feed**: The dashboard simulates real-time data jitter to look like a live control center.
+4.  **Dark Mode**: Fully supported via Tailwind (check `index.css` and system preferences).
+
+## 📦 Install & Run
+
+```bash
+# Install dependencies
+npm install
+
+# Run the dev server
+npm run dev
+```
+
+Then open `http://localhost:5173`.
