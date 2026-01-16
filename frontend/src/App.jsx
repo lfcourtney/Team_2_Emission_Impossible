@@ -4,7 +4,7 @@ import Dashboard from './pages/Dashboard';
 import Sidebar from './components/Sidebar';
 import Header from './components/Header';
 
-import { ServerStackIcon } from "@heroicons/react/24/solid";
+import { Server } from 'lucide-react';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(true);
@@ -32,7 +32,7 @@ function App() {
 
                 <div className="min-h-screen flex flex-col items-center justify-center">
                   <span>
-                    <ServerStackIcon className="h-9 w-9" />
+                    <Server className="h-9 w-9" />
                   </span>
                   <h2 className="text-xl font-semibold">Work in Progress</h2>
                   <p>{activePage} view is coming soon.</p>

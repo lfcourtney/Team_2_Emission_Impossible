@@ -1,22 +1,20 @@
 import React from 'react';
 
-import { RectangleGroupIcon } from '@heroicons/react/24/solid';
-
-import { ChartBarSquareIcon, ArrowTrendingUpIcon, UserIcon, PencilSquareIcon, Cog6ToothIcon } from '@heroicons/react/24/solid';
+import { LayoutDashboard, TrendingUp, Users, FileText, Settings, LayoutGrid } from 'lucide-react';
 
 const Sidebar = ({ activePage, setActivePage }) => {
-    const menuItems = [
-        { name: 'Dashboard', icon: ChartBarSquareIcon },
-        { name: 'Analytics', icon: ArrowTrendingUpIcon },
-        { name: 'Clients', icon: UserIcon },
-        { name: 'Reports', icon: PencilSquareIcon },
-        { name: 'Settings', icon: Cog6ToothIcon },
-    ];
+  const menuItems = [
+        { name: 'Dashboard', icon: LayoutDashboard },
+        { name: 'Analytics', icon: TrendingUp },
+        { name: 'Clients', icon: Users },
+        { name: 'Reports', icon: FileText },
+        { name: 'Settings', icon: Settings },
+      ];
 
     return (
         <aside className="w-64 fixed h-full bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 z-10 hidden md:flex flex-col">
             <div className="h-16 flex items-center px-8 border-b border-gray-200 dark:border-gray-700">
-              <RectangleGroupIcon className='w-8 mr-2' />
+              <LayoutGrid className='w-8 h-8 mr-2 text-white' />
                 <h1 className="text-xl font-bold bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">
                   EcoApp
                 </h1>
