@@ -1,20 +1,24 @@
 import React from 'react';
 
+import { RectangleGroupIcon } from '@heroicons/react/24/solid';
+
+import { ChartBarSquareIcon, ArrowTrendingUpIcon, UserIcon, PencilSquareIcon, Cog6ToothIcon } from '@heroicons/react/24/solid';
+
 const Sidebar = ({ activePage, setActivePage }) => {
     const menuItems = [
-        { name: 'Dashboard', icon: '📊' },
-        { name: 'Analytics', icon: '📈' },
-        { name: 'Facilities', icon: '🏢' },
-        { name: 'Reports', icon: '📑' },
-        { name: 'Settings', icon: '⚙️' },
+        { name: 'Dashboard', icon: ChartBarSquareIcon },
+        { name: 'Analytics', icon: ArrowTrendingUpIcon },
+        { name: 'Clients', icon: UserIcon },
+        { name: 'Reports', icon: PencilSquareIcon },
+        { name: 'Settings', icon: Cog6ToothIcon },
     ];
 
     return (
         <aside className="w-64 fixed h-full bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 z-10 hidden md:flex flex-col">
             <div className="h-16 flex items-center px-8 border-b border-gray-200 dark:border-gray-700">
-                <div className="text-2xl mr-2">hicon</div>
+              <RectangleGroupIcon className='w-8 mr-2' />
                 <h1 className="text-xl font-bold bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">
-                  App Name
+                  EcoApp
                 </h1>
             </div>
 
@@ -29,8 +33,8 @@ const Sidebar = ({ activePage, setActivePage }) => {
                             : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700'
                         }`}
                     >
-                        <span className="mr-3 text-lg">{item.icon}</span>
-                        {item.name}
+                      <item.icon className="w-5 h-5 mr-3" />
+                      {item.name}
                     </button>
                 ))}
             </nav>

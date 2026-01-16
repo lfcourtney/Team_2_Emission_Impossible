@@ -1,4 +1,5 @@
 import React from 'react';
+import { BellIcon } from "@heroicons/react/24/solid";
 
 const Header = ({ title }) => {
     return (
@@ -7,12 +8,15 @@ const Header = ({ title }) => {
 
             <div className="flex items-center gap-4">
                 <button className="p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-white relative">
-                    Noti
+                    <BellIcon className="w-6" />
                     <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
                 </button>
-                <button className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">
-                    Generate Report
-                </button>
+                <select className="bg-gray-50 dark:bg-gray-900 border-none text-sm rounded-lg p-2.5 focus:ring-2 focus:ring-green-500 outline-none dark:text-white">
+                    <option>Select Client...</option>
+                    <option>Government Project</option>
+                    <option>Client A</option>
+                    <option>Client B</option>
+                </select>
             </div>
         </header>
     );
