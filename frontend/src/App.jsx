@@ -1,36 +1,49 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState } from 'react';
+import Login from './pages/Login';
+import Dashboard from './pages/Dashboard';
+import Sidebar from './components/Sidebar';
+import Header from './components/Header';
+
+import { ServerStackIcon } from "@heroicons/react/24/solid";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [isAuthenticated, setIsAuthenticated] = useState(true);
+  const [activePage, setActivePage] = useState('Dashboard');
+
+  const handleLogin = () => {
+    setIsAuthenticated(true);
+  };
+
+  if (!isAuthenticated) {
+    return <Login onLogin={handleLogin} />;
+  }
 
   return (
-    <>
-      <div className="flex justify-center items-center mb-4">
+    <div className="flex bg-gray-50 dark:bg-gray-900 min-h-screen text-gray-900 dark:text-gray-100 font-sans">
+      <Sidebar activePage={activePage} setActivePage={setActivePage} />
 
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+      <main className="flex-1 md:ml-64 flex flex-col min-h-screen transition-all duration-300">
+        <Header title={activePage} />
+
+        <div className="flex-1 overflow-y-auto">
+            {activePage === 'Dashboard' && <Dashboard />}
+            {activePage !== 'Dashboard' && (
+              <div className="p-8 flex items-center justify-center h-full text-gray-400">
+
+                <div className="min-h-screen flex flex-col items-center justify-center">
+                  <span>
+                    <ServerStackIcon className="h-9 w-9" />
+                  </span>
+                  <h2 className="text-xl font-semibold">Work in Progress</h2>
+                  <p>{activePage} view is coming soon.</p>
+                </div>
+
+              </div>
+            )}
+        </div>
+      </main>
+    </div>
+  );
 }
 
-export default App
+export default App;
