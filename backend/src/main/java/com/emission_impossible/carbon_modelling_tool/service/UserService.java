@@ -12,6 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Works with UserRepository, the class that is able to interact with the User
+ * database storing the logged in users directly.
+ */
 @Service
 public class UserService implements UserDetailsService{
 

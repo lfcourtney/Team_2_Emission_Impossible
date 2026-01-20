@@ -20,6 +20,9 @@ import javax.crypto.SecretKey;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Enforce that all requests to /api/** have JWT token in request header
+ */
 public class JwtTokenValidator extends OncePerRequestFilter {
 
     @Override

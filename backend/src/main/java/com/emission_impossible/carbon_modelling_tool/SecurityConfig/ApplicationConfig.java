@@ -24,8 +24,26 @@ public class ApplicationConfig {
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
 
+
                 .sessionManagement(management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(
+                            /*
+                            /api/** → authenticated()
+
+                            Any request whose path starts with /api/
+
+                            Must be authenticated
+
+                            Your JwtTokenValidator filter is expected to validate the JWT and set the security context
+
+                            anyRequest().permitAll()
+
+                            Every other request that does NOT match /api/**
+
+                            Is allowed without authentication
+
+                            No login, no JWT, no credentials required
+                             */
                         authorize -> authorize.requestMatchers("/api/**")
                                 .authenticated().anyRequest().permitAll())
                 .addFilterBefore(new JwtTokenValidator(), BasicAuthenticationFilter.class)

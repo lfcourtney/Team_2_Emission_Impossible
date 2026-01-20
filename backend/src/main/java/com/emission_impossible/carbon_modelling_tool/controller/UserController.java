@@ -28,14 +28,17 @@ import java.util.Optional;
 @RequestMapping("/auth")
 public class UserController {
 
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    private final UserRepository userRepository;
+    // Password Encoder comes from spring boot security
+    private final PasswordEncoder passwordEncoder;
+    private final UserService customUserDetails;
 
-    @Autowired
-    private UserService customUserDetails;
-
+    // Dependency injection
+    public UserController(UserRepository userRepository, PasswordEncoder passwordEncoder, UserService customUserDetails) {
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+        this.customUserDetails = customUserDetails;
+    }
 
     @PostMapping("/signup")
     public ResponseEntity<AuthResponse> createUserHandler(@RequestBody User user)  {
@@ -44,9 +47,12 @@ public class UserController {
         String fullName = user.getFullName();
 
         Optional<User> isEmailExist = userRepository.findByEmail(email);
-        if (isEmailExist.isEmpty()) {
+
+        // Not empty. Therefore, user exists. Therefore, throw exception.
+        if (!isEmailExist.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Email Is Already Used With Another Account");
         }
+
         User createdUser = new User();
         createdUser.setEmail(email);
         createdUser.setFullName(fullName);
@@ -58,6 +64,11 @@ public class UserController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String token = JwtProvider.generateToken(authentication);
 
+
+        //NOTE: Once user is signed in.
+        // The way to get authenticated user:
+        //Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        //String currentPrincipalName = authentication.getName();
 
         AuthResponse authResponse = new AuthResponse();
         authResponse.setJwt(token);
@@ -88,7 +99,7 @@ public class UserController {
         authResponse.setJwt(token);
         authResponse.setStatus(true);
 
-        return new ResponseEntity<>(authResponse,HttpStatus.OK);
+        return new ResponseEntity<AuthResponse>(authResponse,HttpStatus.OK);
     }
 
 

@@ -133,17 +133,13 @@ System Design Document (SDD) outlines specifications used to build the system; a
 
 ## Getting Started
 
-<!-- This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+1. Ensure `carbon-modelling-tool` database exists. In a localhost instance of MySQL:
 
-### Prerequisites
+```
+DROP DATABASE IF EXISTS `carbon-modelling-tool`;
 
-This is an example of how to list things you need to use the software and how to install them.
-
-- npm
-  ```sh
-  npm install npm@latest -g
-  ``` -->
+CREATE DATABASE `carbon-modelling-tool`;
+```
 
 ### Installation
 
