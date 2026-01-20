@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.jdbc.autoconfigure.DataSourceAutoConfiguration;
 
 //TODO: Remove exclude property. Has been added since there is no database yet.
-@SpringBootApplication(exclude={DataSourceAutoConfiguration.class})
+@SpringBootApplication()
 public class CarbonModellingToolApplication {
 
 	public static void main(String[] args) {
