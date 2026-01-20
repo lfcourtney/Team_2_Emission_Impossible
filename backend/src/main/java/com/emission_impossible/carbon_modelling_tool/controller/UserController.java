@@ -2,7 +2,7 @@ package com.emission_impossible.carbon_modelling_tool.controller;
 
 
 import com.emission_impossible.carbon_modelling_tool.SecurityConfig.JwtProvider;
-import com.emission_impossible.carbon_modelling_tool.User;
+import com.emission_impossible.carbon_modelling_tool.model.User;
 import com.emission_impossible.carbon_modelling_tool.repository.UserRepository;
 import com.emission_impossible.carbon_modelling_tool.response.AuthResponse;
 import com.emission_impossible.carbon_modelling_tool.service.UserService;

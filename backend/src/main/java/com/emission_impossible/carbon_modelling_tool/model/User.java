@@ -1,4 +1,4 @@
-package com.emission_impossible.carbon_modelling_tool;
+package com.emission_impossible.carbon_modelling_tool.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;

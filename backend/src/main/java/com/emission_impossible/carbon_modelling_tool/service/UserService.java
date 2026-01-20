@@ -1,6 +1,6 @@
 package com.emission_impossible.carbon_modelling_tool.service;
 
-import com.emission_impossible.carbon_modelling_tool.User;
+import com.emission_impossible.carbon_modelling_tool.model.User;
 import com.emission_impossible.carbon_modelling_tool.repository.UserRepository;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
