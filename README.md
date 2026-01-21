@@ -31,6 +31,7 @@ A web‑based carbon modelling tool (Java Spring) to show customers potential de
         <li>
         <a href="#system-design-document">System Design Document</a>
             <ul>
+            <li><a href="#entity-relationship-diagram-erd">Entity-relationship diagram (ERD)</a></li>
             <li><a href="#pestle-analysis">PESTLE Analysis</a></li>
             <li><a href="#vmost-analysis">VMOST Analysis</a></li>
             <li><a href="#risk-matrix">Risk Matrix</a></li>
@@ -78,6 +79,12 @@ Here's a blank template to get started. To avoid retyping too much info, do a se
 ### System Design Document
 
 System Design Document (SDD) outlines specifications used to build the system; a high-level overview of the system architecture; and data design of the system.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+#### Entity-relationship diagram (ERD)
+
+![Entity-relationship diagram](/images/erd_diagram.png)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -154,7 +161,7 @@ CREATE DATABASE `carbon-modelling-tool`;
 ## Roadmap
 
 - [ ] System Design Document (SDD)
-  - [ ] Database Design ie, Entity-relationship diagram (ERD)
+  - [x] Database Design ie, Entity-relationship diagram (ERD)
   - [x] PEST analysis; possible VMOST and SWOT analysis too
   - [ ] Prototype Design, eg, wireframe
   - [x] Risk Matrix

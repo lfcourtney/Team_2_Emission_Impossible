@@ -6,7 +6,6 @@ import com.emission_impossible.carbon_modelling_tool.model.User;
 import com.emission_impossible.carbon_modelling_tool.repository.UserRepository;
 import com.emission_impossible.carbon_modelling_tool.response.AuthResponse;
 import com.emission_impossible.carbon_modelling_tool.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -118,12 +117,14 @@ public class UserController {
 
             throw new BadCredentialsException("Invalid username and password");
         }
+
         if(!passwordEncoder.matches(password,userDetails.getPassword())) {
             System.out.println("Sign in userDetails - password mismatch"+userDetails);
 
             throw new BadCredentialsException("Invalid password");
 
         }
+
         return new UsernamePasswordAuthenticationToken(userDetails,null,userDetails.getAuthorities());
 
     }

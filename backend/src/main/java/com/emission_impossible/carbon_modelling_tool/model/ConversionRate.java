@@ -1,16 +1,17 @@
+package com.emission_impossible.carbon_modelling_tool.model;
 import jakarta.persistence.*;
-import java.time.LocalDate;
 
 @Entity
-@Table(name = "emissions_data")
-public class EmissionsData {
+@Table(name = "conversion_rates")
+public class ConversionRate {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private LocalDate date;
-    private double value;
+    private int year;
+    private double rate;
+    private String unit;
 
     @ManyToOne
     @JoinColumn(name = "emission_type_id")
@@ -20,12 +21,13 @@ public class EmissionsData {
     @JoinColumn(name = "location_id")
     private Location location;
 
-    protected EmissionsData() {}
+    protected ConversionRate() {}
 
     // Constructor
-    public EmissionsData(LocalDate date, double value, EmissionType emissionType, Location location) {
-        this.date = date;
-        this.value = value;
+    public ConversionRate(int year, double rate, String unit, EmissionType emissionType, Location location) {
+        this.year = year;
+        this.rate = rate;
+        this.unit = unit;
         this.emissionType = emissionType;
         this.location = location;
     }
@@ -34,11 +36,14 @@ public class EmissionsData {
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
-    public LocalDate getDate() { return date; }
-    public void setDate(LocalDate date) { this.date = date; }
+    public int getYear() { return year; }
+    public void setYear(int year) { this.year = year; }
 
-    public double getValue() { return value; }
-    public void setValue(double value) { this.value = value; }
+    public double getRate() { return rate; }
+    public void setRate(double rate) { this.rate = rate; }
+
+    public String getUnit() { return unit; }
+    public void setUnit(String unit) { this.unit = unit; }
 
     public EmissionType getEmissionType() { return emissionType; }
     public void setEmissionType(EmissionType emissionType) { this.emissionType = emissionType; }

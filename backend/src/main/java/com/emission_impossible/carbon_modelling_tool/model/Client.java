@@ -1,3 +1,5 @@
+package com.emission_impossible.carbon_modelling_tool.model;
+
 import jakarta.persistence.*;
 import java.util.List;
 
