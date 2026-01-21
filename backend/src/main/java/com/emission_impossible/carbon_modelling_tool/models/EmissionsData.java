@@ -20,10 +20,6 @@ public class EmissionsData {
     @JoinColumn(name = "location_id")
     private Location location;
 
-    // Optionally link to precomputed CO2e
-    @OneToMany(mappedBy = "emissionsData", cascade = CascadeType.ALL)
-    private java.util.List<ComputedEmission> computedEmissions;
-
     protected EmissionsData() {}
 
     // Constructor
@@ -49,7 +45,4 @@ public class EmissionsData {
 
     public Location getLocation() { return location; }
     public void setLocation(Location location) { this.location = location; }
-
-    public java.util.List<ComputedEmission> getComputedEmissions() { return computedEmissions; }
-    public void setComputedEmissions(java.util.List<ComputedEmission> computedEmissions) { this.computedEmissions = computedEmissions; }
 }
