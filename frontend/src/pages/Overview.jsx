@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo } from 'react';
 import { CalculatedEmissionsService } from '../fakeBackend/services/CalculatedEmissionsService';
 import ModernEmissionTrendChart from '../components/ModernEmissionTrendChart';
 import WeatherCorrelationChart from '../components/WeatherCorrelationChart';
+import SourceBreakdown from '../components/SourceBreakdown';
 import StatCard from '../components/StatCard';
 import LiveTelemetry from '../components/LiveTelemetry';
 import { useData } from '../contexts/DataContext';
@@ -34,6 +35,14 @@ export default function Overview() {
         }, 500);
     }, [selectedClientId, selectedLocationId]);
 
+    /* Memoization (useMemo()) allows a function to cache its results based on its inputs.
+    If a component calls these functions with the same inputs again, it can return the cached result 
+    instead of performing expensive calculations again. It is also easier than iterating through an object.
+
+    If our component widgets re-render (e.g. user switches timeframe), we don't want to recalculate stats unnecessarily!
+    */
+
+    // Calculate key statistics from data object returned from API endpoint.
     const stats = useMemo(() => {
         const totalCO2e = data.reduce((acc, curr) => acc + (curr.co2e || 0), 0);
         
@@ -43,10 +52,28 @@ export default function Overview() {
         const percentChange = lastMonth > 0 ? ((difference / lastMonth) * 100).toFixed(1) : 0;
 
         // Group by type for breakdown
+        // We first call the reduce() function with an accumulator object 'acc' and the current data point 'curr'.
         const byType = data.reduce((acc, curr) => {
+
+            // We define type using the emissionTypeName property from curr (Current data point).
             const type = curr.emissionTypeName || 'Other';
+
+            // If the type does not exist in the accumulator, we initialize it to 0.
             if (!acc[type]) acc[type] = 0;
+            // We then add the co2e value of the current data point to the corresponding type in the accumulator.
             acc[type] += (curr.co2e || 0);
+
+            // We then return the accumulator for the next iteration.
+            return acc;
+        }, {});
+
+        // Improved version that includes scope (we retain original for legacy purposes)
+        const byTypeWithScope = data.reduce((acc, curr) => {
+            const type = curr.emissionTypeName || 'Other';
+            const scope = curr.scope || 3;                  // Default to Scope 3 if undefined
+
+            if (!acc[type]) acc[type] = { total: 0, scope: scope };
+            acc[type].total += (curr.co2e || 0);
             return acc;
         }, {});
 
@@ -55,7 +82,7 @@ export default function Overview() {
         const topContributor = sortedTypes.length > 0 ? sortedTypes[0][0] : 'None';
 
         return { totalCO2e, totalCount: data.length, percentChange, topContributor, byType };
-    }, [data]);
+    }, [data]); // If the data object changes, THEN recalculate stats.
 
     // Use state-based budget
     const budgetUsed = ((stats.totalCO2e / annualBudget) * 100).toFixed(1);
@@ -159,45 +186,8 @@ export default function Overview() {
                         <LiveTelemetry />
                     </div>
 
-                    {/* Side Breakdown Panel (Donut Chart Replacement - Simple Bars for now) */}
-                    <div className="bg-white/5 backdrop-blur-sm border border-white/5 rounded-2xl p-6 shadow-xl flex flex-col flex-1">
-                        <h3 className="text-lg font-heading font-bold text-white mb-6">Source Breakdown</h3>
-                        
-                        <div className="flex-1 space-y-6">
-                            {Object.entries(stats.byType).map(([type, value], index) => {
-                                const percent = stats.totalCO2e > 0 ? (value / stats.totalCO2e) * 100 : 0;
-                                const colors = ['bg-secondary', 'bg-blue-500', 'bg-amber-500', 'bg-purple-500'];
-                                const color = colors[index % colors.length];
-                                
-                                return (
-                                    <div key={type} className="group cursor-pointer">
-                                        <div className="flex justify-between text-sm mb-2">
-                                            <span className="text-gray-300 font-medium group-hover:text-white transition-colors">{type}</span>
-                                            <div className="text-right">
-                                                <span className="text-white font-bold">{value.toFixed(0)}</span>
-                                                <span className="text-xs text-gray-500 ml-1">kg</span>
-                                            </div>
-                                        </div>
-                                        <div className="h-2 w-full bg-white/5 rounded-full overflow-hidden">
-                                            <div 
-                                                className={`h-full ${color} rounded-full transition-all duration-1000 ease-out`} 
-                                                style={{ width: `${percent}%` }}
-                                            ></div>
-                                        </div>
-                                        <div className="mt-1 text-xs text-gray-500 text-right">{percent.toFixed(1)}%</div>
-                                    </div>
-                                );
-                            })}
-                            
-                            {Object.keys(stats.byType).length === 0 && (
-                                <div className="text-gray-500 text-center py-10">No breakdown available</div>
-                            )}
-                        </div>
-
-                        <button className="mt-6 w-full py-3 bg-white/5 hover:bg-white/10 text-secondary text-sm font-bold rounded-xl border border-white/5 transition-all">
-                            View Detailed Report
-                        </button>
-                    </div>
+                <SourceBreakdown stats={stats} />
+                    
                 </div>
             </div>
 
