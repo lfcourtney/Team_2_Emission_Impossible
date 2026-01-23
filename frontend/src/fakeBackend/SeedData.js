@@ -59,7 +59,26 @@ export function seedDatabase() {
     desc: "Petrol/diesel for company vehicles"
   });
 
+  const wasteId = generateId();
+  db.emissionTypes.push({
+    id: wasteId,
+    name: "Waste Generation",
+    unit: "tonnes",
+    scope: '3',
+    desc: "General office waste sent to landfill"
+  });
+
+  const travelId = generateId();
+  db.emissionTypes.push({
+      id: travelId,
+      name: "Business Travel",
+      unit: "km",
+      scope: '3',
+      desc: "Flights and rail travel"
+  });
+
   // CONVERSION RATES (Per location and emission type)
+  // Dublin Rates
   db.conversionRates.push({
     id: generateId(),
     emissionTypeId: electricityId,
@@ -71,6 +90,27 @@ export function seedDatabase() {
   });
 
   db.conversionRates.push({
+      id: generateId(),
+      emissionTypeId: wasteId,
+      locationId: dublinOfficeId,
+      year: 2024,
+      rate: 450.0,
+      unit: "kgCO2e/tonne",
+      desc: "Municipal waste factor"
+  });
+
+  db.conversionRates.push({
+      id: generateId(),
+      emissionTypeId: travelId,
+      locationId: dublinOfficeId,
+      year: 2024,
+      rate: 0.15,
+      unit: "kgCO2e/km",
+      desc: "Mixed business travel factor"
+  });
+
+  // London Rates
+  db.conversionRates.push({
     id: generateId(),
     emissionTypeId: electricityId,
     locationId: londonOfficeId,
@@ -78,6 +118,26 @@ export function seedDatabase() {
     rate: 0.19,
     unit: "kgCO2e/kWh",
     desc: "UK grid electricity factor 2024"
+  });
+
+  db.conversionRates.push({
+      id: generateId(),
+      emissionTypeId: wasteId,
+      locationId: londonOfficeId,
+      year: 2024,
+      rate: 450.0,
+      unit: "kgCO2e/tonne",
+      desc: "Municipal waste factor"
+  });
+
+  db.conversionRates.push({
+      id: generateId(),
+      emissionTypeId: travelId,
+      locationId: londonOfficeId,
+      year: 2024,
+      rate: 0.14,
+      unit: "kgCO2e/km",
+      desc: "Mixed business travel factor"
   });
 
   db.conversionRates.push({
@@ -246,6 +306,51 @@ export function seedDatabase() {
     date: '2024-03-15',
     value: 190 // litres → 438.9 kg CO2e (190 * 2.31)
   });
+
+  // NEW SCOPE 3 DATA (Waste & Travel) for Jan-Mar 2024
+  // Dublin Waste
+  db.emissionsData.push({ id: generateId(), emissionTypeId: wasteId, locationId: dublinOfficeId, date: '2024-01-15', value: 1.9 });
+  db.emissionsData.push({ id: generateId(), emissionTypeId: wasteId, locationId: dublinOfficeId, date: '2024-02-15', value: 2.1 });
+  db.emissionsData.push({ id: generateId(), emissionTypeId: wasteId, locationId: dublinOfficeId, date: '2024-03-15', value: 1.7 });
+
+  // Dublin Travel
+  db.emissionsData.push({ id: generateId(), emissionTypeId: travelId, locationId: dublinOfficeId, date: '2024-01-20', value: 4500 });
+  db.emissionsData.push({ id: generateId(), emissionTypeId: travelId, locationId: dublinOfficeId, date: '2024-02-22', value: 1200 }); // Low travel month
+  db.emissionsData.push({ id: generateId(), emissionTypeId: travelId, locationId: dublinOfficeId, date: '2024-03-10', value: 8900 });
+
+  // London Waste
+  db.emissionsData.push({ id: generateId(), emissionTypeId: wasteId, locationId: londonOfficeId, date: '2024-01-15', value: 3.5 });
+  db.emissionsData.push({ id: generateId(), emissionTypeId: wasteId, locationId: londonOfficeId, date: '2024-02-15', value: 3.2 });
+  db.emissionsData.push({ id: generateId(), emissionTypeId: wasteId, locationId: londonOfficeId, date: '2024-03-15', value: 3.8 });
+
+  // London Travel
+  db.emissionsData.push({ id: generateId(), emissionTypeId: travelId, locationId: londonOfficeId, date: '2024-01-20', value: 12000 });
+  db.emissionsData.push({ id: generateId(), emissionTypeId: travelId, locationId: londonOfficeId, date: '2024-02-22', value: 5400 });
+  db.emissionsData.push({ id: generateId(), emissionTypeId: travelId, locationId: londonOfficeId, date: '2024-03-10', value: 15600 });
+
+
+  // HISTORICAL DATA (2023)
+  // Dublin 2023
+  db.emissionsData.push({ id: generateId(), emissionTypeId: electricityId, locationId: dublinOfficeId, date: '2023-06-15', value: 1200 });
+  db.emissionsData.push({ id: generateId(), emissionTypeId: electricityId, locationId: dublinOfficeId, date: '2023-12-15', value: 1300 });
+  db.emissionsData.push({ id: generateId(), emissionTypeId: gasId, locationId: dublinOfficeId, date: '2023-12-15', value: 850 }); // High winter usage
+
+  // London 2023
+  db.emissionsData.push({ id: generateId(), emissionTypeId: electricityId, locationId: londonOfficeId, date: '2023-06-15', value: 850 });
+  db.emissionsData.push({ id: generateId(), emissionTypeId: electricityId, locationId: londonOfficeId, date: '2023-12-15', value: 950 });
+
+  // LATE 2024 & 2025 (Projected/Recent)
+  // Dublin
+  db.emissionsData.push({ id: generateId(), emissionTypeId: electricityId, locationId: dublinOfficeId, date: '2024-06-15', value: 980 });
+  db.emissionsData.push({ id: generateId(), emissionTypeId: electricityId, locationId: dublinOfficeId, date: '2024-12-15', value: 1150 });
+  db.emissionsData.push({ id: generateId(), emissionTypeId: electricityId, locationId: dublinOfficeId, date: '2025-03-15', value: 920 }); // Dropping due to efficiency?
+  db.emissionsData.push({ id: generateId(), emissionTypeId: electricityId, locationId: dublinOfficeId, date: '2025-06-15', value: 890 });
+
+  // London
+  db.emissionsData.push({ id: generateId(), emissionTypeId: electricityId, locationId: londonOfficeId, date: '2024-06-15', value: 780 });
+  db.emissionsData.push({ id: generateId(), emissionTypeId: electricityId, locationId: londonOfficeId, date: '2024-12-15', value: 880 });
+  db.emissionsData.push({ id: generateId(), emissionTypeId: electricityId, locationId: londonOfficeId, date: '2025-03-15', value: 720 });
+  db.emissionsData.push({ id: generateId(), emissionTypeId: electricityId, locationId: londonOfficeId, date: '2025-06-15', value: 690 }); 
 
 }
   
