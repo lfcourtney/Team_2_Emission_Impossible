@@ -17,7 +17,7 @@ public class ClientService {
 
     public Client getClient(Long clientId){
         return this.clientRepository.findById(clientId)
-                .orElseThrow(() -> new RuntimeException("Client not found"));
+                .orElseThrow(() -> new RuntimeException(String.format("No client found for client id %d", clientId)));
     }
 
     public List<Client> getAllClients(){

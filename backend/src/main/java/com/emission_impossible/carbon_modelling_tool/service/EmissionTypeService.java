@@ -18,7 +18,7 @@ public class EmissionTypeService {
     public EmissionType getEmissionType(Long emissionTypeId){
 
         return this.emissionTypeRepository.findById(emissionTypeId)
-                .orElseThrow(() -> new RuntimeException("Emission Type not found"));
+                .orElseThrow(() -> new RuntimeException(String.format("No emission type found for id %d", emissionTypeId)));
     }
 
     public List<EmissionType> getAllEmissionTypes(){

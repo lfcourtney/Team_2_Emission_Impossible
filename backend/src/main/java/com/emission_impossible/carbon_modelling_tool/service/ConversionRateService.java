@@ -20,7 +20,7 @@ public class ConversionRateService {
 
     public ConversionRate getRate(Long emissionTypeId, Long locationId, int year){
         return this.conversionRateRepository.findByEmissionTypeIdAndLocationIdAndYear(emissionTypeId, locationId, year)
-                .orElseThrow(() -> new RuntimeException("Conversion rate not found"));
+                .orElseThrow(() -> new RuntimeException(String.format("No conversion rate found for emission type %d at location %d for year %d", emissionTypeId, locationId, year)));
     }
 
     public List<ConversionRate> getRatesForLocation(Long locationId){
@@ -76,6 +76,6 @@ public class ConversionRateService {
                                        .stream()
                                        .filter(r -> r.getEmissionType().equals(type))
                                        .findFirst()
-                                       .orElseThrow(() -> new RuntimeException("No conversion rate found"));
+                                       .orElseThrow(() -> new RuntimeException(String.format("No conversion rate found for emission type %d at location %d for year %d", type.getId(), location.getId(), year)));
     }
 }

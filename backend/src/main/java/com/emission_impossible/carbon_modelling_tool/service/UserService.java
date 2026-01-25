@@ -31,7 +31,7 @@ public class UserService implements UserDetailsService{
 
 
         if(user.isEmpty()) {
-            throw new UsernameNotFoundException("User not found with this email"+username);
+            throw new UsernameNotFoundException("User not found with this email: "+username);
 
         }
 
