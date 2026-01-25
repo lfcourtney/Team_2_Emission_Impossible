@@ -23,6 +23,8 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Optional;
 
+// Handle all requests from frontend to backend as part of authentication and authorisation process.
+// All such requests will start with /auth
 @RestController
 @RequestMapping("/auth")
 public class UserController {
@@ -81,6 +83,10 @@ public class UserController {
 
 
 
+    // Throws 403 forbidden HTTP response if client is
+    // trying to sign into an account that has not been
+    // registered. Otherwise will set the current authentication session,
+    // using the authorised sign in details submitted by the user.
     @PostMapping("/signin")
     public ResponseEntity<AuthResponse> signin(@RequestBody User loginRequest) {
         String username = loginRequest.getEmail();

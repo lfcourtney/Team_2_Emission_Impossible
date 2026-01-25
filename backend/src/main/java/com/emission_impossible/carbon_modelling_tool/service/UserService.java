@@ -25,14 +25,24 @@ public class UserService implements UserDetailsService{
         this.userRepository = userRepository;
     }
 
+    public User findByEmail(String email) throws UsernameNotFoundException{
+        Optional<User> user = this.userRepository.findByEmail(email);
+
+        if(user.isEmpty()) {
+            throw new UsernameNotFoundException("User not found with this email: "+email);
+        }
+
+        return user.get();
+    }
+
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<User> user = userRepository.findByEmail(username);
+        Optional<User> user = this.userRepository.findByEmail(username);
 
 
         if(user.isEmpty()) {
             throw new UsernameNotFoundException("User not found with this email: "+username);
-
         }
 
 

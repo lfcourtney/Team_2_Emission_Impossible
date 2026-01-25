@@ -42,7 +42,19 @@ public class ApplicationConfig {
 
                             Is allowed without authentication
 
-                            No login, no JWT, no credentials required
+                            No login, no JWT, no credentials required.
+
+                            Example axios request using JTW token:
+
+                            await axios.post('https://httpbin.org/post', {
+                            firstName: 'Fred',
+                            lastName: 'Flintstone',
+                          }, {
+                            headers: {
+                              Authorization: "Bearer---jwt token---"
+                            }
+                          }
+                        )
                              */
                         authorize -> authorize.requestMatchers("/api/**")
                                 .authenticated().anyRequest().permitAll())
@@ -61,7 +73,9 @@ public class ApplicationConfig {
             @Override
             public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
                 CorsConfiguration ccfg = new CorsConfiguration();
-                ccfg.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
+
+                // Note: frontend is configured to port 5173.
+                ccfg.setAllowedOrigins(Arrays.asList("http://localhost:5173"));
                 ccfg.setAllowedMethods(Collections.singletonList("*"));
                 ccfg.setAllowCredentials(true);
                 ccfg.setAllowedHeaders(Collections.singletonList("*"));
