@@ -1,6 +1,6 @@
 # Team_2_Emission_Impossible
 
-A web‑based carbon modelling tool (Java Spring) to show customers potential decarbonisation.
+CarbonIQ: A web‑based carbon modelling tool (Java Spring) to show customers potential decarbonisation.
 
 <!-- Template Source: https://github.com/othneildrew/Best-README-Template -->
 
@@ -13,7 +13,7 @@ A web‑based carbon modelling tool (Java Spring) to show customers potential de
     <img src="images/emission_impossible.png" alt="EmissionImpossible" width="80" height="80">
   </a>
 
-<h3 align="center">Team Emission Impossible Carbon Modelling Tool</h3>
+<h3 align="center">CarbonIQ</h3>
 
   <p align="center">
     A web‑based carbon modelling tool (Java Spring) to show customers potential decarbonisation.
@@ -140,12 +140,12 @@ System Design Document (SDD) outlines specifications used to build the system; a
 
 ## Getting Started
 
-1. Ensure `carbon-modelling-tool` database exists. In a localhost instance of MySQL:
+1. Ensure `carbon-iq` database exists. In a localhost instance of MySQL:
 
 ```
-DROP DATABASE IF EXISTS `carbon-modelling-tool`;
+DROP DATABASE IF EXISTS `carbon-iq`;
 
-CREATE DATABASE `carbon-modelling-tool`;
+CREATE DATABASE `carbon-iq`;
 ```
 
 ### Installation

@@ -31,3 +31,7 @@ build/
 
 ### VS Code ###
 .vscode/
+
+## IGNORE seed data
+
+/src/main/resources/seed-data/**

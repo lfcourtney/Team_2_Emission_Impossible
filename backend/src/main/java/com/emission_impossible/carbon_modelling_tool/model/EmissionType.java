@@ -15,6 +15,7 @@ public class EmissionType {
 
     private String name;
     private String unit;
+    private String scope;
     private String description;
 
     @OneToMany(mappedBy = "emissionType", cascade = CascadeType.ALL)
@@ -26,9 +27,10 @@ public class EmissionType {
     protected EmissionType() {}
 
     // Constructor
-    public EmissionType(String name, String unit, String description) {
+    public EmissionType(String name, String unit, String scope, String description) {
         this.name = name;
         this.unit = unit;
+        this.scope = scope;
         this.description = description;
     }
 
@@ -38,6 +40,14 @@ public class EmissionType {
 
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
+
+    public String getScope() {
+        return scope;
+    }
+
+    public void setScope(String scope) {
+        this.scope = scope;
+    }
 
     public String getUnit() { return unit; }
     public void setUnit(String unit) { this.unit = unit; }

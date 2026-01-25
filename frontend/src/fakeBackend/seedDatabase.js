@@ -14,6 +14,7 @@ export function seedDatabase() {
     name: "Version 1"
   });
 
+  
   // CREATE LOCATIONS
   const dublinOfficeId = generateId();
   db.locations.push({
@@ -22,7 +23,8 @@ export function seedDatabase() {
     name: "Dublin Office",
     region: "EU"
   });
-
+  
+  
   const londonOfficeId = generateId();
   db.locations.push({
     id: londonOfficeId,

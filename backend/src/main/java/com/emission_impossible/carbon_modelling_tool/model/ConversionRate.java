@@ -2,7 +2,7 @@ package com.emission_impossible.carbon_modelling_tool.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "conversion_rates")
+@Table(name = "conversion_rates", uniqueConstraints = { @UniqueConstraint(columnNames = { "emission_type_id", "location_id", "year" }) })
 public class ConversionRate {
 
     @Id
@@ -12,6 +12,7 @@ public class ConversionRate {
     private int year;
     private double rate;
     private String unit;
+    private String description;
 
     @ManyToOne
     @JoinColumn(name = "emission_type_id")
@@ -24,10 +25,11 @@ public class ConversionRate {
     protected ConversionRate() {}
 
     // Constructor
-    public ConversionRate(int year, double rate, String unit, EmissionType emissionType, Location location) {
+    public ConversionRate(int year, double rate, String unit, String description, EmissionType emissionType, Location location) {
         this.year = year;
         this.rate = rate;
         this.unit = unit;
+        this.description = description;
         this.emissionType = emissionType;
         this.location = location;
     }
@@ -44,6 +46,14 @@ public class ConversionRate {
 
     public String getUnit() { return unit; }
     public void setUnit(String unit) { this.unit = unit; }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     public EmissionType getEmissionType() { return emissionType; }
     public void setEmissionType(EmissionType emissionType) { this.emissionType = emissionType; }
