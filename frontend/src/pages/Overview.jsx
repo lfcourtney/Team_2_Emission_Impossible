@@ -138,8 +138,8 @@ export default function Overview() {
                     icon={AlertCircle} 
                     subtext="Highest emission source"
                 />
+                {/* Outer div to handle modal open on click */}
                 <div onClick={() => setIsBudgetModalOpen(true)} className="cursor-pointer group contents">
-                    
                     {/* Settings Icon on hover */}
                     <div className="absolute top-2 right-2 p-2 text-gray-500 opacity-0 group-hover:opacity-100 bg-white/10 rounded-full transition-all z-20">
                         <Settings size={14} />
@@ -154,7 +154,6 @@ export default function Overview() {
                         icon={Target} 
                         subtext={`${(annualBudget - stats.totalCO2e).toLocaleString()} kg remaining`}
                     />
-                    
                 </div>
             </div>
 
@@ -208,7 +207,7 @@ export default function Overview() {
 
              {/* Budget Calculator Modal */}
              {isBudgetModalOpen && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-md animate-in fade-in duration-200">
+                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 animate-in fade-in duration-200">
                     <div className="bg-[#052831] w-full max-w-lg rounded-2xl border border-white/10 shadow-2xl overflow-hidden relative animate-in zoom-in-95 duration-300">
                         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-secondary to-blue-500"></div>
                         <div className="p-8">
