@@ -1,6 +1,6 @@
-import Sidebar from './Sidebar';
-import Header from './Header';
-import CarbonPilot from './CarbonPilot'; // Import the new AI Assistant
+import Sidebar from '../components/Sidebar';
+import Header from '../components/Header';
+import CarbonPilot from '../components/CarbonPilot'; // Import the new AI Assistant
 
 /**
  * The Layout component wraps around the main pages of the application.
