@@ -1,7 +1,13 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 export default function ModernEmissionTrendChart({ data }) {
+  const [visibleScopes, setVisibleScopes] = useState({
+    scope1: true,
+    scope2: true,
+    scope3: true
+  });
+
   const chartData = useMemo(() => {
     const grouped = data.reduce((acc, curr) => {
         const date = curr.date; 
@@ -35,11 +41,23 @@ export default function ModernEmissionTrendChart({ data }) {
                     <p className="text-sm font-body text-gray-400">Breakdown of direct vs indirect impact over time</p>
                 </div>
                 <div className="flex gap-2">
-                    {['Scope 1', 'Scope 2', 'Scope 3'].map((scope, i) => (
-                        <div key={scope} className="flex items-center gap-2 px-3 py-1 bg-white/5 rounded-full border border-white/5">
-                            <div className="w-2.5 h-2.5 rounded-full" style={{backgroundColor: i===0 ? '#00c6c2' : i===1 ? '#3b82f6' : '#f59e0b'}}></div>
-                            <span className="text-xs text-gray-300 font-medium">{scope}</span>
-                        </div>
+                    {[
+                        { label: 'Scope 1', key: 'scope1', color: '#00c6c2' },
+                        { label: 'Scope 2', key: 'scope2', color: '#3b82f6' },
+                        { label: 'Scope 3', key: 'scope3', color: '#f59e0b' }
+                    ].map((scope) => (
+                        <button 
+                            key={scope.key}
+                            onClick={() => setVisibleScopes(prev => ({ ...prev, [scope.key]: !prev[scope.key] }))}
+                            className={`flex items-center gap-2 px-3 py-1 rounded-full border transition-all ${
+                                visibleScopes[scope.key] 
+                                    ? 'bg-white/10 border-white/20' 
+                                    : 'bg-transparent border-white/5 opacity-50'
+                            }`}
+                        >
+                            <div className="w-2.5 h-2.5 rounded-full" style={{backgroundColor: scope.color}}></div>
+                            <span className="text-xs text-gray-300 font-medium">{scope.label}</span>
+                        </button>
                     ))}
                 </div>
             </div>
@@ -84,33 +102,39 @@ export default function ModernEmissionTrendChart({ data }) {
                             itemStyle={{ color: '#fff' }}
                             labelStyle={{ color: '#9ca3af', marginBottom: '0.5rem' }}
                         />
-                        <Area 
-                            type="monotone" 
-                            dataKey="scope1" 
-                            stackId="1" 
-                            stroke="#00c6c2" 
-                            strokeWidth={2}
-                            fill="url(#colorScope1)" 
-                            name="Scope 1 (Direct)"
-                        />
-                        <Area 
-                            type="monotone" 
-                            dataKey="scope2" 
-                            stackId="1" 
-                            stroke="#3b82f6" 
-                            strokeWidth={2}
-                            fill="url(#colorScope2)" 
-                            name="Scope 2 (Indirect)"
-                        />
-                        <Area 
-                            type="monotone" 
-                            dataKey="scope3" 
-                            stackId="1" 
-                            stroke="#f59e0b" 
-                            strokeWidth={2}
-                            fill="url(#colorScope3)" 
-                            name="Scope 3 (Value Chain)"
-                        />
+                        {visibleScopes.scope1 && (
+                            <Area 
+                                type="monotone" 
+                                dataKey="scope1" 
+                                stackId="1" 
+                                stroke="#00c6c2" 
+                                strokeWidth={2}
+                                fill="url(#colorScope1)" 
+                                name="Scope 1 (Direct)"
+                            />
+                        )}
+                        {visibleScopes.scope2 && (
+                            <Area 
+                                type="monotone" 
+                                dataKey="scope2" 
+                                stackId="1" 
+                                stroke="#3b82f6" 
+                                strokeWidth={2}
+                                fill="url(#colorScope2)" 
+                                name="Scope 2 (Indirect)"
+                            />
+                        )}
+                        {visibleScopes.scope3 && (
+                            <Area 
+                                type="monotone" 
+                                dataKey="scope3" 
+                                stackId="1" 
+                                stroke="#f59e0b" 
+                                strokeWidth={2}
+                                fill="url(#colorScope3)" 
+                                name="Scope 3 (Value Chain)"
+                            />
+                        )}
                     </AreaChart>
                 </ResponsiveContainer>
             </div>
