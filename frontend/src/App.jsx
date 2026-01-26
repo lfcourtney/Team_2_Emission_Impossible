@@ -1,14 +1,14 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import { DataProvider } from './contexts/DataContext';
-import { seedDatabase } from './fakeBackend/seedDatabase';
+import { seedDatabase } from './fakeBackend/SeedData';
 
 // Pages
 import Login from './pages/Login';
 import Overview from './pages/Overview';
 import Analysis from './pages/Analysis';
 import Calculator from './pages/Calculator';
-import Layout from './components/Layout';
+import Layout from './layouts/Layout';
 
 // Initialize "DB"
 seedDatabase();

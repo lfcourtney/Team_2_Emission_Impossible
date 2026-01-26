@@ -3,6 +3,7 @@ import axios from 'axios';
 
 const AuthContext = createContext(null);
 
+
 /*
   AuthContext.Provider shares authentication state with its children.
 
