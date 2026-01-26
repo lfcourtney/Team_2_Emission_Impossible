@@ -14,6 +14,7 @@ import LiveTelemetry from '../components/LiveTelemetry';
 // Import our Data context. Contexts provide global state management for our app.
 // In this case, we use it to manage selected client/location across multiple pages.
 import { useData } from '../contexts/DataContext';
+import { useRibbon } from '../contexts/RibbonContext';
 
 // Import icons from lucide-react
 import { Leaf, Activity, TrendingUp, Zap, Droplet, Car, AlertCircle, Settings, Target } from 'lucide-react';
@@ -23,7 +24,7 @@ export default function Overview() {
 
     // We get the selected client and location from our DataContext. This is changed in the Header component.
     const { selectedClientId, selectedLocationId } = useData();
-
+    const { openRibbon } = useRibbon();
 
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -106,6 +107,48 @@ export default function Overview() {
             </div>
         );
     }
+
+    // Handler to open the budget settings in the ribbon
+    const handleBudgetClick = () => {
+        openRibbon(
+            <div className="space-y-6">
+                <div>
+                     <h3 className="text-xl font-heading font-bold text-white mb-2">Budget Settings</h3>
+                     <p className="text-sm text-gray-400">Adjust the annual reduction targets for this facility.</p>
+                </div>
+
+                <div className="space-y-4">
+                    <label className="text-sm font-bold text-white uppercase tracking-wider block">Reduction Target</label>
+                    <div className="bg-white/5 rounded-xl p-4 border border-white/5">
+                        <div className="flex justify-between items-center mb-4">
+                            <span className="text-2xl font-bold text-secondary">{reductionTarget}%</span>
+                            <span className="text-xs text-gray-500">vs 2025 Baseline</span>
+                        </div>
+                        <input 
+                            type="range" 
+                            min="0" 
+                            max="50" 
+                            step="1"
+                            value={reductionTarget} 
+                            onChange={(e) => setReductionTarget(Number(e.target.value))}
+                            className="w-full h-2 bg-black/40 rounded-lg appearance-none cursor-pointer accent-secondary"
+                        />
+                    </div>
+                </div>
+
+                <div className="p-4 rounded-xl bg-secondary/10 border border-secondary/20">
+                     <span className="text-xs text-secondary block mb-1">New Annual Budget</span>
+                     <span className="text-xl font-bold text-white">
+                        {(277800 * (1 - reductionTarget / 100)).toLocaleString(undefined, { maximumFractionDigits: 0 })} 
+                        <span className="text-sm font-normal text-gray-500"> kg</span>
+                     </span>
+                 </div>
+                 
+                 <button className="w-full py-3 bg-secondary text-primary font-bold rounded-xl">Apply Changes</button>
+            </div>
+        );
+    };
+
     // The return statement contains the JSX that defines the structure of the Overview page. (HTML-like syntax)
     return (
         <div className="space-y-6">
@@ -139,7 +182,7 @@ export default function Overview() {
                     subtext="Highest emission source"
                 />
                 {/* Outer div to handle modal open on click */}
-                <div onClick={() => setIsBudgetModalOpen(true)} className="cursor-pointer group contents">
+                <div onClick={handleBudgetClick} className="cursor-pointer group contents">
                     {/* Settings Icon on hover */}
                     <div className="absolute top-2 right-2 p-2 text-gray-500 opacity-0 group-hover:opacity-100 bg-white/10 rounded-full transition-all z-20">
                         <Settings size={14} />
@@ -205,75 +248,6 @@ export default function Overview() {
                 </div>
             </div>
 
-             {/* Budget Calculator Modal */}
-             {isBudgetModalOpen && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 animate-in fade-in duration-200">
-                    <div className="bg-[#052831] w-full max-w-lg rounded-2xl border border-white/10 shadow-2xl overflow-hidden relative animate-in zoom-in-95 duration-300">
-                        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-secondary to-blue-500"></div>
-                        <div className="p-8">
-                             <div className="flex justify-between items-start mb-6">
-                                <div>
-                                    <h3 className="text-2xl font-heading font-bold text-white flex items-center gap-2">
-                                        <Target className="text-secondary" /> 
-                                        Set Carbon Budget
-                                    </h3>
-                                    <p className="text-gray-400 text-sm mt-1">Adjust your reduction ambition to calculate your annual allowance.</p>
-                                </div>
-                                <button onClick={() => setIsBudgetModalOpen(false)} className="text-gray-500 hover:text-white transition-colors">Close</button>
-                             </div>
-
-                             <div className="space-y-8">
-                                 {/* Interactive Calculator */}
-                                 <div className="bg-white/5 rounded-xl p-6 border border-white/5">
-                                     <div className="flex justify-between items-center mb-2">
-                                         <label className="text-sm font-bold text-white uppercase tracking-wider">Reduction Target</label>
-                                         <span className="text-2xl font-bold text-secondary">{reductionTarget}%</span>
-                                     </div>
-                                     <input 
-                                        type="range" 
-                                        min="0" 
-                                        max="50" 
-                                        step="1"
-                                        value={reductionTarget} 
-                                        onChange={(e) => setReductionTarget(Number(e.target.value))}
-                                        className="w-full h-2 bg-black/40 rounded-lg appearance-none cursor-pointer accent-secondary"
-                                     />
-                                     <div className="flex justify-between text-xs text-gray-500 mt-2 font-mono">
-                                         <span>Business As Usual</span>
-                                         <span>Net Zero Trajectory</span>
-                                     </div>
-                                 </div>
-
-                                 {/* Results Visualization */}
-                                 <div className="grid grid-cols-2 gap-4">
-                                     <div className="p-4 rounded-xl bg-white/5 border border-white/5">
-                                         <span className="text-xs text-gray-400 block mb-1">Baseline (Last Year)</span>
-                                         <span className="text-xl font-bold text-white">277,800 <span className="text-sm font-normal text-gray-500">kg</span></span>
-                                     </div>
-                                     <div className="p-4 rounded-xl bg-secondary/10 border border-secondary/20">
-                                         <span className="text-xs text-secondary block mb-1">New Annual Budget</span>
-                                         <span className="text-xl font-bold text-white">
-                                            {(277800 * (1 - reductionTarget / 100)).toLocaleString(undefined, { maximumFractionDigits: 0 })} 
-                                            <span className="text-sm font-normal text-gray-500"> kg</span>
-                                         </span>
-                                     </div>
-                                 </div>
-
-                                 <button 
-                                    onClick={() => {
-                                        const newBudget = 277800 * (1 - reductionTarget / 100);
-                                        setAnnualBudget(newBudget);
-                                        setIsBudgetModalOpen(false);
-                                    }}
-                                    className="w-full py-4 bg-secondary text-primary font-bold text-lg rounded-xl hover:bg-white transition-colors shadow-[0_0_20px_rgba(0,198,194,0.3)]"
-                                 >
-                                     Apply New Budget
-                                 </button>
-                             </div>
-                        </div>
-                    </div>
-                </div>
-            )}
         </div>
     );
 }
