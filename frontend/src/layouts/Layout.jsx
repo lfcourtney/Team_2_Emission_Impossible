@@ -1,6 +1,7 @@
 import Sidebar from '../components/Sidebar';
 import Header from '../components/Header';
-import CarbonPilot from '../components/CarbonPilot'; // Import the new AI Assistant
+import CarbonPilot from '../components/CarbonPilot'; 
+import Ribbon from '../components/Ribbon';
 
 /**
  * The Layout component wraps around the main pages of the application.
@@ -17,6 +18,8 @@ export default function Layout({ children, title = "Dashboard" }) {
             <div className="flex-1 ml-0 lg:ml-64 flex flex-col transition-all duration-300">
                 {/* Pass the title of the page to the Header as a prop*/}
                 <Header title={title} />
+
+                <Ribbon />
                 
                 <main className="flex-1 p-6 lg:p-8 overflow-x-hidden relative">
                     {/* This wrapper centers the content and adds animation to child elements */}

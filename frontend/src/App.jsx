@@ -9,6 +9,7 @@ import Overview from './pages/Overview';
 import Analysis from './pages/Analysis';
 import Calculator from './pages/Calculator';
 import Layout from './layouts/Layout';
+import { RibbonProvider } from './contexts/RibbonContext';
 
 // Initialize "DB"
 seedDatabase();
@@ -41,30 +42,32 @@ function App() {
   return (
     <AuthProvider>
       <DataProvider>
-        <Router>
-          <Routes>
-            <Route path="/login" element={<Login />} />
+        <RibbonProvider>
+          <Router>
+            <Routes>
+              <Route path="/login" element={<Login />} />
 
-            <Route path="/" element={
-              <ProtectedRoute title="Dashboard Overview">
-                <Overview />
-              </ProtectedRoute>
-            } />
+              <Route path="/" element={
+                <ProtectedRoute title="Dashboard Overview">
+                  <Overview />
+                </ProtectedRoute>
+              } />
 
-            <Route path="/analysis" element={
-              <ProtectedRoute title="Detailed Analysis">
-                <Analysis />
-              </ProtectedRoute>
-            } />
+              <Route path="/analysis" element={
+                <ProtectedRoute title="Detailed Analysis">
+                  <Analysis />
+                </ProtectedRoute>
+              } />
 
-            <Route path="/calculator" element={
-              <ProtectedRoute title="Emissions Calculator">
-                <Calculator />
-              </ProtectedRoute>
-            } />
+              <Route path="/calculator" element={
+                <ProtectedRoute title="Emissions Calculator">
+                  <Calculator />
+                </ProtectedRoute>
+              } />
 
-          </Routes>
-        </Router>
+            </Routes>
+          </Router>
+        </RibbonProvider>
       </DataProvider>
     </AuthProvider>
   );
