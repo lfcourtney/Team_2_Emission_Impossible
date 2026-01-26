@@ -52,18 +52,18 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    20%
+    100%
   </span>
   <span class="absValue">
-    (1/5)
+    (5/5)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    25%
+    100%
   </span>
   <span class="absValue">
-    (3/12)
+    (12/12)
   </span>
 </td>
 </tr>
@@ -98,28 +98,28 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;
 &nbsp;
 &nbsp;    public Location getLocation(Long locationId){
-<b class="nc">&nbsp;        return this.locationRepository.findById(locationId)</b>
-<b class="nc">&nbsp;                .orElseThrow(() -&gt; new RuntimeException(String.format(&quot;Location with location id %d not found&quot;, locationId)));</b>
+<b class="fc">&nbsp;        return this.locationRepository.findById(locationId)</b>
+<b class="fc">&nbsp;                .orElseThrow(() -&gt; new RuntimeException(String.format(&quot;Location with location id %d not found&quot;, locationId)));</b>
 &nbsp;    }
 &nbsp;
 &nbsp;    public List&lt;Location&gt; getLocationsForClient(Long clientId){
-<b class="nc">&nbsp;        return this.locationRepository.findByClientId(clientId);</b>
+<b class="fc">&nbsp;        return this.locationRepository.findByClientId(clientId);</b>
 &nbsp;    }
 &nbsp;
 &nbsp;    public List&lt;Location&gt; getAllLocations(){
-<b class="nc">&nbsp;        return this.locationRepository.findAll();</b>
+<b class="fc">&nbsp;        return this.locationRepository.findAll();</b>
 &nbsp;    }
 &nbsp;
 &nbsp;    public Location addLocation(Long clientId, String name, String region){
 &nbsp;
-<b class="nc">&nbsp;        Client findClient = this.clientRepository.findById(clientId)</b>
-<b class="nc">&nbsp;                .orElseThrow(() -&gt; new RuntimeException(String.format(&quot;Client with client id %d not found&quot;, clientId)));</b>
+<b class="fc">&nbsp;        Client findClient = this.clientRepository.findById(clientId)</b>
+<b class="fc">&nbsp;                .orElseThrow(() -&gt; new RuntimeException(String.format(&quot;Client with client id %d not found&quot;, clientId)));</b>
 &nbsp;
-<b class="nc">&nbsp;        Location newLocation = new Location(name, region, findClient);</b>
+<b class="fc">&nbsp;        Location newLocation = new Location(name, region, findClient);</b>
 &nbsp;
-<b class="nc">&nbsp;        this.locationRepository.save(newLocation);</b>
+<b class="fc">&nbsp;        this.locationRepository.save(newLocation);</b>
 &nbsp;
-<b class="nc">&nbsp;        return newLocation;</b>
+<b class="fc">&nbsp;        return newLocation;</b>
 &nbsp;    }
 &nbsp;
 &nbsp;}
@@ -146,7 +146,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2026-01-26 12:13</div>
+    <div style="float:right;">generated on 2026-01-26 13:38</div>
 </div>
 </body>
 </html>

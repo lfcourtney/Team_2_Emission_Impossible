@@ -45,26 +45,26 @@ Current scope:     <a href="../../index.html">all classes</a>
   <td class="name">ConversionRateService</td>
 <td class="coverageStat">
   <span class="percent">
-    14.3%
+    100%
   </span>
   <span class="absValue">
-    (1/7)
+    (7/7)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/4)
+    (4/4)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    8.3%
+    100%
   </span>
   <span class="absValue">
-    (2/24)
+    (24/24)
   </span>
 </td>
 </tr>
@@ -75,26 +75,26 @@ Current scope:     <a href="../../index.html">all classes</a>
   <td class="name"><strong>Total</strong></td>
 <td class="coverageStat">
   <span class="percent">
-    14.3%
+    100%
   </span>
   <span class="absValue">
-    (1/7)
+    (7/7)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/4)
+    (4/4)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    8.3%
+    100%
   </span>
   <span class="absValue">
-    (2/24)
+    (24/24)
   </span>
 </td>
 </tr>
@@ -126,16 +126,16 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;    }
 &nbsp;
 &nbsp;    public ConversionRate getRate(Long emissionTypeId, Long locationId, int year){
-<b class="nc">&nbsp;        return this.conversionRateRepository.findByEmissionTypeIdAndLocationIdAndYear(emissionTypeId, locationId, year)</b>
-<b class="nc">&nbsp;                .orElseThrow(() -&gt; new RuntimeException(String.format(&quot;No conversion rate found for emission type %d at location %d for year %d&quot;, emissionTypeId, locationId, year)));</b>
+<b class="fc">&nbsp;        return this.conversionRateRepository.findByEmissionTypeIdAndLocationIdAndYear(emissionTypeId, locationId, year)</b>
+<b class="fc">&nbsp;                .orElseThrow(() -&gt; new RuntimeException(String.format(&quot;No conversion rate found for emission type %d at location %d for year %d&quot;, emissionTypeId, locationId, year)));</b>
 &nbsp;    }
 &nbsp;
 &nbsp;    public List&lt;ConversionRate&gt; getRatesForLocation(Long locationId){
-<b class="nc">&nbsp;        return this.conversionRateRepository.findByLocationId(locationId);</b>
+<b class="fc">&nbsp;        return this.conversionRateRepository.findByLocationId(locationId);</b>
 &nbsp;    }
 &nbsp;
 &nbsp;    public List&lt;ConversionRate&gt; getAllRates(){
-<b class="nc">&nbsp;        return this.conversionRateRepository.findAll();</b>
+<b class="fc">&nbsp;        return this.conversionRateRepository.findAll();</b>
 &nbsp;    }
 &nbsp;
 &nbsp;    // @Transactional ensures:
@@ -152,38 +152,38 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;    @Transactional
 &nbsp;    public ConversionRate updateRate(ConversionRate newRate) {
 &nbsp;
-<b class="nc">&nbsp;        if (newRate.getEmissionType() == null || newRate.getLocation() == null) {</b>
-<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;EmissionType and Location must be provided&quot;);</b>
+<b class="fc">&nbsp;        if (newRate.getEmissionType() == null || newRate.getLocation() == null) {</b>
+<b class="fc">&nbsp;            throw new IllegalArgumentException(&quot;EmissionType and Location must be provided&quot;);</b>
 &nbsp;        }
 &nbsp;
-<b class="nc">&nbsp;        Long emissionTypeId = newRate.getEmissionType().getId();</b>
-<b class="nc">&nbsp;        Long locationId = newRate.getLocation().getId();</b>
-<b class="nc">&nbsp;        int year = newRate.getYear();</b>
+<b class="fc">&nbsp;        Long emissionTypeId = newRate.getEmissionType().getId();</b>
+<b class="fc">&nbsp;        Long locationId = newRate.getLocation().getId();</b>
+<b class="fc">&nbsp;        int year = newRate.getYear();</b>
 &nbsp;
-<b class="nc">&nbsp;        return conversionRateRepository</b>
-<b class="nc">&nbsp;                .findByEmissionTypeIdAndLocationIdAndYear(</b>
+<b class="fc">&nbsp;        return conversionRateRepository</b>
+<b class="fc">&nbsp;                .findByEmissionTypeIdAndLocationIdAndYear(</b>
 &nbsp;                        emissionTypeId,
 &nbsp;                        locationId,
 &nbsp;                        year
 &nbsp;                )
-<b class="nc">&nbsp;                .map(existingRate -&gt; {</b>
+<b class="fc">&nbsp;                .map(existingRate -&gt; {</b>
 &nbsp;                    // Update fields
-<b class="nc">&nbsp;                    existingRate.setRate(newRate.getRate());</b>
-<b class="nc">&nbsp;                    existingRate.setUnit(newRate.getUnit());</b>
-<b class="nc">&nbsp;                    existingRate.setDescription(newRate.getDescription());</b>
+<b class="fc">&nbsp;                    existingRate.setRate(newRate.getRate());</b>
+<b class="fc">&nbsp;                    existingRate.setUnit(newRate.getUnit());</b>
+<b class="fc">&nbsp;                    existingRate.setDescription(newRate.getDescription());</b>
 &nbsp;
-<b class="nc">&nbsp;                    return existingRate;</b>
+<b class="fc">&nbsp;                    return existingRate;</b>
 &nbsp;                })
 &nbsp;                // Add new rate if rate already exists
-<b class="nc">&nbsp;                .orElseGet(() -&gt; conversionRateRepository.save(newRate));</b>
+<b class="fc">&nbsp;                .orElseGet(() -&gt; conversionRateRepository.save(newRate));</b>
 &nbsp;    }
 &nbsp;
 &nbsp;    public ConversionRate getRateFor(Location location, EmissionType type, int year) {
-<b class="nc">&nbsp;        return conversionRateRepository.findByLocationAndYear(location, year)</b>
-<b class="nc">&nbsp;                                       .stream()</b>
-<b class="nc">&nbsp;                                       .filter(r -&gt; r.getEmissionType().equals(type))</b>
-<b class="nc">&nbsp;                                       .findFirst()</b>
-<b class="nc">&nbsp;                                       .orElseThrow(() -&gt; new RuntimeException(String.format(&quot;No conversion rate found for emission type %d at location %d for year %d&quot;, type.getId(), location.getId(), year)));</b>
+<b class="fc">&nbsp;        return conversionRateRepository.findByLocationAndYear(location, year)</b>
+<b class="fc">&nbsp;                                       .stream()</b>
+<b class="fc">&nbsp;                                       .filter(r -&gt; r.getEmissionType().equals(type))</b>
+<b class="fc">&nbsp;                                       .findFirst()</b>
+<b class="fc">&nbsp;                                       .orElseThrow(() -&gt; new RuntimeException(String.format(&quot;No conversion rate found for emission type %d at location %d for year %d&quot;, type.getId(), location.getId(), year)));</b>
 &nbsp;    }
 &nbsp;}
 </code>
@@ -209,7 +209,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2026-01-26 12:13</div>
+    <div style="float:right;">generated on 2026-01-26 13:38</div>
 </div>
 </body>
 </html>

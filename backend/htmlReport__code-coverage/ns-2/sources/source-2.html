@@ -72,10 +72,10 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    8.9%
+    9.1%
   </span>
   <span class="absValue">
-    (4/45)
+    (4/44)
   </span>
 </td>
 </tr>
@@ -150,8 +150,9 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="nc">&nbsp;        createdUser.setFullName(fullName);</b>
 <b class="nc">&nbsp;        createdUser.setPassword(passwordEncoder.encode(password));</b>
 &nbsp;
-<b class="nc">&nbsp;        User savedUser = userRepository.save(createdUser);</b>
-<b class="nc">&nbsp;        userRepository.save(savedUser);</b>
+&nbsp;        // Save the user in the &#39;users&#39; database
+<b class="nc">&nbsp;        userRepository.save(createdUser);</b>
+&nbsp;
 <b class="nc">&nbsp;        Authentication authentication = new UsernamePasswordAuthenticationToken(email,password);</b>
 <b class="nc">&nbsp;        SecurityContextHolder.getContext().setAuthentication(authentication);</b>
 <b class="nc">&nbsp;        String token = JwtProvider.generateToken(authentication);</b>
@@ -255,7 +256,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2026-01-26 12:13</div>
+    <div style="float:right;">generated on 2026-01-26 13:38</div>
 </div>
 </body>
 </html>

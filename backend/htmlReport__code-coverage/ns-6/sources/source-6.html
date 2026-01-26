@@ -56,26 +56,26 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    33.3%
+    100%
   </span>
   <span class="absValue">
-    (1/3)
+    (3/3)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/4)
+    (4/4)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    14.3%
+    100%
   </span>
   <span class="absValue">
-    (2/14)
+    (14/14)
   </span>
 </td>
 </tr>
@@ -115,31 +115,31 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;    }
 &nbsp;
 &nbsp;    public User findByEmail(String email) throws UsernameNotFoundException{
-<b class="nc">&nbsp;        Optional&lt;User&gt; user = this.userRepository.findByEmail(email);</b>
+<b class="fc">&nbsp;        Optional&lt;User&gt; user = this.userRepository.findByEmail(email);</b>
 &nbsp;
-<b class="nc">&nbsp;        if(user.isEmpty()) {</b>
-<b class="nc">&nbsp;            throw new UsernameNotFoundException(&quot;User not found with this email: &quot;+email);</b>
+<b class="fc">&nbsp;        if(user.isEmpty()) {</b>
+<b class="fc">&nbsp;            throw new UsernameNotFoundException(&quot;User not found with this email: &quot;+email);</b>
 &nbsp;        }
 &nbsp;
-<b class="nc">&nbsp;        return user.get();</b>
+<b class="fc">&nbsp;        return user.get();</b>
 &nbsp;    }
 &nbsp;
 &nbsp;
 &nbsp;    @Override
 &nbsp;    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-<b class="nc">&nbsp;        Optional&lt;User&gt; user = this.userRepository.findByEmail(username);</b>
+<b class="fc">&nbsp;        Optional&lt;User&gt; user = this.userRepository.findByEmail(username);</b>
 &nbsp;
 &nbsp;
-<b class="nc">&nbsp;        if(user.isEmpty()) {</b>
-<b class="nc">&nbsp;            throw new UsernameNotFoundException(&quot;User not found with this email: &quot;+username);</b>
+<b class="fc">&nbsp;        if(user.isEmpty()) {</b>
+<b class="fc">&nbsp;            throw new UsernameNotFoundException(&quot;User not found with this email: &quot;+username);</b>
 &nbsp;        }
 &nbsp;
 &nbsp;
-<b class="nc">&nbsp;        System.out.println(&quot;Loaded user: &quot; + user.get().getEmail());</b>
-<b class="nc">&nbsp;        List&lt;GrantedAuthority&gt; authorities = new ArrayList&lt;&gt;();</b>
-<b class="nc">&nbsp;        return new org.springframework.security.core.userdetails.User(</b>
-<b class="nc">&nbsp;                user.get().getEmail(),</b>
-<b class="nc">&nbsp;                user.get().getPassword(),</b>
+<b class="fc">&nbsp;        System.out.println(&quot;Loaded user: &quot; + user.get().getEmail());</b>
+<b class="fc">&nbsp;        List&lt;GrantedAuthority&gt; authorities = new ArrayList&lt;&gt;();</b>
+<b class="fc">&nbsp;        return new org.springframework.security.core.userdetails.User(</b>
+<b class="fc">&nbsp;                user.get().getEmail(),</b>
+<b class="fc">&nbsp;                user.get().getPassword(),</b>
 &nbsp;                authorities);
 &nbsp;    }
 &nbsp;
@@ -168,7 +168,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2026-01-26 12:13</div>
+    <div style="float:right;">generated on 2026-01-26 13:38</div>
 </div>
 </body>
 </html>

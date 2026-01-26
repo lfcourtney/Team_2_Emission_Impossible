@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>Coverage Report > UserRepository</title>
+  <title>Coverage Report > EmissionsDataRepository</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -22,14 +22,14 @@ Current scope:     <a href="../../index.html">all classes</a>
     <a href="../index.html">com.emission_impossible.carbon_modelling_tool.repository</a>
 </div>
 
-<h1>Coverage Summary for Class: UserRepository (com.emission_impossible.carbon_modelling_tool.repository)</h1>
+<h1>Coverage Summary for Class: EmissionsDataRepository (com.emission_impossible.carbon_modelling_tool.repository)</h1>
 
 <table class="coverageStats">
 <tr>
   <th class="name">Class</th>
 </tr>
 <tr>
-  <td class="name">UserRepository</td>
+  <td class="name">EmissionsDataRepository</td>
 </tr>
 
 </table>
@@ -41,18 +41,28 @@ Current scope:     <a href="../../index.html">all classes</a>
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;package com.emission_impossible.carbon_modelling_tool.repository;
 &nbsp;
-&nbsp;import com.emission_impossible.carbon_modelling_tool.model.User;
+&nbsp;import com.emission_impossible.carbon_modelling_tool.model.EmissionType;
+&nbsp;import com.emission_impossible.carbon_modelling_tool.model.EmissionsData;
 &nbsp;import org.springframework.data.jpa.repository.JpaRepository;
 &nbsp;import org.springframework.stereotype.Repository;
 &nbsp;
+&nbsp;import java.time.LocalDate;
+&nbsp;import java.util.List;
 &nbsp;import java.util.Optional;
 &nbsp;
 &nbsp;@Repository
-&nbsp;public interface UserRepository extends JpaRepository&lt;User,Integer&gt; {
-&nbsp;    Optional&lt;User&gt; findByEmail(String email);
+&nbsp;public interface EmissionsDataRepository extends JpaRepository&lt;EmissionsData, Long&gt; {
+&nbsp;    List&lt;EmissionsData&gt; findByLocationId(Long locationId);
 &nbsp;
-&nbsp;    Optional&lt;User&gt; findById(int id);
+&nbsp;    List&lt;EmissionsData&gt; findByLocationIdIn(List&lt;Long&gt; locationIds);
 &nbsp;
+&nbsp;    List&lt;EmissionsData&gt; findByDateBetween(LocalDate start, LocalDate end);
+&nbsp;
+&nbsp;    List&lt;EmissionsData&gt; findByDateBetweenAndLocationId(
+&nbsp;            LocalDate start,
+&nbsp;            LocalDate end,
+&nbsp;            Long locationId
+&nbsp;    );
 &nbsp;}
 </code>
 </pre>
@@ -77,7 +87,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2026-01-26 12:13</div>
+    <div style="float:right;">generated on 2026-01-26 13:38</div>
 </div>
 </body>
 </html>

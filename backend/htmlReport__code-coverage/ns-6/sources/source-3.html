@@ -52,18 +52,18 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    25%
+    100%
   </span>
   <span class="absValue">
-    (1/4)
+    (4/4)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    25%
+    100%
   </span>
   <span class="absValue">
-    (2/8)
+    (8/8)
   </span>
 </td>
 </tr>
@@ -94,20 +94,20 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;
 &nbsp;    public EmissionType getEmissionType(Long emissionTypeId){
 &nbsp;
-<b class="nc">&nbsp;        return this.emissionTypeRepository.findById(emissionTypeId)</b>
-<b class="nc">&nbsp;                .orElseThrow(() -&gt; new RuntimeException(String.format(&quot;No emission type found for id %d&quot;, emissionTypeId)));</b>
+<b class="fc">&nbsp;        return this.emissionTypeRepository.findById(emissionTypeId)</b>
+<b class="fc">&nbsp;                .orElseThrow(() -&gt; new RuntimeException(String.format(&quot;No emission type found for id %d&quot;, emissionTypeId)));</b>
 &nbsp;    }
 &nbsp;
 &nbsp;    public List&lt;EmissionType&gt; getAllEmissionTypes(){
-<b class="nc">&nbsp;        return this.emissionTypeRepository.findAll();</b>
+<b class="fc">&nbsp;        return this.emissionTypeRepository.findAll();</b>
 &nbsp;    }
 &nbsp;
 &nbsp;    public EmissionType addEmissionType(String name, String unit, String scope, String description){
-<b class="nc">&nbsp;        EmissionType emissionType = new EmissionType(name, unit, scope, description);</b>
+<b class="fc">&nbsp;        EmissionType emissionType = new EmissionType(name, unit, scope, description);</b>
 &nbsp;
-<b class="nc">&nbsp;        this.emissionTypeRepository.save(emissionType);</b>
+<b class="fc">&nbsp;        this.emissionTypeRepository.save(emissionType);</b>
 &nbsp;
-<b class="nc">&nbsp;        return emissionType;</b>
+<b class="fc">&nbsp;        return emissionType;</b>
 &nbsp;    }
 &nbsp;}
 </code>
@@ -133,7 +133,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2026-01-26 12:13</div>
+    <div style="float:right;">generated on 2026-01-26 13:38</div>
 </div>
 </body>
 </html>

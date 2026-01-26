@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>Coverage Report > LocationRepository</title>
+  <title>Coverage Report > EmissionTypeRepository</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -22,14 +22,14 @@ Current scope:     <a href="../../index.html">all classes</a>
     <a href="../index.html">com.emission_impossible.carbon_modelling_tool.repository</a>
 </div>
 
-<h1>Coverage Summary for Class: LocationRepository (com.emission_impossible.carbon_modelling_tool.repository)</h1>
+<h1>Coverage Summary for Class: EmissionTypeRepository (com.emission_impossible.carbon_modelling_tool.repository)</h1>
 
 <table class="coverageStats">
 <tr>
   <th class="name">Class</th>
 </tr>
 <tr>
-  <td class="name">LocationRepository</td>
+  <td class="name">EmissionTypeRepository</td>
 </tr>
 
 </table>
@@ -41,21 +41,17 @@ Current scope:     <a href="../../index.html">all classes</a>
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;package com.emission_impossible.carbon_modelling_tool.repository;
 &nbsp;
+&nbsp;import com.emission_impossible.carbon_modelling_tool.model.Client;
 &nbsp;import com.emission_impossible.carbon_modelling_tool.model.EmissionType;
 &nbsp;import org.springframework.data.jpa.repository.JpaRepository;
 &nbsp;import org.springframework.stereotype.Repository;
-&nbsp;import com.emission_impossible.carbon_modelling_tool.model.Location;
 &nbsp;
-&nbsp;import java.util.List;
 &nbsp;import java.util.Optional;
 &nbsp;
 &nbsp;@Repository
-&nbsp;public interface LocationRepository extends JpaRepository&lt;Location, Long&gt; {
+&nbsp;public interface EmissionTypeRepository extends JpaRepository&lt;EmissionType, Long&gt; {
 &nbsp;
-&nbsp;    Optional&lt;Location&gt; findByName(String name);
-&nbsp;
-&nbsp;    // Find all Locations belonging to a given Client (by client ID)
-&nbsp;    List&lt;Location&gt; findByClientId(Long clientId);
+&nbsp;    Optional&lt;EmissionType&gt; findByName(String name);
 &nbsp;
 &nbsp;}
 </code>
@@ -81,7 +77,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2026-01-26 12:13</div>
+    <div style="float:right;">generated on 2026-01-26 13:38</div>
 </div>
 </body>
 </html>
