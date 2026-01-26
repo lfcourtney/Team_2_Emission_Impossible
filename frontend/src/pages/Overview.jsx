@@ -138,10 +138,13 @@ export default function Overview() {
                     icon={AlertCircle} 
                     subtext="Highest emission source"
                 />
-                <div onClick={() => setIsBudgetModalOpen(true)} className="cursor-pointer group relative">
+                <div onClick={() => setIsBudgetModalOpen(true)} className="cursor-pointer group contents">
+                    
+                    {/* Settings Icon on hover */}
                     <div className="absolute top-2 right-2 p-2 text-gray-500 opacity-0 group-hover:opacity-100 bg-white/10 rounded-full transition-all z-20">
                         <Settings size={14} />
                     </div>
+                    {/* Main Stat Card */}
                     <StatCard 
                         title="YTD Carbon Budget" 
                         value={budgetUsed}
@@ -151,6 +154,7 @@ export default function Overview() {
                         icon={Target} 
                         subtext={`${(annualBudget - stats.totalCO2e).toLocaleString()} kg remaining`}
                     />
+                    
                 </div>
             </div>
 
