@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.*;
 // Handle requests that, per the Spring Security setup in ApplicationConfig,
 // require a JWT value in the Authorization header.
 //
-// Such routes are identified in that they begin with /api
+// Such routes are identified in that they begin with /api. Namely,
+// all of the HTTP handlers in this class respond to requests that begin
+// with /api
 @RestController
 @RequestMapping("/api")
 public class ApiController {

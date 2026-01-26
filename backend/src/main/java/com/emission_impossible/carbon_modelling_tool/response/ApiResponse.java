@@ -1,6 +1,8 @@
 package com.emission_impossible.carbon_modelling_tool.response;
 
-
+/**
+ * HTTP response entity object
+ */
 public class ApiResponse {
     private String message;
     private boolean status;

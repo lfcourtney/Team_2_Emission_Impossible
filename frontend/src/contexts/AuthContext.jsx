@@ -3,10 +3,29 @@ import axios from 'axios';
 
 const AuthContext = createContext(null);
 
+/*
+  AuthContext.Provider shares authentication state with its children.
+
+  Think of it as a wrapper that stores auth data (like the current user
+  and login/logout functions) and makes it available to every component
+  inside it — without passing props down manually.
+
+  Any child component can access this shared state by using:
+    useContext(AuthContext)
+
+  When the auth state changes, React automatically updates all
+  components that are using it.
+*/
 export const AuthProvider = ({ children }) => {
+  // Store JSON web token value. All backend requests to any 
+  // route beginning with /route will require this value.
   const [user, setUser] = useState(null);
   // Format: { fullName: 'Demo User', email: 'demo@demo.com'};
   const [authenticatedUser, setAuthenticatedUser] = useState(null);
+
+  // Boolean. Used with 'ProtectedRoute' wrapper component. This Wrapper 
+  // component will allow the user to continue with navigation based on 
+  // the value of this boolean.
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
@@ -19,6 +38,7 @@ export const AuthProvider = ({ children }) => {
     }
   }, []);
 
+  // Take user log in information. Send log in request to the relevant /auth backend route.
   const login = async (email, password) => {
 
     // Immediately return false if either email or password is empty
@@ -80,6 +100,7 @@ export const AuthProvider = ({ children }) => {
       });
   }
 
+  // Reset login state
   const logout = () => {
     setUser(null);
     setAuthenticatedUser(null);

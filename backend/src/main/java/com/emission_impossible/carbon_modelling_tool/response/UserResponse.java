@@ -1,7 +1,12 @@
 package com.emission_impossible.carbon_modelling_tool.response;
 
-// Used to securely return the information of the currently logged in user:
-// does not include the user password.
+/**
+ * HTTP response entity object
+ *
+ * Used to securely return the information of the currently logged in user:
+ * does not include the user password.
+ */
+
 public class UserResponse {
 
     private String fullName;

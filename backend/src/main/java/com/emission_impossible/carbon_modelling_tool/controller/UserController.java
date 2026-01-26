@@ -41,6 +41,8 @@ public class UserController {
         this.customUserDetails = customUserDetails;
     }
 
+    // Create new user entry in User table. Password value
+    // will be hashed for security using Bcrypt.
     @PostMapping("/signup")
     public ResponseEntity<AuthResponse> createUserHandler(@RequestBody User user)  {
         String email = user.getEmail();
@@ -108,8 +110,10 @@ public class UserController {
     }
 
 
-
-
+    // Returns necessary information to start user session
+    // (calling relevant method from 'SecurityContextHolder'),
+    // providing the parameters passed into this method can be
+    // used to log the user into a valid user account.
     private Authentication authenticate(String username, String password) {
 
         System.out.println(username+"---++----"+password);

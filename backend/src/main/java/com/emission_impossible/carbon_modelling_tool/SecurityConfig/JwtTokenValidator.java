@@ -21,7 +21,11 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * Enforce that all requests to /api/** have JWT token in request header
+ * Enforce that all requests to /api/** have JWT token in request header.
+ *
+ * Instantiated, therefore, in 'ApplicationConfig', used in the SecurityFilterChain:
+ *
+ * SecurityFilterChain intercepts all HTTP requests, executing before all HTTP requests
  */
 public class JwtTokenValidator extends OncePerRequestFilter {
 

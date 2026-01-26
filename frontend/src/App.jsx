@@ -13,12 +13,28 @@ import Layout from './components/Layout';
 // Initialize "DB"
 seedDatabase();
 
-// Protected Route Wrapper
+// Protected Route Wrapper Component
+// Specifically, is a React *functional component*.
+// Like any React component, it receives its inputs via props.
 const ProtectedRoute = ({ children, title }) => {
-    const { isAuthenticated } = useAuth();
-    if (!isAuthenticated) return <Navigate to="/login" />;
-    
-    return <Layout title={title}>{children}</Layout>;
+
+  // The first argument we care about here is `children`.
+  // `children` represents any child components wrapped inside <ProtectedRoute>...</ProtectedRoute>
+  // For example: <ProtectedRoute><Overview /></ProtectedRoute>
+
+  // We access authentication state from the AuthContext using the custom hook.
+  const { isAuthenticated } = useAuth();
+
+  // If the user is NOT authenticated,
+  // immediately redirect them to the login page.
+  // <Navigate /> is a React Router component used for programmatic redirects.
+  if (!isAuthenticated) return <Navigate to="/login" />;
+
+
+  // If the user *is* authenticated,
+  // render the Layout component and pass in the page title.
+  // The `children` are rendered *inside* the Layout component.
+  return <Layout title={title}>{children}</Layout>;
 };
 
 function App() {
@@ -28,23 +44,23 @@ function App() {
         <Router>
           <Routes>
             <Route path="/login" element={<Login />} />
-            
+
             <Route path="/" element={
-                 <ProtectedRoute title="Dashboard Overview">
-                    <Overview />
-                 </ProtectedRoute>
+              <ProtectedRoute title="Dashboard Overview">
+                <Overview />
+              </ProtectedRoute>
             } />
-            
+
             <Route path="/analysis" element={
-                 <ProtectedRoute title="Detailed Analysis">
-                    <Analysis />
-                 </ProtectedRoute>
+              <ProtectedRoute title="Detailed Analysis">
+                <Analysis />
+              </ProtectedRoute>
             } />
-            
+
             <Route path="/calculator" element={
-                 <ProtectedRoute title="Emissions Calculator">
-                    <Calculator />
-                 </ProtectedRoute>
+              <ProtectedRoute title="Emissions Calculator">
+                <Calculator />
+              </ProtectedRoute>
             } />
 
           </Routes>

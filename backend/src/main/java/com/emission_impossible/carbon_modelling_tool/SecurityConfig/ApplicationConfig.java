@@ -21,6 +21,8 @@ public class ApplicationConfig {
 
     @SuppressWarnings("deprecation")
     @Bean
+    // Intercepts each and every HTTP requests such that
+        // this code is executed before every HTTP request.
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
 
@@ -44,17 +46,17 @@ public class ApplicationConfig {
 
                             No login, no JWT, no credentials required.
 
-                            Example axios request using JTW token:
+                            Example axios request using JTW token ('jsonWebToken'):
 
-                            await axios.post('https://httpbin.org/post', {
-                            firstName: 'Fred',
-                            lastName: 'Flintstone',
-                          }, {
-                            headers: {
-                              Authorization: "Bearer---jwt token---"
-                            }
-                          }
-                        )
+                            axios.get('http://localhost:8081/api/get-authenticated-user', {
+                                  headers: {
+                                    "Authorization": "Bearer " + jsonWebToken,
+                                  },
+
+                                  // indicates whether or not cross-site Access-Control requests
+                                  // should be made using credentials
+                                  withCredentials: true
+                                })
                              */
                         authorize -> authorize.requestMatchers("/api/**")
                                 .authenticated().anyRequest().permitAll())
@@ -67,7 +69,9 @@ public class ApplicationConfig {
     }
 
 
-
+    // Prevent Cross-Origin Resource Sharing (CORS) error when HTTP
+    // requests are made from frontend. To that end, allow requests
+    // from localhost 5173: localhost uses port 5173
     private CorsConfigurationSource corsConfigurationSource() {
         return new CorsConfigurationSource() {
             @Override

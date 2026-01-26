@@ -1,6 +1,10 @@
 package com.emission_impossible.carbon_modelling_tool.response;
 
-
+/**
+ * HTTP response entity object.
+ *
+ * Is how frontend received JSON web token (and thus is able to store this value)
+ */
 public class AuthResponse {
     private String jwt;
     private String message;
