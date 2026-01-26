@@ -7,6 +7,9 @@ import jakarta.persistence.*;
  User model. Represents Users database storing the logged in users.
  */
 @Entity
+// That works in some databases, but USER is a system keyword in some SQL databases.
+// Thus, use 'users'
+@Table(name = "users")
 public class User {
 
     @Id

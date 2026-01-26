@@ -1,0 +1,192 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > LocationSeeder</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.emission_impossible.carbon_modelling_tool.seeder</a>
+</div>
+
+<h1>Coverage Summary for Class: LocationSeeder (com.emission_impossible.carbon_modelling_tool.seeder)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">LocationSeeder</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    66.7%
+  </span>
+  <span class="absValue">
+    (2/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (1/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    45.5%
+  </span>
+  <span class="absValue">
+    (5/11)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.emission_impossible.carbon_modelling_tool.seeder;
+&nbsp;
+&nbsp;import com.emission_impossible.carbon_modelling_tool.model.Client;
+&nbsp;import com.emission_impossible.carbon_modelling_tool.model.EmissionType;
+&nbsp;import com.emission_impossible.carbon_modelling_tool.model.EmissionsData;
+&nbsp;import com.emission_impossible.carbon_modelling_tool.model.Location;
+&nbsp;import com.emission_impossible.carbon_modelling_tool.repository.ClientRepository;
+&nbsp;import com.emission_impossible.carbon_modelling_tool.repository.LocationRepository;
+&nbsp;import com.emission_impossible.carbon_modelling_tool.util.CsvUtils;
+&nbsp;import org.springframework.boot.CommandLineRunner;
+&nbsp;import org.springframework.context.annotation.Profile;
+&nbsp;import org.springframework.core.annotation.Order;
+&nbsp;import org.springframework.stereotype.Component;
+&nbsp;
+&nbsp;import java.time.LocalDate;
+&nbsp;
+&nbsp;@Component
+&nbsp;// Do not run in test profile
+&nbsp;@Profile(&quot;!test&quot;)
+&nbsp;@Order(2)
+&nbsp;public class LocationSeeder implements CommandLineRunner {
+&nbsp;
+&nbsp;    private final LocationRepository locationRepository;
+&nbsp;    private final ClientRepository clientRepository;
+&nbsp;
+<b class="fc">&nbsp;    public LocationSeeder(LocationRepository locationRepository, ClientRepository clientRepository){</b>
+<b class="fc">&nbsp;        this.locationRepository = locationRepository;</b>
+<b class="fc">&nbsp;        this.clientRepository = clientRepository;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;//    @Override
+&nbsp;//    public void run(String... args) {
+&nbsp;//        // Populate client repository as it is empty
+&nbsp;//        if (this.locationRepository.count() == 0) {
+&nbsp;//            Client version1Client = this.clientRepository.findByName(&quot;Version 1&quot;)
+&nbsp;//                    .orElseThrow(() -&gt; new RuntimeException(&quot;Client not found&quot;));
+&nbsp;//
+&nbsp;//            // Save Dublin Office
+&nbsp;//            this.locationRepository.save(new Location(&quot;Dublin Office&quot;, &quot;EU&quot;, version1Client));
+&nbsp;//            this.locationRepository.save(new Location(&quot;London Office&quot;, &quot;UK&quot;, version1Client));
+&nbsp;//
+&nbsp;//
+&nbsp;//        }else{
+&nbsp;//            System.out.println(&quot;Location Database already contains locations.&quot;);
+&nbsp;//        }
+&nbsp;//    }
+&nbsp;
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void run(String... args) {
+<b class="pc">&nbsp;        if (this.locationRepository.count() &gt; 0) {</b>
+<b class="fc">&nbsp;            System.out.println(&quot;Locations Database already contains locations data.&quot;);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+&nbsp;        // For each row of data in CSV file
+&nbsp;        // Important: requires file in /src/main/resources/seed-data to run
+<b class="nc">&nbsp;        CsvUtils.read(&quot;seed-data/locations.csv&quot;).forEach(row -&gt; {</b>
+&nbsp;
+<b class="nc">&nbsp;            Client foundClient = this.clientRepository.findByName(row.get(&quot;clientName&quot;)).orElseThrow(() -&gt; new RuntimeException(&quot;Client not found&quot;));</b>
+&nbsp;
+&nbsp;
+&nbsp;            // New location to save
+<b class="nc">&nbsp;            Location location = new Location(</b>
+<b class="nc">&nbsp;                    row.get(&quot;name&quot;),</b>
+<b class="nc">&nbsp;                    row.get(&quot;region&quot;),</b>
+&nbsp;                    foundClient
+&nbsp;            );
+&nbsp;
+<b class="nc">&nbsp;            this.locationRepository.save(location);</b>
+&nbsp;        });
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2026-01-26 12:11</div>
+</div>
+</body>
+</html>

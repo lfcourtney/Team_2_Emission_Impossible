@@ -1,0 +1,176 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > JwtTokenValidator</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.emission_impossible.carbon_modelling_tool.SecurityConfig</a>
+</div>
+
+<h1>Coverage Summary for Class: JwtTokenValidator (com.emission_impossible.carbon_modelling_tool.SecurityConfig)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">JwtTokenValidator</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (1/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    5.9%
+  </span>
+  <span class="absValue">
+    (1/17)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.emission_impossible.carbon_modelling_tool.SecurityConfig;
+&nbsp;
+&nbsp;import io.jsonwebtoken.Claims;
+&nbsp;import io.jsonwebtoken.Jwts;
+&nbsp;import io.jsonwebtoken.security.Keys;
+&nbsp;import jakarta.servlet.FilterChain;
+&nbsp;import jakarta.servlet.ServletException;
+&nbsp;import jakarta.servlet.http.HttpServletRequest;
+&nbsp;import jakarta.servlet.http.HttpServletResponse;
+&nbsp;import org.springframework.security.authentication.BadCredentialsException;
+&nbsp;import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+&nbsp;import org.springframework.security.core.Authentication;
+&nbsp;import org.springframework.security.core.GrantedAuthority;
+&nbsp;import org.springframework.security.core.authority.AuthorityUtils;
+&nbsp;import org.springframework.security.core.context.SecurityContextHolder;
+&nbsp;import org.springframework.web.filter.OncePerRequestFilter;
+&nbsp;
+&nbsp;
+&nbsp;import javax.crypto.SecretKey;
+&nbsp;import java.io.IOException;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;/**
+&nbsp; * Enforce that all requests to /api/** have JWT token in request header.
+&nbsp; *
+&nbsp; * Instantiated, therefore, in &#39;ApplicationConfig&#39;, used in the SecurityFilterChain:
+&nbsp; *
+&nbsp; * SecurityFilterChain intercepts all HTTP requests, executing before all HTTP requests
+&nbsp; */
+<b class="fc">&nbsp;public class JwtTokenValidator extends OncePerRequestFilter {</b>
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+<b class="nc">&nbsp;        String jwt = request.getHeader(JwtConstant.JWT_HEADER);</b>
+<b class="nc">&nbsp;        System.out.println(&quot;JWT Token in JwtTokenValidator: &quot; + jwt);</b>
+<b class="nc">&nbsp;        if (jwt != null &amp;&amp; jwt.startsWith(&quot;Bearer &quot;)) {</b>
+<b class="nc">&nbsp;            jwt = jwt.substring(7);</b>
+&nbsp;
+<b class="nc">&nbsp;            System.out.println(&quot;JWT Token in JwtTokenValidator: &quot; + jwt);</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                SecretKey key = Keys.hmacShaKeyFor(JwtConstant.SECRET_KEY.getBytes());</b>
+&nbsp;                @SuppressWarnings(&quot;deprecation&quot;)
+<b class="nc">&nbsp;                Claims claims = Jwts.parser().setSigningKey(key).build().parseClaimsJws(jwt).getBody();</b>
+<b class="nc">&nbsp;                System.out.print(claims);</b>
+&nbsp;
+<b class="nc">&nbsp;                String email = String.valueOf(claims.get(&quot;email&quot;));</b>
+<b class="nc">&nbsp;                System.out.print(email);</b>
+<b class="nc">&nbsp;                String authorities = String.valueOf(claims.get(&quot;authorities&quot;));</b>
+<b class="nc">&nbsp;                List&lt;GrantedAuthority&gt; auth = AuthorityUtils.commaSeparatedStringToAuthorityList(authorities);</b>
+<b class="nc">&nbsp;                Authentication authentication = new UsernamePasswordAuthenticationToken(email, null, auth);</b>
+<b class="nc">&nbsp;                SecurityContextHolder.getContext().setAuthentication(authentication);</b>
+&nbsp;
+&nbsp;            } catch (Exception e) {
+<b class="nc">&nbsp;                throw new BadCredentialsException(&quot;Invalid token&quot;, e);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        filterChain.doFilter(request, response);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2026-01-26 12:11</div>
+</div>
+</body>
+</html>

@@ -5,10 +5,13 @@ import com.emission_impossible.carbon_modelling_tool.model.EmissionType;
 import com.emission_impossible.carbon_modelling_tool.repository.ClientRepository;
 import com.emission_impossible.carbon_modelling_tool.util.CsvUtils;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Profile;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 @Component
+// Do not run in test profile
+@Profile("!test")
 @Order(1)
 public class ClientSeeder implements CommandLineRunner {
 

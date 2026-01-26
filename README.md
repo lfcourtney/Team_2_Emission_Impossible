@@ -40,6 +40,7 @@ CarbonIQ: A web‑based carbon modelling tool (Java Spring) to show customers po
             <!-- <li><a href="#user-personas">User Personas</a></li> -->
             <li><a href="#user-stories">User Stories</a></li>
             <li><a href="#work-breakdown-structure-wbs">Work Breakdown Structure (WBS)</a></li>
+            <li><a href="#code-coverage">Spring Boot Backend Code Coverage</a></li>
             </ul>
         </li>
       </ul>
@@ -135,6 +136,13 @@ System Design Document (SDD) outlines specifications used to build the system; a
 ![work breakdown structure](/images/work_breakdown_structure.png)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+#### Code Coverage
+
+[Spring Boot Backend Code Coverage](/backend/htmlReport__code-coverage/index.html)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 
 <!-- GETTING STARTED -->
 

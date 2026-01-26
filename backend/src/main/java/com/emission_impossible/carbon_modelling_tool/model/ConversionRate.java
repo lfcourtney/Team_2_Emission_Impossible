@@ -2,13 +2,16 @@ package com.emission_impossible.carbon_modelling_tool.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "conversion_rates", uniqueConstraints = { @UniqueConstraint(columnNames = { "emission_type_id", "location_id", "year" }) })
+// 'year' is a reserved keyword. So rename to 'year_value'.
+@Table(name = "conversion_rates", uniqueConstraints = { @UniqueConstraint(columnNames = { "emission_type_id", "location_id", "year_value" }) })
 public class ConversionRate {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    // 'year' is a reserved keyword. So rename to 'year_value'.
+    @Column(name = "year_value")
     private int year;
     private double rate;
     private String unit;

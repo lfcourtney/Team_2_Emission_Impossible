@@ -10,12 +10,15 @@ import com.emission_impossible.carbon_modelling_tool.repository.EmissionsDataRep
 import com.emission_impossible.carbon_modelling_tool.repository.LocationRepository;
 import com.emission_impossible.carbon_modelling_tool.util.CsvUtils;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Profile;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 
 @Component
+// Do not run in test profile
+@Profile("!test")
 @Order(5)
 public class EmissionsDataSeeder implements CommandLineRunner {
 

@@ -1,0 +1,336 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > EmissionsDataService</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.emission_impossible.carbon_modelling_tool.service</a>
+</div>
+
+<h1>Coverage Summary for Class: EmissionsDataService (com.emission_impossible.carbon_modelling_tool.service)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">EmissionsDataService</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    8.3%
+  </span>
+  <span class="absValue">
+    (1/12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    5.4%
+  </span>
+  <span class="absValue">
+    (4/74)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.emission_impossible.carbon_modelling_tool.service;
+&nbsp;
+&nbsp;import com.emission_impossible.carbon_modelling_tool.dto.EmissionsDataDTO;
+&nbsp;import com.emission_impossible.carbon_modelling_tool.dto.EmissionsSummaryDTO;
+&nbsp;import com.emission_impossible.carbon_modelling_tool.model.ConversionRate;
+&nbsp;import com.emission_impossible.carbon_modelling_tool.model.EmissionType;
+&nbsp;import com.emission_impossible.carbon_modelling_tool.model.EmissionsData;
+&nbsp;import com.emission_impossible.carbon_modelling_tool.model.Location;
+&nbsp;import com.emission_impossible.carbon_modelling_tool.repository.ConversionRateRepository;
+&nbsp;import com.emission_impossible.carbon_modelling_tool.repository.EmissionsDataRepository;
+&nbsp;import com.emission_impossible.carbon_modelling_tool.repository.LocationRepository;
+&nbsp;import org.springframework.stereotype.Service;
+&nbsp;
+&nbsp;import java.time.LocalDate;
+&nbsp;import java.util.HashMap;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Map;
+&nbsp;
+&nbsp;@Service
+&nbsp;public class EmissionsDataService {
+&nbsp;
+&nbsp;    private final EmissionsDataRepository emissionsDataRepository;
+&nbsp;
+&nbsp;    private final ConversionRateRepository conversionRateRepository;
+&nbsp;
+&nbsp;    private final LocationRepository locationRepository;
+&nbsp;
+<b class="fc">&nbsp;    public EmissionsDataService(EmissionsDataRepository emissionsDataRepository, ConversionRateRepository conversionRateRepository, LocationRepository locationRepository){</b>
+<b class="fc">&nbsp;        this.emissionsDataRepository = emissionsDataRepository;</b>
+<b class="fc">&nbsp;        this.conversionRateRepository = conversionRateRepository;</b>
+<b class="fc">&nbsp;        this.locationRepository = locationRepository;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public double calculateCO2e(EmissionsData emissionsData){
+<b class="nc">&nbsp;        int emissionsDataYear = emissionsData.getDate().getYear();</b>
+&nbsp;
+<b class="nc">&nbsp;        ConversionRate conversionRate = this.conversionRateRepository.findByEmissionTypeIdAndLocationIdAndYear(emissionsData.getEmissionType().getId(), emissionsData.getLocation().getId(), emissionsDataYear)</b>
+<b class="nc">&nbsp;                .orElseThrow(() -&gt; new RuntimeException(String.format(&quot;No conversion rate found for emission type %d at location %d for year %d&quot;, emissionsData.getEmissionType().getId(),  emissionsData.getLocation().getId(), emissionsDataYear)));</b>
+&nbsp;
+<b class="nc">&nbsp;        return emissionsData.getValue() * conversionRate.getRate();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public EmissionsData addEmission(Long emissionTypeId, Long locationId, LocalDate date, double value){
+&nbsp;
+<b class="nc">&nbsp;        int emissionsDataYear = date.getYear();</b>
+&nbsp;
+&nbsp;
+<b class="nc">&nbsp;        ConversionRate conversionRate = this.conversionRateRepository.findByEmissionTypeIdAndLocationIdAndYear(emissionTypeId, locationId, emissionsDataYear)</b>
+<b class="nc">&nbsp;                .orElseThrow(() -&gt; new RuntimeException(String.format(&quot;No conversion rate found for emission type %d at location %d for year %d&quot;, emissionTypeId,  locationId, emissionsDataYear)));</b>
+&nbsp;
+&nbsp;
+<b class="nc">&nbsp;        EmissionsData newEmissionData = new EmissionsData(date, value, conversionRate.getEmissionType(), conversionRate.getLocation());</b>
+&nbsp;
+<b class="nc">&nbsp;        this.emissionsDataRepository.save(newEmissionData);</b>
+&nbsp;
+<b class="nc">&nbsp;        return newEmissionData;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public List&lt;EmissionsDataDTO&gt; getEmissionsForLocation(Long locationId) {
+<b class="nc">&nbsp;        return emissionsDataRepository.findByLocationId(locationId)</b>
+<b class="nc">&nbsp;                .stream()</b>
+&nbsp;                // Use collection of EmissionsData objects.
+&nbsp;                // Each object will map to an instance of EmissionsDataDTO.
+&nbsp;                // Return this new collection.
+<b class="nc">&nbsp;                .map(this::mapToDTO)</b>
+<b class="nc">&nbsp;                .toList();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public List&lt;EmissionsDataDTO&gt; getEmissionsForClient(Long clientId) {
+&nbsp;
+<b class="nc">&nbsp;        List&lt;Long&gt; locationIds = locationRepository.findByClientId(clientId)</b>
+<b class="nc">&nbsp;                .stream()</b>
+<b class="nc">&nbsp;                .map(Location::getId)</b>
+<b class="nc">&nbsp;                .toList();</b>
+&nbsp;
+<b class="nc">&nbsp;        return emissionsDataRepository.findByLocationIdIn(locationIds)</b>
+<b class="nc">&nbsp;                .stream()</b>
+<b class="nc">&nbsp;                .map(this::mapToDTO)</b>
+<b class="nc">&nbsp;                .toList();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public List&lt;EmissionsDataDTO&gt; getAllEmissions() {
+<b class="nc">&nbsp;        return emissionsDataRepository.findAll()</b>
+<b class="nc">&nbsp;                .stream()</b>
+<b class="nc">&nbsp;                .map(this::mapToDTO)</b>
+<b class="nc">&nbsp;                .toList();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public List&lt;EmissionsDataDTO&gt; getEmissionsByDateRange(
+&nbsp;            LocalDate startDate,
+&nbsp;            LocalDate endDate,
+&nbsp;            Long locationId
+&nbsp;    ) {
+&nbsp;
+&nbsp;        List&lt;EmissionsData&gt; emissions;
+&nbsp;
+<b class="nc">&nbsp;        if (locationId != null) {</b>
+<b class="nc">&nbsp;            emissions = emissionsDataRepository</b>
+<b class="nc">&nbsp;                    .findByDateBetweenAndLocationId(startDate, endDate, locationId);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            emissions = emissionsDataRepository</b>
+<b class="nc">&nbsp;                    .findByDateBetween(startDate, endDate);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return emissions.stream()</b>
+<b class="nc">&nbsp;                .map(this::mapToDTO)</b>
+<b class="nc">&nbsp;                .toList();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public double getTotalCO2eForLocation(Long locationId) {
+<b class="nc">&nbsp;        return getEmissionsForLocation(locationId)</b>
+<b class="nc">&nbsp;                .stream()</b>
+<b class="nc">&nbsp;                .mapToDouble(EmissionsDataDTO::getCo2e)</b>
+<b class="nc">&nbsp;                .sum();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public double getTotalCO2eForClient(Long clientId) {
+<b class="nc">&nbsp;        return getEmissionsForClient(clientId)</b>
+<b class="nc">&nbsp;                .stream()</b>
+<b class="nc">&nbsp;                .mapToDouble(EmissionsDataDTO::getCo2e)</b>
+<b class="nc">&nbsp;                .sum();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // Find all the Emission Data records related to the given location id.
+&nbsp;    // Create an overall emission data summary HashMap. Each key value pair will be an overall summary of the emission data, the key for each summary being the emissionTypeName.
+&nbsp;    // Return the overall emission data summary HashMap.
+&nbsp;    public Map&lt;String, EmissionsSummaryDTO&gt; getEmissionsSummaryByType(Long locationId) {
+&nbsp;
+&nbsp;        // Store final results in this HashMap. Will be returned.
+<b class="nc">&nbsp;        Map&lt;String, EmissionsSummaryDTO&gt; summary = new HashMap&lt;&gt;();</b>
+&nbsp;
+&nbsp;        // Use given location. Loop through all emission records belonging
+&nbsp;        // to the location
+<b class="nc">&nbsp;        for (EmissionsDataDTO _emissionsDataDTO : getEmissionsForLocation(locationId)) {</b>
+&nbsp;
+&nbsp;            // Using the emissionsTypeName as the key to find the emissions summary,
+&nbsp;            // create a new emissions summary if the key does not correspond to an existing
+&nbsp;            // emissions summary. Otherwise, do nothing and keep the existing emissions summary
+&nbsp;            // associated with the given key.
+<b class="nc">&nbsp;            summary.computeIfAbsent(</b>
+<b class="nc">&nbsp;                    _emissionsDataDTO.getEmissionTypeName(),</b>
+&nbsp;                    key -&gt; {
+<b class="nc">&nbsp;                        EmissionsSummaryDTO esDTO = new EmissionsSummaryDTO();</b>
+<b class="nc">&nbsp;                        esDTO.setUnit(_emissionsDataDTO.getUnit());</b>
+&nbsp;
+&nbsp;                        // Set emissions summary
+<b class="nc">&nbsp;                        return esDTO;</b>
+&nbsp;                    }
+&nbsp;            );
+&nbsp;
+&nbsp;            // Get emissions summary from the overall emissions summary Map.
+&nbsp;            //
+&nbsp;            //This object was possibly just created and added to the
+&nbsp;            // overall emissions summary Map. Would have happened if the
+&nbsp;            // emissionTypeName could not find an existing emissions summary
+&nbsp;            // DTO object in the summary map.
+<b class="nc">&nbsp;            EmissionsSummaryDTO extractedEmissionsSummaryDto = summary.get(_emissionsDataDTO.getEmissionTypeName());</b>
+&nbsp;
+&nbsp;            // Add this record&#39;s value to the running total
+&nbsp;            // (for example: total fuel used, total gas emitted, etc.)
+<b class="nc">&nbsp;            extractedEmissionsSummaryDto.setTotalValue(extractedEmissionsSummaryDto.getTotalValue() + _emissionsDataDTO.getValue());</b>
+&nbsp;
+&nbsp;            // Add this record&#39;s CO2 equivalent to the running total
+&nbsp;            // (this is the climate impact number, accumulated over all records)
+<b class="nc">&nbsp;            extractedEmissionsSummaryDto.setTotalCO2e(extractedEmissionsSummaryDto.getTotalCO2e() + _emissionsDataDTO.getCo2e());</b>
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;            // Increase the count by 1
+&nbsp;            // This tracks how many individual records were combined
+<b class="nc">&nbsp;            extractedEmissionsSummaryDto.setCount(extractedEmissionsSummaryDto.getCount() + 1);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;
+&nbsp;        // Return the finished emissions summary:
+&nbsp;        // A map where:
+&nbsp;        //  - the key = emission type name (like &quot;Electricity&quot;, &quot;Fuel&quot;, &quot;Gas&quot;)
+&nbsp;        //  - the value = combined totals for that type
+<b class="nc">&nbsp;        return summary;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;    // Central mapper; keeps logic consistent.
+&nbsp;    // Takes EmissionsData.
+&nbsp;    // Will take all the data from EmissionsData and map it to a newly created EmissionsDataDTO object.
+&nbsp;    // Will return that EmissionsDataDTO object.
+&nbsp;    private EmissionsDataDTO mapToDTO(EmissionsData emissionsData) {
+&nbsp;
+&nbsp;
+&nbsp;        // DTO (Data Transfer Object). The purpose is to reduce boilerplate code
+&nbsp;        // and to increase security, since access is controlled, per encapsulation OOP principle.
+<b class="nc">&nbsp;        EmissionsDataDTO emissionsDataDTO = new EmissionsDataDTO();</b>
+&nbsp;
+&nbsp;
+<b class="nc">&nbsp;        emissionsDataDTO.setId(emissionsData.getId());</b>
+<b class="nc">&nbsp;        emissionsDataDTO.setDate(emissionsData.getDate());</b>
+<b class="nc">&nbsp;        emissionsDataDTO.setValue(emissionsData.getValue());</b>
+&nbsp;
+<b class="nc">&nbsp;        Location location = emissionsData.getLocation();</b>
+<b class="nc">&nbsp;        emissionsDataDTO.setLocationId(location.getId());</b>
+<b class="nc">&nbsp;        emissionsDataDTO.setLocationName(location.getName());</b>
+<b class="nc">&nbsp;        emissionsDataDTO.setLocationRegion(location.getRegion());</b>
+&nbsp;
+<b class="nc">&nbsp;        EmissionType emissionType = emissionsData.getEmissionType();</b>
+<b class="nc">&nbsp;        emissionsDataDTO.setEmissionTypeId(emissionType.getId());</b>
+&nbsp;
+&nbsp;        // Set properties unique to EmissionsDataDTO object
+<b class="nc">&nbsp;        double co2e = calculateCO2e(emissionsData);</b>
+<b class="nc">&nbsp;        emissionsDataDTO.setCo2e(co2e);</b>
+&nbsp;
+<b class="nc">&nbsp;        emissionsDataDTO.setEmissionTypeName(emissionType.getName());</b>
+<b class="nc">&nbsp;        emissionsDataDTO.setUnit(emissionType.getUnit());</b>
+<b class="nc">&nbsp;        emissionsDataDTO.setScope(emissionType.getScope());</b>
+&nbsp;
+<b class="nc">&nbsp;        return emissionsDataDTO;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2026-01-26 12:13</div>
+</div>
+</body>
+</html>
