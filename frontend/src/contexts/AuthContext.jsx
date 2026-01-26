@@ -20,14 +20,14 @@ const AuthContext = createContext(null);
 export const AuthProvider = ({ children }) => {
   // Store JSON web token value. All backend requests to any 
   // route beginning with /route will require this value.
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState("mock-token");
   // Format: { fullName: 'Demo User', email: 'demo@demo.com'};
-  const [authenticatedUser, setAuthenticatedUser] = useState(null);
+  const [authenticatedUser, setAuthenticatedUser] = useState({ fullName: 'Test User', email: 'test@example.com'});
 
   // Boolean. Used with 'ProtectedRoute' wrapper component. This Wrapper 
   // component will allow the user to continue with navigation based on 
   // the value of this boolean.
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(true);
 
   useEffect(() => {
     // Check local storage on seed
