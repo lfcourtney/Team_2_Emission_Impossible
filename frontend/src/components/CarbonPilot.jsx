@@ -1,7 +1,15 @@
+//  Import necessary React components
 import { useState, useRef, useEffect } from 'react';
+// Import icons from lucide-react
 import { MessageSquare, X, Send, Sparkles, Bot } from 'lucide-react';
 
+/**
+ * This component renders an inteactive chat interface for Carbon Pilot AI.
+ * A selection of pre-defined prompts are provided for a demo experience.
+ * @returns A JSX component representing the Carbon Pilot AI chat interface.
+ */
 export default function CarbonPilot() {
+    // State to track open/closed status of chat
     const [isOpen, setIsOpen] = useState(false);
     const [messages, setMessages] = useState([
         { id: 1, type: 'bot', text: 'Hello! I\'m Carbon Pilot. I can help analyze your emission trends or suggest reduction strategies. How can I assist you today?' }
@@ -36,7 +44,7 @@ export default function CarbonPilot() {
         // Simulate AI "Thinking"
         setTimeout(() => {
             let botResponse = "I can certainly help with that. Based on the current dataset, switching the Dublin office to a renewable energy provider would reduce net emissions by approximately 18% annually.";
-            
+
             if (text.toLowerCase().includes('report')) {
                 botResponse = "I've generated a draft Executive Summary highlighting the 2.4% increase in vehicle fuel consumption. Would you like me to export this to PDF?";
             } else if (text.toLowerCase().includes('scope')) {
@@ -52,7 +60,7 @@ export default function CarbonPilot() {
     return (
         <>
             {/* Toggle Button */}
-            <button 
+            <button
                 onClick={() => setIsOpen(!isOpen)}
                 className={`fixed bottom-6 right-6 z-50 p-4 rounded-full shadow-2xl transition-all duration-300 hover:scale-110 flex items-center justify-center
                 ${isOpen ? 'bg-red-500 rotate-90' : 'bg-gradient-to-r from-secondary to-blue-500 animate-bounce-subtle'}`}
@@ -63,7 +71,7 @@ export default function CarbonPilot() {
             {/* Chat Interface */}
             <div className={`fixed bottom-24 right-6 z-50 w-[380px] h-[500px] bg-primary/95 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl flex flex-col transition-all duration-300 origin-bottom-right
                 ${isOpen ? 'scale-100 opacity-100' : 'scale-0 opacity-0 pointer-events-none'}`}>
-                
+
                 {/* Header */}
                 <div className="p-4 border-b border-white/10 flex items-center gap-3 bg-white/5 rounded-t-2xl">
                     <div className="w-8 h-8 rounded-lg bg-secondary flex items-center justify-center">
@@ -83,8 +91,8 @@ export default function CarbonPilot() {
                     {messages.map((msg) => (
                         <div key={msg.id} className={`flex ${msg.type === 'user' ? 'justify-end' : 'justify-start'}`}>
                             <div className={`max-w-[80%] p-3 rounded-2xl text-sm leading-relaxed ${
-                                msg.type === 'user' 
-                                ? 'bg-secondary text-primary font-medium rounded-tr-none' 
+                                msg.type === 'user'
+                                ? 'bg-secondary text-primary font-medium rounded-tr-none'
                                 : 'bg-white/10 text-gray-200 rounded-tl-none border border-white/5'
                             }`}>
                                 {msg.text}
@@ -108,27 +116,27 @@ export default function CarbonPilot() {
                     {messages.length < 3 && !isTyping && (
                         <div className="flex gap-2 mb-3 overflow-x-auto pb-1 hide-scrollbar">
                            {suggestions.map((s, i) => (
-                               <button 
+                               <button
                                 key={i}
                                 onClick={() => handleSend(s)}
                                 className="whitespace-nowrap px-3 py-1 bg-white/5 hover:bg-white/10 border border-white/10 rounded-full text-xs text-secondary transition-colors"
                                >
                                 {s}
                                </button>
-                           ))} 
+                           ))}
                         </div>
                     )}
-                    
+
                     <div className="relative">
-                        <input 
-                            type="text" 
+                        <input
+                            type="text"
                             value={input}
                             onChange={(e) => setInput(e.target.value)}
                             onKeyDown={(e) => e.key === 'Enter' && handleSend(input)}
                             placeholder="Ask me anything about your emissions..."
                             className="w-full bg-black/20 text-white text-sm rounded-xl pl-4 pr-10 py-3 outline-none focus:ring-1 focus:ring-secondary/50 placeholder-gray-500 border border-white/5"
                         />
-                        <button 
+                        <button
                             onClick={() => handleSend(input)}
                             className="absolute right-2 top-2 p-1 text-secondary hover:text-white transition-colors"
                         >

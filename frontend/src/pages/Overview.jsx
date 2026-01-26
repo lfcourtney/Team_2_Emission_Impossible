@@ -1,26 +1,45 @@
+// React imports
 import { useState, useEffect, useMemo } from 'react';
+
+// Import the API service to fetch calculated emissions data
 import { CalculatedEmissionsService } from '../fakeBackend/services/CalculatedEmissionsService';
+
+// Import our components
 import ModernEmissionTrendChart from '../components/ModernEmissionTrendChart';
 import WeatherCorrelationChart from '../components/WeatherCorrelationChart';
 import SourceBreakdown from '../components/SourceBreakdown';
 import StatCard from '../components/StatCard';
 import LiveTelemetry from '../components/LiveTelemetry';
+
+// Import our Data context. Contexts provide global state management for our app.
+// In this case, we use it to manage selected client/location across multiple pages.
 import { useData } from '../contexts/DataContext';
+
+// Import icons from lucide-react
 import { Leaf, Activity, TrendingUp, Zap, Droplet, Car, AlertCircle, Settings, Target } from 'lucide-react';
 
+// Main Page Component Export
 export default function Overview() {
+
+    // We get the selected client and location from our DataContext. This is changed in the Header component.
     const { selectedClientId, selectedLocationId } = useData();
+
+
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
     
-    // Budget / Target State
+    // Budget / Target States (Used for the YTD Carbon Budget stat card)
     const [annualBudget, setAnnualBudget] = useState(250000); // Default 250t
     const [isBudgetModalOpen, setIsBudgetModalOpen] = useState(false);
     const [reductionTarget, setReductionTarget] = useState(10); // 10% reduction default
 
+    // useEffect is a React hook that runs on component mount, and when any specified dependencies change.
     useEffect(() => {
+
+        // This is where we would call our API to fetch data based on selected client/location.
+        // Each time the user changes the client or location from the header, this effect will re-run and fetch new data.
         setLoading(true);
-        // Simulate loading
+        // For now, we simulate an API call with a timeout.
         setTimeout(() => {
             let result = [];
             if (selectedClientId && selectedLocationId) {
@@ -33,7 +52,7 @@ export default function Overview() {
             setData(result);
             setLoading(false);
         }, 500);
-    }, [selectedClientId, selectedLocationId]);
+    }, [selectedClientId, selectedLocationId]); // Re-run when client/location changes
 
     /* Memoization (useMemo()) allows a function to cache its results based on its inputs.
     If a component calls these functions with the same inputs again, it can return the cached result 
@@ -67,15 +86,6 @@ export default function Overview() {
             return acc;
         }, {});
 
-        // Improved version that includes scope (we retain original for legacy purposes)
-        const byTypeWithScope = data.reduce((acc, curr) => {
-            const type = curr.emissionTypeName || 'Other';
-            const scope = curr.scope || 3;                  // Default to Scope 3 if undefined
-
-            if (!acc[type]) acc[type] = { total: 0, scope: scope };
-            acc[type].total += (curr.co2e || 0);
-            return acc;
-        }, {});
 
         // Identify largest contributor
         const sortedTypes = Object.entries(byType).sort(([, a], [, b]) => b - a);
@@ -87,6 +97,7 @@ export default function Overview() {
     // Use state-based budget
     const budgetUsed = ((stats.totalCO2e / annualBudget) * 100).toFixed(1);
 
+    // If our page is loading data, show a loading spinner.
     if(loading) {
         return (
             <div className="h-96 flex flex-col items-center justify-center">
@@ -95,7 +106,7 @@ export default function Overview() {
             </div>
         );
     }
-
+    // The return statement contains the JSX that defines the structure of the Overview page. (HTML-like syntax)
     return (
         <div className="space-y-6">
             {/* Top Stats Row */}

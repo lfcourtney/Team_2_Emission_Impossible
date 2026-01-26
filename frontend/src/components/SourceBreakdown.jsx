@@ -1,6 +1,7 @@
 /**
  * This component displays a breakdown of emissions by source type.
  * @param {*} stats - Takes in the memoized stats object from Overview page.
+ * @return A JSX component representing the Source Breakdown section.
  */
 export default function SourceBreakdown({ stats }) {
     return (
