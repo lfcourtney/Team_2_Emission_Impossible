@@ -1,0 +1,149 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > UserResponse</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.emission_impossible.carbon_modelling_tool.response</a>
+</div>
+
+<h1>Coverage Summary for Class: UserResponse (com.emission_impossible.carbon_modelling_tool.response)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">UserResponse</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/9)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.emission_impossible.carbon_modelling_tool.response;
+&nbsp;
+&nbsp;/**
+&nbsp; * HTTP response entity object
+&nbsp; *
+&nbsp; * Used to securely return the information of the currently logged in user:
+&nbsp; * does not include the user password.
+&nbsp; */
+&nbsp;
+&nbsp;public class UserResponse {
+&nbsp;
+&nbsp;    private String fullName;
+&nbsp;    private String email;
+&nbsp;
+<b class="nc">&nbsp;    public UserResponse() {}</b>
+&nbsp;
+<b class="nc">&nbsp;    public UserResponse(String fullName, String email) {</b>
+<b class="nc">&nbsp;        this.fullName = fullName;</b>
+<b class="nc">&nbsp;        this.email = email;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getFullName() {
+<b class="nc">&nbsp;        return fullName;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setFullName(String fullName) {
+<b class="nc">&nbsp;        this.fullName = fullName;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getEmail() {
+<b class="nc">&nbsp;        return email;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setEmail(String email) {
+<b class="nc">&nbsp;        this.email = email;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String toString() {
+<b class="nc">&nbsp;        return &quot;UserResponse{&quot; +</b>
+&nbsp;                &quot;fullName=&#39;&quot; + fullName + &#39;\&#39;&#39; +
+&nbsp;                &quot;, email=&#39;&quot; + email + &#39;\&#39;&#39; +
+&nbsp;                &#39;}&#39;;
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2026-01-26 13:38</div>
+</div>
+</body>
+</html>

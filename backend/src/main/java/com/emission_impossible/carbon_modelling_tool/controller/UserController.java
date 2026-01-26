@@ -23,6 +23,8 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Optional;
 
+// Handle all requests from frontend to backend as part of authentication and authorisation process.
+// All such requests will start with /auth
 @RestController
 @RequestMapping("/auth")
 public class UserController {
@@ -39,6 +41,8 @@ public class UserController {
         this.customUserDetails = customUserDetails;
     }
 
+    // Create new user entry in User table. Password value
+    // will be hashed for security using Bcrypt.
     @PostMapping("/signup")
     public ResponseEntity<AuthResponse> createUserHandler(@RequestBody User user)  {
         String email = user.getEmail();
@@ -57,8 +61,9 @@ public class UserController {
         createdUser.setFullName(fullName);
         createdUser.setPassword(passwordEncoder.encode(password));
 
-        User savedUser = userRepository.save(createdUser);
-        userRepository.save(savedUser);
+        // Save the user in the 'users' database
+        userRepository.save(createdUser);
+
         Authentication authentication = new UsernamePasswordAuthenticationToken(email,password);
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String token = JwtProvider.generateToken(authentication);
@@ -81,6 +86,10 @@ public class UserController {
 
 
 
+    // Throws 403 forbidden HTTP response if client is
+    // trying to sign into an account that has not been
+    // registered. Otherwise will set the current authentication session,
+    // using the authorised sign in details submitted by the user.
     @PostMapping("/signin")
     public ResponseEntity<AuthResponse> signin(@RequestBody User loginRequest) {
         String username = loginRequest.getEmail();
@@ -102,8 +111,10 @@ public class UserController {
     }
 
 
-
-
+    // Returns necessary information to start user session
+    // (calling relevant method from 'SecurityContextHolder'),
+    // providing the parameters passed into this method can be
+    // used to log the user into a valid user account.
     private Authentication authenticate(String username, String password) {
 
         System.out.println(username+"---++----"+password);

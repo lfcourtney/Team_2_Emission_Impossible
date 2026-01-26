@@ -21,6 +21,8 @@ public class ApplicationConfig {
 
     @SuppressWarnings("deprecation")
     @Bean
+    // Intercepts each and every HTTP requests such that
+        // this code is executed before every HTTP request.
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
 
@@ -42,7 +44,19 @@ public class ApplicationConfig {
 
                             Is allowed without authentication
 
-                            No login, no JWT, no credentials required
+                            No login, no JWT, no credentials required.
+
+                            Example axios request using JTW token ('jsonWebToken'):
+
+                            axios.get('http://localhost:8081/api/get-authenticated-user', {
+                                  headers: {
+                                    "Authorization": "Bearer " + jsonWebToken,
+                                  },
+
+                                  // indicates whether or not cross-site Access-Control requests
+                                  // should be made using credentials
+                                  withCredentials: true
+                                })
                              */
                         authorize -> authorize.requestMatchers("/api/**")
                                 .authenticated().anyRequest().permitAll())
@@ -55,13 +69,17 @@ public class ApplicationConfig {
     }
 
 
-
+    // Prevent Cross-Origin Resource Sharing (CORS) error when HTTP
+    // requests are made from frontend. To that end, allow requests
+    // from localhost 5173: localhost uses port 5173
     private CorsConfigurationSource corsConfigurationSource() {
         return new CorsConfigurationSource() {
             @Override
             public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
                 CorsConfiguration ccfg = new CorsConfiguration();
-                ccfg.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
+
+                // Note: frontend is configured to port 5173.
+                ccfg.setAllowedOrigins(Arrays.asList("http://localhost:5173"));
                 ccfg.setAllowedMethods(Collections.singletonList("*"));
                 ccfg.setAllowCredentials(true);
                 ccfg.setAllowedHeaders(Collections.singletonList("*"));

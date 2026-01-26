@@ -1,6 +1,6 @@
 # Team_2_Emission_Impossible
 
-A web‑based carbon modelling tool (Java Spring) to show customers potential decarbonisation.
+CarbonIQ: A web‑based carbon modelling tool (Java Spring) to show customers potential decarbonisation.
 
 <!-- Template Source: https://github.com/othneildrew/Best-README-Template -->
 
@@ -13,7 +13,7 @@ A web‑based carbon modelling tool (Java Spring) to show customers potential de
     <img src="images/emission_impossible.png" alt="EmissionImpossible" width="80" height="80">
   </a>
 
-<h3 align="center">Team Emission Impossible Carbon Modelling Tool</h3>
+<h3 align="center">CarbonIQ</h3>
 
   <p align="center">
     A web‑based carbon modelling tool (Java Spring) to show customers potential decarbonisation.
@@ -40,6 +40,7 @@ A web‑based carbon modelling tool (Java Spring) to show customers potential de
             <!-- <li><a href="#user-personas">User Personas</a></li> -->
             <li><a href="#user-stories">User Stories</a></li>
             <li><a href="#work-breakdown-structure-wbs">Work Breakdown Structure (WBS)</a></li>
+            <li><a href="#code-coverage">Spring Boot Backend Code Coverage</a></li>
             </ul>
         </li>
       </ul>
@@ -136,16 +137,23 @@ System Design Document (SDD) outlines specifications used to build the system; a
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+#### Code Coverage
+
+[Spring Boot Backend Code Coverage](/backend/htmlReport__code-coverage/index.html)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
 <!-- GETTING STARTED -->
 
 ## Getting Started
 
-1. Ensure `carbon-modelling-tool` database exists. In a localhost instance of MySQL:
+1. Ensure `carbon-iq` database exists. In a localhost instance of MySQL:
 
 ```
-DROP DATABASE IF EXISTS `carbon-modelling-tool`;
+DROP DATABASE IF EXISTS `carbon-iq`;
 
-CREATE DATABASE `carbon-modelling-tool`;
+CREATE DATABASE `carbon-iq`;
 ```
 
 ### Installation

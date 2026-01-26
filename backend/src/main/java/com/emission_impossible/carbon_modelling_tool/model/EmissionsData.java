@@ -11,6 +11,9 @@ public class EmissionsData {
     private Long id;
 
     private LocalDate date;
+
+    // 'value' is a reserved keyword. So rename to 'emission_value'
+    @Column(name = "emission_value")
     private double value;
 
     @ManyToOne

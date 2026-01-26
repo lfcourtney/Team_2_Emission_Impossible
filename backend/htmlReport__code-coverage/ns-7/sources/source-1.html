@@ -1,0 +1,162 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > CsvUtils</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.emission_impossible.carbon_modelling_tool.util</a>
+</div>
+
+<h1>Coverage Summary for Class: CsvUtils (com.emission_impossible.carbon_modelling_tool.util)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CsvUtils</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/11)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.emission_impossible.carbon_modelling_tool.util;
+&nbsp;
+&nbsp;import org.apache.commons.csv.CSVFormat;
+&nbsp;import org.apache.commons.csv.CSVParser;
+&nbsp;import org.apache.commons.csv.CSVRecord;
+&nbsp;import org.springframework.core.io.ClassPathResource;
+&nbsp;
+&nbsp;import java.io.InputStreamReader;
+&nbsp;import java.io.Reader;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;
+&nbsp;/**
+&nbsp; * Utility class for reading CSV files from the application classpath.
+&nbsp; *
+&nbsp; *
+&nbsp; * &lt;p&gt;The returned {@link CSVRecord} objects can be accessed by column
+&nbsp; * name or index.&lt;/p&gt;
+&nbsp; */
+<b class="nc">&nbsp;public class CsvUtils {</b>
+&nbsp;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Reads a CSV file from the classpath and returns its records.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;The CSV is expected to have a header row, which will be used
+&nbsp;     * as column names and excluded from the returned data records.&lt;/p&gt;
+&nbsp;     */
+&nbsp;    public static List&lt;CSVRecord&gt; read(String path) {
+&nbsp;        try {
+&nbsp;
+&nbsp;            // Load the CSV file from the classpath
+<b class="nc">&nbsp;            Reader reader = new InputStreamReader(</b>
+<b class="nc">&nbsp;                    new ClassPathResource(path).getInputStream()</b>
+&nbsp;            );
+&nbsp;
+&nbsp;            // Configure the CSV parser:
+&nbsp;            // - use the first row as headers
+&nbsp;            // - skip the header row in the returned records
+&nbsp;            // - trim surrounding whitespace from values
+<b class="nc">&nbsp;            CSVParser parser = CSVFormat.DEFAULT.builder()</b>
+&nbsp;                    // tells CSV to use the first record as column names
+<b class="nc">&nbsp;                    .setHeader()</b>
+&nbsp;                    // prevents that header row from appearing as a data record
+<b class="nc">&nbsp;                    .setSkipHeaderRecord(true)</b>
+<b class="nc">&nbsp;                    .setTrim(true)</b>
+<b class="nc">&nbsp;                    .build()</b>
+<b class="nc">&nbsp;                    .parse(reader);</b>
+&nbsp;
+&nbsp;            // Parse and return all records
+<b class="nc">&nbsp;            return parser.getRecords();</b>
+&nbsp;
+&nbsp;        } catch (Exception e) {
+&nbsp;            // Wrap any IO or parsing exceptions in a runtime exception
+<b class="nc">&nbsp;            throw new RuntimeException(&quot;Failed to read CSV: &quot; + path, e);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2026-01-26 13:38</div>
+</div>
+</body>
+</html>
