@@ -40,6 +40,7 @@ CarbonIQ: A web‑based carbon modelling tool (Java Spring) to show customers po
             <!-- <li><a href="#user-personas">User Personas</a></li> -->
             <li><a href="#user-stories">User Stories</a></li>
             <li><a href="#work-breakdown-structure-wbs">Work Breakdown Structure (WBS)</a></li>
+            <li><a href="#uml-class-diagram">UML Class Diagram</a></li>
             <li><a href="#code-coverage">Spring Boot Backend Code Coverage</a></li>
             </ul>
         </li>
@@ -133,7 +134,13 @@ System Design Document (SDD) outlines specifications used to build the system; a
 
 #### Work Breakdown Structure (WBS)
 
-![work breakdown structure](/images/work_breakdown_structure.png)
+![Work Breakdown Structure](/images/work_breakdown_structure.png)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+#### UML Class Diagram
+
+![UML Class Diagram](/images/uml_class_diagram.png)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
