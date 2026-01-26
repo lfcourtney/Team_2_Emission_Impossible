@@ -139,7 +139,7 @@ System Design Document (SDD) outlines specifications used to build the system; a
 
 #### Code Coverage
 
-[Spring Boot Backend Code Coverage](/backend/htmlReport__code-coverage/index.html)
+[Spring Boot Backend Code Coverage](/backend/htmlReport__code-coverage/index.html "backend\htmlReport__code-coverage\index.html")
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
