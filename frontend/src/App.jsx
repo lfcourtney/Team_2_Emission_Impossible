@@ -8,7 +8,7 @@ import Login from './pages/Login';
 import Overview from './pages/Overview';
 import Analysis from './pages/Analysis';
 import Calculator from './pages/Calculator';
-import Layout from './components/Layout';
+import Layout from './layouts/Layout';
 
 // Initialize "DB"
 seedDatabase();
