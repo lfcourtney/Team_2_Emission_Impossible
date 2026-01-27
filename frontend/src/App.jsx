@@ -10,6 +10,8 @@ import Analysis from './pages/Analysis';
 import Calculator from './pages/Calculator';
 import Layout from './layouts/Layout';
 import { RibbonProvider } from './contexts/RibbonContext';
+import Landing from "./pages/landing";
+
 
 // Initialize "DB"
 seedDatabase();
@@ -64,6 +66,10 @@ function App() {
                   <Calculator />
                 </ProtectedRoute>
               } />
+
+              <Route path="/landing" element={<Landing />} />
+
+
 
             </Routes>
           </Router>
