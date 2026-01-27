@@ -37,7 +37,7 @@ CarbonIQ: A web‑based carbon modelling tool (Java Spring) to show customers po
             <li><a href="#risk-matrix">Risk Matrix</a></li>
             <li><a href="#risk-register">Risk Register</a></li>
             <li><a href="#skills-matrix">Skills Matrix</a></li>
-            <!-- <li><a href="#user-personas">User Personas</a></li> -->
+            <li><a href="#user-personas">User Personas</a></li>
             <li><a href="#user-stories">User Stories</a></li>
             <li><a href="#work-breakdown-structure-wbs">Work Breakdown Structure (WBS)</a></li>
             <li><a href="#uml-class-diagram">UML Class Diagram</a></li>
@@ -62,11 +62,9 @@ CarbonIQ: A web‑based carbon modelling tool (Java Spring) to show customers po
 
 ## About The Project
 
-<!-- [![Product Name Screen Shot][product-screenshot]](https://example.com)
+![CarbonIQ-screenshot](/images/carbon_iq_screenshot.png "CarbonIQ Screen Shot")
 
-Here's a blank template to get started. To avoid retyping too much info, do a search and replace with your text editor for the following: `github_username`, `repo_name`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `project_title`, `project_description`, `project_license`
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p> -->
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Built With
 
@@ -120,11 +118,11 @@ System Design Document (SDD) outlines specifications used to build the system; a
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<!-- #### User Personas
+#### User Personas
 
-![skills matrix](/images/skills_matrix.png)
+![user personas](/images/user_personas.png)
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p> -->
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 #### User Stories
 
@@ -146,10 +144,9 @@ System Design Document (SDD) outlines specifications used to build the system; a
 
 #### Code Coverage
 
-[Spring Boot Backend Code Coverage](/backend/htmlReport__code-coverage/index.html "backend\htmlReport__code-coverage\index.html")
+[Spring Boot Backend Code Coverage](/backend/htmlReport__code-coverage/index.html "backend\\htmlReport__code-coverage\\index.html")
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 
 <!-- GETTING STARTED -->
 

@@ -1,67 +1,67 @@
+@import url('https://fonts.cdnfonts.com/css/avenir-next-lt-pro');
+
 @import "tailwindcss";
 
-@theme {
-    /* --- Typography System --- */
-    --font-heading: "Segoe UI", system-ui, sans-serif;
-    --font-body: "Avenir Next LT Pro", "Avenir Next", Avenir, sans-serif;
+/* Deprecated way of importing Tailwind */
+/* @tailwind base;
+@tailwind components;
+@tailwind utilities; */
 
-    /* --- Color Palette --- */
-    /* Primary: Deep Midnight Teal (Backgrounds, Text, Navbar) */
-    --color-primary: #052831;
-    --color-primary-foreground: #ffffff;
-    
-    /* Secondary: Electric Cyan (Accents, Buttons, Graphs, Highlights) */
-    --color-secondary: #00c6c2;
-    --color-secondary-foreground: #052831;
-
-    /* Base: Warm Cream (Page Backgrounds, Cards) */
-    --color-accent: #fdf7ea;
-    --color-accent-foreground: #052831;
-}
-
-:root {
-    /* Set defaults */
-    font-family: var(--font-body);
-    color: var(--color-primary);
-    background-color: var(--color-accent);
-}
-
-body {
+@layer base {
+  body {
     margin: 0;
-    min-height: 100vh;
-}
+    padding: 0;
+    font-family: 'Avenir Next LT Pro', 'Avenir Next', Avenir, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+  }
 
-/* --- Utility Classes for specific font weights requested --- */
-h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-heading);
-    font-weight: 700; /* Bold */
-}
+  /* Headings use Segoe UI */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, system-ui, sans-serif !important;
+  }
 
-/* Subheadings often use regular weight */
-.subheading {
-    font-family: var(--font-heading);
-    font-weight: 400; /* Regular */
-}
+  /* Bold text in headings */
+  h1.font-bold,
+  h2.font-bold,
+  h3.font-bold,
+  h4.font-bold,
+  h5.font-bold,
+  h6.font-bold {
+    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, system-ui, sans-serif !important;
+    font-weight: 700 !important;
+  }
 
-/* Animations */
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-@keyframes slideInBottom {
-    from { transform: translateY(20px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
-}
+  /* Regular body text uses Avenir Next LT Pro */
+  p,
+  span,
+  div,
+  a,
+  button,
+  input,
+  select,
+  textarea,
+  label {
+    font-family: 'Avenir Next LT Pro', 'Avenir Next', Avenir, -apple-system, BlinkMacSystemFont, sans-serif !important;
+  }
 
-.animate-in {
-    animation-fill-mode: forwards;
-}
-.fade-in {
-    animation-name: fadeIn;
-}
-.slide-in-from-bottom-4 {
-    animation-name: slideInBottom;
-}
-.duration-500 {
-    animation-duration: 500ms;
+  button {
+    /* Hovering over buttons should change cursor to click icon */
+    cursor: pointer;
+  }
+
+  /* Bold text in body uses Avenir Next LT Pro Bold */
+  .font-bold:not(h1):not(h2):not(h3):not(h4):not(h5):not(h6) {
+    font-family: 'Avenir Next LT Pro', 'Avenir Next', Avenir, -apple-system, BlinkMacSystemFont, sans-serif !important;
+    font-weight: 700 !important;
+  }
+
+  strong,
+  b {
+    font-family: 'Avenir Next LT Pro', 'Avenir Next', Avenir, -apple-system, BlinkMacSystemFont, sans-serif !important;
+    font-weight: 700 !important;
+  }
 }
