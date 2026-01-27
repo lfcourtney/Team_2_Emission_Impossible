@@ -1,17 +1,19 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+
+
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import { DataProvider } from './contexts/DataContext';
 import { seedDatabase } from './fakeBackend/SeedData';
 
-// Pages
-import Login from './pages/Login';
-import Overview from './pages/Overview';
-import Analysis from './pages/Analysis';
-import Calculator from './pages/Calculator';
-import Layout from './layouts/Layout';
-import { RibbonProvider } from './contexts/RibbonContext';
-import Landing from "./pages/landing";
+// Side bar component. Render components with this sidebar
+import Layout from './components/Layout';
+import LoginPage from './components/LoginPage';
+import BuildScenario from './components/BuildScenario';
+import Scenario2 from './components/Scenario2';
 
+
+import Landing from "./pages/landing";
+import { RibbonProvider } from './contexts/RibbonContext';
 
 // Initialize "DB"
 seedDatabase();
@@ -29,15 +31,17 @@ const ProtectedRoute = ({ children, title }) => {
   const { isAuthenticated } = useAuth();
 
   // If the user is NOT authenticated,
-  // immediately redirect them to the login page.
+  // immediately redirect them to the login page (Just root URL).
   // <Navigate /> is a React Router component used for programmatic redirects.
-  if (!isAuthenticated) return <Navigate to="/login" />;
+  if (!isAuthenticated) return <Navigate to="/" />;
 
 
   // If the user *is* authenticated,
-  // render the Layout component and pass in the page title.
-  // The `children` are rendered *inside* the Layout component.
-  return <Layout title={title}>{children}</Layout>;
+  // return child components.
+  // That is, <ProtectedRoute/> will always resolve to child components.
+  // The only requirement is that <ProtectedRoute/> has not navigated to
+  // root URL yet.
+  return children;
 };
 
 function App() {
@@ -45,21 +49,31 @@ function App() {
     <AuthProvider>
       <DataProvider>
         <RibbonProvider>
-          <Router>
+          <BrowserRouter>
             <Routes>
-              <Route path="/login" element={<Login />} />
+              {/* Login without sidebar */}
+              <Route path="/" element={<LoginPage />} />
 
-              <Route path="/" element={
-                <ProtectedRoute title="Dashboard Overview">
-                  <Overview />
-                </ProtectedRoute>
-              } />
-
-              <Route path="/analysis" element={
-                <ProtectedRoute title="Detailed Analysis">
-                  <Analysis />
-                </ProtectedRoute>
-              } />
+              {/* All other routes with sidebar */}
+              <Route
+                path="/build"
+                element={
+                  <ProtectedRoute>
+                    <Layout>
+                      <BuildScenario />
+                    </Layout>
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/outcome"
+                element={
+                  <ProtectedRoute>
+                    <Layout>
+                      <Scenario2 />
+                    </Layout>
+                  </ProtectedRoute>
+                } />
 
               <Route path="/calculator" element={
                 <ProtectedRoute title="Emissions Calculator">
@@ -67,16 +81,16 @@ function App() {
                 </ProtectedRoute>
               } />
 
-              <Route path="/landing" element={<Landing />} />
-
-
+              <Route path="/landing" element={<ProtectedRoute title="Routing">
+                <Landing />
+              </ProtectedRoute>} />
 
             </Routes>
-          </Router>
+          </BrowserRouter>
         </RibbonProvider>
       </DataProvider>
-    </AuthProvider>
-  );
+    </AuthProvider >
+  )
 }
 
 export default App

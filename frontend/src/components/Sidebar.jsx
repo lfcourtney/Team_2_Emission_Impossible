@@ -32,10 +32,10 @@ export default function Sidebar() {
                         key={item.path}
                         onClick={() => navigate(item.path)}
                         className={`w-full flex items-center justify-center lg:justify-start px-3 py-3.5 rounded-xl transition-all duration-200 group
-                        ${isActive(item.path) 
-                            ? 'bg-secondary text-primary font-bold shadow-[0_0_15px_rgba(0,198,194,0.2)]' 
-                            : 'text-gray-400 hover:bg-white/5 hover:text-white'
-                        }`}
+                        ${isActive(item.path)
+                                ? 'bg-secondary text-primary font-bold shadow-[0_0_15px_rgba(0,198,194,0.2)]'
+                                : 'text-gray-400 hover:bg-white/5 hover:text-white'
+                            }`}
                     >
                         <item.icon size={22} className={isActive(item.path) ? 'stroke-2' : 'stroke-[1.5]'} />
                         <span className="hidden lg:block ml-4 text-sm">{item.label}</span>
@@ -45,16 +45,16 @@ export default function Sidebar() {
 
             {/* Bottom Actions */}
             <div className="p-4 border-t border-white/5 space-y-2">
-                 <button className="w-full flex items-center justify-center lg:justify-start px-3 py-3 rounded-xl text-gray-400 hover:text-white hover:bg-white/5 transition-colors">
+                <button className="w-full flex items-center justify-center lg:justify-start px-3 py-3 rounded-xl text-gray-400 hover:text-white hover:bg-white/5 transition-colors">
                     <Settings size={22} className="stroke-[1.5]" />
                     <span className="hidden lg:block ml-4 text-sm">Settings</span>
                 </button>
-                <button 
+                <button
                     onClick={() => {
                         logout();
                         navigate('/login');
                     }}
-                    className="w-full flex items-center justify-center lg:justify-start px-3 py-3 rounded-xl text-red-400 hover:text-red-300 hover:bg-red-400/10 transition-colors"
+                    className="w-full flex items-center justify-center lg:justify-start px-3 py-3 rounded-xl text-red-400 hover:text-red-300 hover:bg-red-400/10 transition-colors cursor-pointer"
                 >
                     <LogOut size={22} className="stroke-[1.5]" />
                     <span className="hidden lg:block ml-4 text-sm">Sign Out</span>

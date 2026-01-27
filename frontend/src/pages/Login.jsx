@@ -1,23 +1,34 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
-import { Zap, ArrowRight, Leaf } from 'lucide-react';
+import { Zap, ArrowRight, Leaf, AlertCircle } from 'lucide-react';
 
 export default function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    // Allows form to change style, informing user that their
+    //  most recent log in request was unsuccessful
+    const [error, setError] = useState(false);
     const { login } = useAuth();
     const navigate = useNavigate();
 
     const handleLogin = async (event) => {
         // Prevent form submission from refreshing the page
         event.preventDefault();
+
+        // Clear any previous errors
+        setError(false);
+
         const success = await login(email, password);
 
         // Only navigate to homepage if user is successfully signed in
         if (success) {
             navigate('/');
+            return;
         }
+
+        // Display error message if login failed
+        setError(true);
     };
 
     return (
@@ -42,9 +53,20 @@ export default function Login() {
                     <p className="text-secondary/80 text-lg">Transforming data into sustainable action.</p>
                 </div>
 
-                <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-3xl p-8 shadow-2xl">
+                <div className={`bg-white/5 backdrop-blur-lg border rounded-3xl p-8 shadow-2xl transition-all ${error ? 'border-red-500/50' : 'border-white/10'
+                    }`}>
                     <h2 className="text-xl font-heading font-semibold text-white mb-6">Sign In</h2>
+                    {/* Display log in error message if user log in was unsuccessful */}
 
+                    {error && (
+                        <div className="mb-5 bg-red-500/10 border border-red-500/30 rounded-xl p-4 flex items-start">
+                            <AlertCircle className="w-5 h-5 text-red-400 mt-0.5 mr-3 flex-shrink-0" />
+                            <div>
+                                <p className="text-red-300 text-sm font-medium">Login unsuccessful</p>
+                                <p className="text-red-400/80 text-sm mt-1">The credentials you entered are incorrect. Please try again.</p>
+                            </div>
+                        </div>
+                    )}
                     <form onSubmit={handleLogin} className="space-y-5">
                         <div>
                             <label className="block text-sm font-medium text-gray-300 mb-1.5 ml-1">Email Address</label>
@@ -53,7 +75,10 @@ export default function Login() {
                                 required
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
-                                className="w-full bg-primary/50 border border-white/10 focus:border-secondary rounded-xl px-4 py-3 text-white placeholder-gray-500 outline-none transition-all focus:ring-1 focus:ring-secondary/50"
+                                className={`w-full bg-primary/50 border rounded-xl px-4 py-3 text-white placeholder-gray-500 outline-none transition-all ${error
+                                    ? 'border-red-500/50 focus:border-red-500 focus:ring-1 focus:ring-red-500/50'
+                                    : 'border-white/10 focus:border-secondary focus:ring-1 focus:ring-secondary/50'
+                                    }`}
                                 placeholder="name@company.com"
                             />
                         </div>
@@ -64,7 +89,10 @@ export default function Login() {
                                 type="password"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
-                                className="w-full bg-primary/50 border border-white/10 focus:border-secondary rounded-xl px-4 py-3 text-white placeholder-gray-500 outline-none transition-all focus:ring-1 focus:ring-secondary/50"
+                                className={`w-full bg-primary/50 border rounded-xl px-4 py-3 text-white placeholder-gray-500 outline-none transition-all ${error
+                                    ? 'border-red-500/50 focus:border-red-500 focus:ring-1 focus:ring-red-500/50'
+                                    : 'border-white/10 focus:border-secondary focus:ring-1 focus:ring-secondary/50'
+                                    }`}
                                 placeholder="••••••••"
                             />
                         </div>
@@ -79,7 +107,7 @@ export default function Login() {
 
                         <button
                             type="submit"
-                            className="w-full group bg-secondary hover:bg-white text-primary font-bold py-3.5 px-4 rounded-xl transition-all duration-300 transform hover:scale-[1.02] flex items-center justify-center"
+                            className="w-full group bg-secondary hover:bg-white text-primary font-bold py-3.5 px-4 rounded-xl transition-all duration-300 transform hover:scale-[1.02] flex items-center justify-center cursor-pointer"
                         >
                             Sign In
                             <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />

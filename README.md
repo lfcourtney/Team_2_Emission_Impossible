@@ -37,9 +37,10 @@ CarbonIQ: A web‑based carbon modelling tool (Java Spring) to show customers po
             <li><a href="#risk-matrix">Risk Matrix</a></li>
             <li><a href="#risk-register">Risk Register</a></li>
             <li><a href="#skills-matrix">Skills Matrix</a></li>
-            <!-- <li><a href="#user-personas">User Personas</a></li> -->
+            <li><a href="#user-personas">User Personas</a></li>
             <li><a href="#user-stories">User Stories</a></li>
             <li><a href="#work-breakdown-structure-wbs">Work Breakdown Structure (WBS)</a></li>
+            <li><a href="#uml-class-diagram">UML Class Diagram</a></li>
             <li><a href="#code-coverage">Spring Boot Backend Code Coverage</a></li>
             </ul>
         </li>
@@ -61,11 +62,9 @@ CarbonIQ: A web‑based carbon modelling tool (Java Spring) to show customers po
 
 ## About The Project
 
-<!-- [![Product Name Screen Shot][product-screenshot]](https://example.com)
+![CarbonIQ-screenshot](/images/carbon_iq_screenshot.png "CarbonIQ Screen Shot")
 
-Here's a blank template to get started. To avoid retyping too much info, do a search and replace with your text editor for the following: `github_username`, `repo_name`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `project_title`, `project_description`, `project_license`
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p> -->
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Built With
 
@@ -119,11 +118,11 @@ System Design Document (SDD) outlines specifications used to build the system; a
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<!-- #### User Personas
+#### User Personas
 
-![skills matrix](/images/skills_matrix.png)
+![user personas](/images/user_personas.png)
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p> -->
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 #### User Stories
 
@@ -133,16 +132,21 @@ System Design Document (SDD) outlines specifications used to build the system; a
 
 #### Work Breakdown Structure (WBS)
 
-![work breakdown structure](/images/work_breakdown_structure.png)
+![Work Breakdown Structure](/images/work_breakdown_structure.png)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+#### UML Class Diagram
+
+![UML Class Diagram](/images/uml_class_diagram.png)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 #### Code Coverage
 
-[Spring Boot Backend Code Coverage](/backend/htmlReport__code-coverage/index.html)
+[Spring Boot Backend Code Coverage](/backend/htmlReport__code-coverage/index.html "backend\\htmlReport__code-coverage\\index.html")
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 
 <!-- GETTING STARTED -->
 
@@ -171,14 +175,14 @@ CREATE DATABASE `carbon-iq`;
 - [ ] System Design Document (SDD)
   - [x] Database Design ie, Entity-relationship diagram (ERD)
   - [x] PEST analysis; possible VMOST and SWOT analysis too
-  - [ ] Prototype Design, eg, wireframe
+  - [x] Prototype Design, eg, wireframe
   - [x] Risk Matrix
   - [x] Risk Register
   - [x] Skills matrix
   - [x] User stories; at least 3 personas
   - [x] Work Breakdown Structure (WBS)
   - [ ] Swim-lane diagram (or UML activity diagram)
-  - [ ] UML class diagram
+  - [x] UML class diagram
   - [ ] Gantt chart (alternatively burnup or burndown chart)
   - [ ] Consider technical debts. Need to mention this in presentation.
 - [x] Set up Sprint Boot project
