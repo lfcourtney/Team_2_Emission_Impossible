@@ -8,6 +8,7 @@ import Login from './pages/Login';
 import Overview from './pages/Overview';
 import Analysis from './pages/Analysis';
 import Calculator from './pages/Calculator';
+import BuildScenario from './pages/BuildScenario';
 import Layout from './layouts/Layout';
 import { RibbonProvider } from './contexts/RibbonContext';
 
@@ -62,6 +63,12 @@ function App() {
               <Route path="/calculator" element={
                 <ProtectedRoute title="Emissions Calculator">
                   <Calculator />
+                </ProtectedRoute>
+              } />
+
+              <Route path="/build-scenario" element={
+                <ProtectedRoute title="Scenario Builder">
+                  <BuildScenario />
                 </ProtectedRoute>
               } />
 
