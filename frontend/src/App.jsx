@@ -11,6 +11,10 @@ import LoginPage from './components/LoginPage';
 import BuildScenario from './components/BuildScenario';
 import Scenario2 from './components/Scenario2';
 
+
+import Landing from "./pages/landing";
+import { RibbonProvider } from './contexts/RibbonContext';
+
 // Initialize "DB"
 seedDatabase();
 
@@ -44,34 +48,43 @@ function App() {
   return (
     <AuthProvider>
       <DataProvider>
-        <BrowserRouter>
-          <Routes>
-            {/* Login without sidebar */}
-            <Route path="/" element={<LoginPage />} />
+        <RibbonProvider>
+          <BrowserRouter>
+            <Routes>
+              {/* Login without sidebar */}
+              <Route path="/" element={<LoginPage />} />
 
-            {/* All other routes with sidebar */}
-            <Route
-              path="/build"
-              element={
-                <ProtectedRoute>
-                  <Layout>
-                    <BuildScenario />
-                  </Layout>
+              {/* All other routes with sidebar */}
+              <Route
+                path="/build"
+                element={
+                  <ProtectedRoute>
+                    <Layout>
+                      <BuildScenario />
+                    </Layout>
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/outcome"
+                element={
+                  <ProtectedRoute>
+                    <Layout>
+                      <Scenario2 />
+                    </Layout>
+                  </ProtectedRoute>
+                } />
+
+              <Route path="/landing" element={
+                <ProtectedRoute >
+                  <Landing />
                 </ProtectedRoute>
               }
-            />
-            <Route
-              path="/outcome"
-              element={
-                <ProtectedRoute>
-                  <Layout>
-                    <Scenario2 />
-                  </Layout>
-                </ProtectedRoute>
-              }
-            />
-          </Routes>
-        </BrowserRouter>
+              />
+
+            </Routes>
+          </BrowserRouter>
+        </RibbonProvider>
       </DataProvider>
     </AuthProvider >
   )
