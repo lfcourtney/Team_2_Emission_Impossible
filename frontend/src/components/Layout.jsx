@@ -1,5 +1,6 @@
-import { useState } from 'react'
-import { NavLink, useNavigate } from 'react-router-dom'
+import { useState } from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
 
 const navItems = [
   {
@@ -23,8 +24,11 @@ const navItems = [
 ]
 
 function Layout({ children }) {
-  const navigate = useNavigate()
-  const [sidebarOpen, setSidebarOpen] = useState(false)
+  const navigate = useNavigate();
+
+  const { logout } = useAuth();
+
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
     <div className="flex min-h-screen">
@@ -38,9 +42,8 @@ function Layout({ children }) {
 
       {/* Sidebar */}
       <div
-        className={`fixed lg:static inset-y-0 left-0 z-30 w-64 bg-[#052831] transform transition-transform duration-300 lg:transform-none flex flex-col ${
-          sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
-        }`}
+        className={`fixed lg:static inset-y-0 left-0 z-30 w-64 bg-[#052831] transform transition-transform duration-300 lg:transform-none flex flex-col ${sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
+          }`}
       >
         {/* Sidebar Header - matches page header height */}
         <div className="h-[73px] px-6 border-b border-[#1f2937] flex items-center justify-between shrink-0">
@@ -69,10 +72,9 @@ function Layout({ children }) {
                   to={item.path}
                   onClick={() => setSidebarOpen(false)}
                   className={({ isActive }) =>
-                    `flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${
-                      isActive
-                        ? 'bg-[#00C6C2] text-white'
-                        : 'text-[#9ca3af] hover:bg-[#1f2937] hover:text-white'
+                    `flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${isActive
+                      ? 'bg-[#00C6C2] text-white'
+                      : 'text-[#9ca3af] hover:bg-[#1f2937] hover:text-white'
                     }`
                   }
                 >
@@ -88,10 +90,11 @@ function Layout({ children }) {
         <div className="p-4 border-t border-[#1f2937] shrink-0">
           <button
             onClick={() => {
-              setSidebarOpen(false)
-              navigate('/')
+              setSidebarOpen(false);
+              logout();
+              navigate('/');
             }}
-            className="flex items-center gap-3 px-4 py-3 w-full rounded-xl text-sm font-medium text-[#9ca3af] hover:bg-[#1f2937] hover:text-white transition-all"
+            className="cursor-pointer flex items-center gap-3 px-4 py-3 w-full rounded-xl text-sm font-medium text-[#9ca3af] hover:bg-[#1f2937] hover:text-white transition-all"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />

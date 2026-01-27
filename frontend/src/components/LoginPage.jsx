@@ -1,31 +1,60 @@
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
 
-function LoginPage({ onLoginSuccess }) {
-  const navigate = useNavigate()
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
-  const [step, setStep] = useState(1)
+function LoginPage() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  // Allows form to change style, informing user that their
+  //  most recent log in request was unsuccessful
+  const [error, setError] = useState(false);
+
+
+  // Navigate hamburger menu
+  const [step, setStep] = useState(1);
+
+
+  const { logout, login, authenticatedUser } = useAuth();
+
+  const navigate = useNavigate();
+
+
 
   const handleNext = (e) => {
     e.preventDefault()
-    if (username.trim()) {
-      setStep(2)
+    if (email.trim()) {
+      setStep(2);
     }
   }
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    console.log('Login submitted:', { username, password })
-    setStep(3)
+  const handleSubmit = async (event) => {
+    // Prevent form submission from refreshing the page
+    event.preventDefault();
+
+
+
+    // Clear any previous errors
+    setError(false);
+
+    const onLoginSuccess = await login(email, password);
+
+    if (!onLoginSuccess) {
+      // Display error message if login failed
+      setError(true);
+      return;
+    }
+
+    // Only go to step 3 if login was a success
+    setStep(3);
+
+
     // Navigate to /build after a brief delay to show success
     setTimeout(() => {
-      if (onLoginSuccess) {
-        onLoginSuccess()
-      }
-      navigate('/build')
-    }, 1500)
-  }
+      navigate('/build');
+      // Wait 1.5 seconds
+    }, 1500);
+  };
 
   return (
     <div className="min-h-screen flex flex-col lg:flex-row">
@@ -33,22 +62,43 @@ function LoginPage({ onLoginSuccess }) {
       <div className="bg-[#101828] flex flex-col items-center px-4 sm:px-6 py-8 sm:py-10 lg:py-10 lg:w-[46%] lg:min-h-screen">
         {/* Decorative Bar with Ellipses */}
         <div className="bg-[#b9afaf] rounded-2xl px-4 sm:px-6 lg:px-8 py-3 sm:py-4 flex justify-between items-center w-full max-w-[500px] mb-8 sm:mb-12 lg:mb-20 gap-4 sm:gap-8 lg:gap-12">
-          {/* Circle 1 */}
+          {/* Circle 1 - Active on step 1 */}
           <div className="flex-1 max-w-[85px] aspect-[85/59]">
             <svg className="w-full h-full" viewBox="0 0 85 59" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <ellipse cx="42.5" cy="29.5" rx="42.5" ry="29.5" fill="#D9D9D9"/>
+              <ellipse
+                cx="42.5"
+                cy="29.5"
+                rx="42.5"
+                ry="29.5"
+                fill={step === 1 ? "#00c2c7" : "#D9D9D9"}
+                className="transition-colors duration-300"
+              />
             </svg>
           </div>
-          {/* Circle 2 */}
+          {/* Circle 2 - Active on step 2 */}
           <div className="flex-1 max-w-[85px] aspect-[85/59]">
             <svg className="w-full h-full" viewBox="0 0 85 59" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <ellipse cx="42.5" cy="29.5" rx="42.5" ry="29.5" fill="#D9D9D9"/>
+              <ellipse
+                cx="42.5"
+                cy="29.5"
+                rx="42.5"
+                ry="29.5"
+                fill={step === 2 ? "#00c2c7" : "#D9D9D9"}
+                className="transition-colors duration-300"
+              />
             </svg>
           </div>
           {/* Circle 3 */}
           <div className="flex-1 max-w-[85px] aspect-[85/59]">
             <svg className="w-full h-full" viewBox="0 0 85 59" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <ellipse cx="42.5" cy="29.5" rx="42.5" ry="29.5" fill="#D9D9D9"/>
+              <ellipse
+                cx="42.5"
+                cy="29.5"
+                rx="42.5"
+                ry="29.5"
+                fill={step === 3 ? "#00c2c7" : "#D9D9D9"}
+                className="transition-colors duration-300"
+              />
             </svg>
           </div>
         </div>
@@ -73,27 +123,43 @@ function LoginPage({ onLoginSuccess }) {
               className="text-[#6b7280] text-sm leading-[14px]"
             >
               {step === 1
-                ? 'Enter your username to continue'
+                ? 'Enter your email to continue'
                 : step === 2
-                ? 'Enter your password to login'
-                : 'You have successfully logged in'}
+                  ? 'Enter your password to login'
+                  : 'You have successfully logged in'}
             </p>
           </div>
+
+          {/* Error Message */}
+          {error && (
+            <div className="mb-4 p-3 bg-red-50 border-2 border-red-200 rounded-xl flex items-start gap-2">
+              <svg className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+              </svg>
+              <div>
+                <p className="text-red-800 text-sm font-bold">Login Failed</p>
+                <p className="text-red-600 text-xs mt-0.5">Invalid email or password. Please try again.</p>
+              </div>
+            </div>
+          )}
+
+
 
           {/* Form */}
           {step < 3 && (
             <form onSubmit={step === 1 ? handleNext : handleSubmit}>
-              {/* Username Field - Step 1 */}
+              {/* Email Field - Step 1 */}
               {step === 1 && (
                 <div className="mb-10 sm:mb-12 lg:mb-16">
                   <label className="block text-[#111827] text-[13px] font-bold mb-2">
-                    Username
+                    Email
                   </label>
                   <input
-                    type="text"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    placeholder="e.g. aaron123"
+                    type="email"
+                    required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="e.g. example@email.com"
                     className="w-full h-[50px] sm:h-[54px] bg-[#f3f4f6] border-2 border-[#e5e7eb] rounded-2xl px-4 text-sm text-[#111827] placeholder:text-[#9ca3af] focus:outline-none focus:border-[#00c2c7] transition-colors"
                   />
                 </div>
@@ -107,10 +173,17 @@ function LoginPage({ onLoginSuccess }) {
                   </label>
                   <input
                     type="password"
+                    required
                     value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    onChange={(e) => {
+                      setPassword(e.target.value);
+                      if (error) setError(false); // Clear error when user starts typing
+                    }}
                     placeholder="Enter your password"
-                    className="w-full h-[50px] sm:h-[54px] bg-[#f3f4f6] border-2 border-[#e5e7eb] rounded-2xl px-4 text-sm text-[#111827] placeholder:text-[#9ca3af] focus:outline-none focus:border-[#00c2c7] transition-colors"
+                    className={`w-full h-[50px] sm:h-[54px] bg-[#f3f4f6] border-2 rounded-2xl px-4 text-sm text-[#111827] placeholder:text-[#9ca3af] focus:outline-none transition-colors ${error
+                      ? 'border-red-300 focus:border-red-400 bg-red-50'
+                      : 'border-[#e5e7eb] focus:border-[#00c2c7]'
+                      }`}
                   />
                 </div>
               )}
@@ -118,7 +191,10 @@ function LoginPage({ onLoginSuccess }) {
               {/* Submit Button */}
               <button
                 type="submit"
-                className="w-full h-12 sm:h-14 bg-[#00c2c7] hover:bg-[#00b0b5] active:bg-[#009a9e] rounded-2xl text-white text-base sm:text-lg font-bold transition-colors cursor-pointer"
+                className={`w-full h-12 sm:h-14 rounded-2xl text-white text-base sm:text-lg font-bold transition-colors cursor-pointer ${error
+                  ? 'bg-red-500 hover:bg-red-600 active:bg-red-700'
+                  : 'bg-[#00c2c7] hover:bg-[#00b0b5] active:bg-[#009a9e]'
+                  }`}
               >
                 {step === 1 ? 'Next →' : 'Submit'}
               </button>
@@ -133,7 +209,7 @@ function LoginPage({ onLoginSuccess }) {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                 </svg>
               </div>
-              <p className="text-[#111827] font-bold text-lg">Welcome, {username}!</p>
+              <p className="text-[#111827] font-bold text-lg">Welcome, {authenticatedUser?.fullName || 'Guest'}!</p>
             </div>
           )}
 
@@ -153,7 +229,13 @@ function LoginPage({ onLoginSuccess }) {
               <>
                 <button
                   type="button"
-                  onClick={() => setStep(1)}
+                  onClick={() => {
+                    setStep(1);
+
+                    // Clear password as going back
+                    setPassword('');
+                    setError(false); // Clear error when going back
+                  }}
                   className="text-[#00a7ab] text-xs sm:text-[13px] font-bold hover:underline cursor-pointer bg-transparent border-none"
                 >
                   ← Back
@@ -167,9 +249,10 @@ function LoginPage({ onLoginSuccess }) {
               <button
                 type="button"
                 onClick={() => {
-                  setStep(1)
-                  setUsername('')
-                  setPassword('')
+                  setStep(1);
+                  setEmail('');
+                  setPassword('');
+                  logout();
                 }}
                 className="text-[#00a7ab] text-xs sm:text-[13px] font-bold hover:underline cursor-pointer bg-transparent border-none mx-auto"
               >
