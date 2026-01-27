@@ -2,7 +2,14 @@ import NavCard from "../components/NavCard";
 import logo2 from "../assets/logo2.png";
 import canopy from "../assets/canopy.jpg";
 
+import { useAuth } from "../contexts/AuthContext";
+
 export default function Landing() {
+
+  const { logout, authenticatedUser } = useAuth();
+
+
+
   return (
     <div className="relative min-h-screen w-full overflow-hidden text-white font-sans">
       {/* ===== FOREST BACKGROUND ===== */}

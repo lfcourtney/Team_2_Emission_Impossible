@@ -75,15 +75,12 @@ function App() {
                   </ProtectedRoute>
                 } />
 
-              <Route path="/calculator" element={
-                <ProtectedRoute title="Emissions Calculator">
-                  <Calculator />
+              <Route path="/landing" element={
+                <ProtectedRoute >
+                  <Landing />
                 </ProtectedRoute>
-              } />
-
-              <Route path="/landing" element={<ProtectedRoute title="Routing">
-                <Landing />
-              </ProtectedRoute>} />
+              }
+              />
 
             </Routes>
           </BrowserRouter>
