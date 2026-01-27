@@ -178,14 +178,14 @@ CREATE DATABASE `carbon-iq`;
 - [ ] System Design Document (SDD)
   - [x] Database Design ie, Entity-relationship diagram (ERD)
   - [x] PEST analysis; possible VMOST and SWOT analysis too
-  - [ ] Prototype Design, eg, wireframe
+  - [x] Prototype Design, eg, wireframe
   - [x] Risk Matrix
   - [x] Risk Register
   - [x] Skills matrix
   - [x] User stories; at least 3 personas
   - [x] Work Breakdown Structure (WBS)
   - [ ] Swim-lane diagram (or UML activity diagram)
-  - [ ] UML class diagram
+  - [x] UML class diagram
   - [ ] Gantt chart (alternatively burnup or burndown chart)
   - [ ] Consider technical debts. Need to mention this in presentation.
 - [x] Set up Sprint Boot project
