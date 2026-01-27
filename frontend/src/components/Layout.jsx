@@ -51,7 +51,7 @@ function Layout({ children }) {
             onClick={() => navigate('/build')}
             className="text-xl font-bold text-white cursor-pointer hover:text-[#00C6C2] transition-colors"
           >
-            Emission Impossible
+            Carbon IQ
           </h1>
           <button
             onClick={() => setSidebarOpen(false)}
@@ -126,7 +126,7 @@ function Layout({ children }) {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
             </svg>
           </button>
-          <h1 className="ml-4 text-xl font-bold text-white">Emission Impossible</h1>
+          <h1 className="ml-4 text-xl font-bold text-white">Carbon IQ</h1>
         </header>
 
         {/* Page content */}
