@@ -48,6 +48,11 @@
     font-family: 'Avenir Next LT Pro', 'Avenir Next', Avenir, -apple-system, BlinkMacSystemFont, sans-serif !important;
   }
 
+  button {
+    /* Hovering over buttons should change cursor to click icon */
+    cursor: pointer;
+  }
+
   /* Bold text in body uses Avenir Next LT Pro Bold */
   .font-bold:not(h1):not(h2):not(h3):not(h4):not(h5):not(h6) {
     font-family: 'Avenir Next LT Pro', 'Avenir Next', Avenir, -apple-system, BlinkMacSystemFont, sans-serif !important;

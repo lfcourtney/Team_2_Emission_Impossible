@@ -133,7 +133,7 @@ function BuildScenario({ onLogout }) {
                       type="checkbox"
                       checked={formData.serviceStages.designSetup}
                       onChange={() => handleStageChange('designSetup')}
-                      className="w-5 h-5 rounded border-2 border-[#e5e7eb] text-[#00C6C2] focus:ring-[#00C6C2]"
+                      className="cursor-pointer w-5 h-5 rounded border-2 border-[#e5e7eb] text-[#00C6C2] focus:ring-[#00C6C2]"
                     />
                     <label className="text-[#111827] text-base font-medium">
                       Design & Set-up (DS)
@@ -146,7 +146,7 @@ function BuildScenario({ onLogout }) {
                       type="checkbox"
                       checked={formData.serviceStages.buildDelivery}
                       onChange={() => handleStageChange('buildDelivery')}
-                      className="w-5 h-5 rounded border-2 border-[#e5e7eb] text-[#00C6C2] focus:ring-[#00C6C2]"
+                      className="cursor-pointer w-5 h-5 rounded border-2 border-[#e5e7eb] text-[#00C6C2] focus:ring-[#00C6C2]"
                     />
                     <label className="text-[#111827] text-base font-medium">
                       Build & Delivery (BD)
@@ -159,7 +159,7 @@ function BuildScenario({ onLogout }) {
                       type="checkbox"
                       checked={formData.serviceStages.operation}
                       onChange={() => handleStageChange('operation')}
-                      className="w-5 h-5 rounded border-2 border-[#e5e7eb] text-[#00C6C2] focus:ring-[#00C6C2]"
+                      className="cursor-pointer w-5 h-5 rounded border-2 border-[#e5e7eb] text-[#00C6C2] focus:ring-[#00C6C2]"
                     />
                     <label className="text-[#111827] text-base font-medium">
                       Operation (O)
@@ -172,7 +172,7 @@ function BuildScenario({ onLogout }) {
                       type="checkbox"
                       checked={formData.serviceStages.endOfLife}
                       onChange={() => handleStageChange('endOfLife')}
-                      className="w-5 h-5 rounded border-2 border-[#e5e7eb] text-[#00C6C2] focus:ring-[#00C6C2]"
+                      className="cursor-pointer w-5 h-5 rounded border-2 border-[#e5e7eb] text-[#00C6C2] focus:ring-[#00C6C2]"
                     />
                     <label className="text-[#111827] text-base font-medium">
                       End of Life (EL)
@@ -209,12 +209,12 @@ function BuildScenario({ onLogout }) {
                 name="cloudProvider"
                 value={formData.cloudProvider}
                 onChange={handleInputChange}
-                className="w-full h-14 bg-[#f3f4f6] border-2 border-[#e5e7eb] rounded-xl px-5 text-base text-[#111827] focus:outline-none focus:border-[#00C6C2] transition-colors"
+                className="cursor-pointer w-full h-14 bg-[#f3f4f6] border-2 border-[#e5e7eb] rounded-xl px-5 text-base text-[#111827] focus:outline-none focus:border-[#00C6C2] transition-colors"
               >
-                <option value="">Select cloud provider</option>
-                <option value="azure">Azure</option>
-                <option value="aws">AWS</option>
-                <option value="other">Other</option>
+                <option value="" >Select cloud provider</option>
+                <option value="azure" >Azure</option>
+                <option value="aws" >AWS</option>
+                <option value="other" >Other</option>
               </select>
             </div>
 
@@ -226,18 +226,18 @@ function BuildScenario({ onLogout }) {
                 name="cloudRegion"
                 value={formData.cloudRegion}
                 onChange={handleInputChange}
-                className="w-full h-14 bg-[#f3f4f6] border-2 border-[#e5e7eb] rounded-xl px-5 text-base text-[#111827] focus:outline-none focus:border-[#00C6C2] transition-colors"
+                className="cursor-pointer w-full h-14 bg-[#f3f4f6] border-2 border-[#e5e7eb] rounded-xl px-5 text-base text-[#111827] focus:outline-none focus:border-[#00C6C2] transition-colors"
               >
-                <option value="">Select cloud region</option>
-                <option value="uk">UK</option>
-                <option value="ireland">Ireland</option>
-                <option value="west-europe">West Europe</option>
-                <option value="north-europe">North Europe</option>
-                <option value="us-avg">US – Avg</option>
-                <option value="us-west">US – West</option>
-                <option value="canada">Canada</option>
-                <option value="australia">Australia</option>
-                <option value="india">India</option>
+                <option value="" >Select cloud region</option>
+                <option value="uk" >UK</option>
+                <option value="ireland" >Ireland</option>
+                <option value="west-europe" >West Europe</option>
+                <option value="north-europe" >North Europe</option>
+                <option value="us-avg" >US – Avg</option>
+                <option value="us-west" >US – West</option>
+                <option value="canada" >Canada</option>
+                <option value="australia" >Australia</option>
+                <option value="india" >India</option>
               </select>
             </div>
 
@@ -255,7 +255,7 @@ function BuildScenario({ onLogout }) {
                       onChange={handleInputChange}
                       className="w-5 h-5 rounded border-2 border-[#e5e7eb] text-[#00C6C2] focus:ring-[#00C6C2]"
                     />
-                    <label className="flex-1 text-[#111827] text-base font-medium">
+                    <label className=" flex-1 text-[#111827] text-base font-medium">
                       Dev/Test/Staging
                     </label>
                     <div className="flex items-center gap-2">
@@ -266,7 +266,7 @@ function BuildScenario({ onLogout }) {
                         onChange={handleInputChange}
                         placeholder="0"
                         disabled={!formData.envDevTestStaging}
-                        className="w-24 h-12 bg-[#f3f4f6] border-2 border-[#e5e7eb] rounded-lg px-3 text-base text-[#111827] placeholder:text-[#9ca3af] focus:outline-none focus:border-[#00C6C2] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                        className=" w-24 h-12 bg-[#f3f4f6] border-2 border-[#e5e7eb] rounded-lg px-3 text-base text-[#111827] placeholder:text-[#9ca3af] focus:outline-none focus:border-[#00C6C2] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                       />
                       <span className="text-[#6b7280] text-sm">days</span>
                     </div>
@@ -628,7 +628,7 @@ function BuildScenario({ onLogout }) {
                 name="primaryOffice"
                 value={formData.primaryOffice}
                 onChange={handleInputChange}
-                className="w-full h-14 bg-[#f3f4f6] border-2 border-[#e5e7eb] rounded-xl px-5 text-base text-[#111827] focus:outline-none focus:border-[#00C6C2] transition-colors"
+                className="cursor-pointer w-full h-14 bg-[#f3f4f6] border-2 border-[#e5e7eb] rounded-xl px-5 text-base text-[#111827] focus:outline-none focus:border-[#00C6C2] transition-colors"
               >
                 <option value="">Select primary office</option>
                 <option value="birmingham">Birmingham</option>
@@ -914,13 +914,12 @@ function BuildScenario({ onLogout }) {
               <button
                 key={step.id}
                 onClick={() => setCurrentStep(step.id)}
-                className={`flex-shrink-0 lg:flex-shrink lg:w-full px-5 py-4 rounded-xl text-left text-base font-medium transition-all ${
-                  currentStep === step.id
-                    ? 'bg-[#00C6C2] text-white'
-                    : step.id < currentStep
+                className={`cursor-pointer flex-shrink-0 lg:flex-shrink lg:w-full px-5 py-4 rounded-xl text-left text-base font-medium transition-all ${currentStep === step.id
+                  ? 'bg-[#00C6C2] text-white'
+                  : step.id < currentStep
                     ? 'bg-[#d1fae5] text-[#065f46]'
                     : 'bg-[#f3f4f6] text-[#6b7280] hover:bg-[#e5e7eb]'
-                }`}
+                  }`}
               >
                 <span className="hidden sm:inline">{step.id}. </span>{step.name}
               </button>
@@ -944,11 +943,10 @@ function BuildScenario({ onLogout }) {
             <button
               onClick={handleBack}
               disabled={currentStep === 1}
-              className={`px-8 py-4 rounded-xl text-base font-medium transition-colors ${
-                currentStep === 1
-                  ? 'bg-[#f3f4f6] text-[#9ca3af] cursor-not-allowed'
-                  : 'bg-[#f3f4f6] text-[#111827] hover:bg-[#e5e7eb]'
-              }`}
+              className={`cursor-pointer px-8 py-4 rounded-xl text-base font-medium transition-colors ${currentStep === 1
+                ? 'bg-[#f3f4f6] text-[#9ca3af] cursor-not-allowed'
+                : 'bg-[#f3f4f6] text-[#111827] hover:bg-[#e5e7eb]'
+                }`}
             >
               ← Back
             </button>

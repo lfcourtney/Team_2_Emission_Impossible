@@ -27,9 +27,8 @@ function Tooltip({ children, content, position = 'top' }) {
     >
       {children}
       <div
-        className={`absolute z-50 ${positionClasses[position]} pointer-events-none transition-all duration-150 ${
-          isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
-        }`}
+        className={`absolute z-50 ${positionClasses[position]} pointer-events-none transition-all duration-150 ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
+          }`}
       >
         <div className="bg-white text-[#111827] text-xs font-semibold rounded-lg px-3 py-1.5 shadow-lg whitespace-nowrap border border-[#e5e7eb]">
           {content}
@@ -119,9 +118,8 @@ function DetailedTooltip({ children, title, items, position = 'right' }) {
     >
       {children}
       <div
-        className={`absolute z-50 ${positionClasses[position]} transition-all duration-150 ${
-          isVisible && items && items.length > 0 ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'
-        }`}
+        className={`absolute z-50 ${positionClasses[position]} transition-all duration-150 ${isVisible && items && items.length > 0 ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'
+          }`}
       >
         <div className="bg-white text-[#111827] text-xs rounded-xl p-4 shadow-lg min-w-[200px] border border-[#e5e7eb]">
           {title && (
@@ -748,7 +746,7 @@ function Scenario2() {
           </div>
           <button
             onClick={() => navigate('/build')}
-            className="px-4 py-2 text-[#6b7280] hover:text-[#111827] text-sm font-medium transition-colors border border-[#e5e7eb] rounded-lg"
+            className="cursor-pointer px-4 py-2 text-[#6b7280] hover:text-[#111827] text-sm font-medium transition-colors border border-[#e5e7eb] rounded-lg"
           >
             Back
           </button>
@@ -769,7 +767,7 @@ function Scenario2() {
                 {selectedLifecycle && (
                   <button
                     onClick={() => setSelectedLifecycle(null)}
-                    className="text-sm text-[#00C6C2] hover:underline"
+                    className="cursor-pointer text-sm text-[#00C6C2] hover:underline"
                   >
                     Show all lifecycles
                   </button>
@@ -827,11 +825,10 @@ function Scenario2() {
                     <button
                       key={key}
                       onClick={() => setSelectedLifecycle(isSelected ? null : key)}
-                      className={`bg-white border rounded-2xl p-5 text-left transition-all ${
-                        isSelected
-                          ? 'border-[#00C6C2] ring-2 ring-[#00C6C2]/20'
-                          : 'border-[#e5e7eb] hover:border-[#00C6C2]/50 hover:shadow-md'
-                      }`}
+                      className={`cursor-pointer bg-white border rounded-2xl p-5 text-left transition-all ${isSelected
+                        ? 'border-[#00C6C2] ring-2 ring-[#00C6C2]/20'
+                        : 'border-[#e5e7eb] hover:border-[#00C6C2]/50 hover:shadow-md'
+                        }`}
                     >
                       <div className="flex justify-between items-start mb-3">
                         <h3 className="font-bold text-[#111827]">{lifecycle.name}</h3>
@@ -1130,13 +1127,13 @@ function Scenario2() {
 
             {/* Action Buttons */}
             <div className="flex flex-wrap gap-3">
-              <button className="px-5 py-2.5 bg-[#00C6C2] hover:bg-[#00B0AC] text-white text-sm font-medium rounded-lg transition-colors">
+              <button className="cursor-pointer px-5 py-2.5 bg-[#00C6C2] hover:bg-[#00B0AC] text-white text-sm font-medium rounded-lg transition-colors">
                 Save
               </button>
-              <button className="px-5 py-2.5 bg-white border border-[#e5e7eb] hover:bg-[#f3f4f6] text-[#111827] text-sm font-medium rounded-lg transition-colors">
+              <button className="cursor-pointer px-5 py-2.5 bg-white border border-[#e5e7eb] hover:bg-[#f3f4f6] text-[#111827] text-sm font-medium rounded-lg transition-colors">
                 Export All
               </button>
-              <button className="px-5 py-2.5 bg-white border border-[#e5e7eb] hover:bg-[#f3f4f6] text-[#111827] text-sm font-medium rounded-lg transition-colors">
+              <button className="cursor-pointer px-5 py-2.5 bg-white border border-[#e5e7eb] hover:bg-[#f3f4f6] text-[#111827] text-sm font-medium rounded-lg transition-colors">
                 Export Page
               </button>
             </div>
@@ -1147,13 +1144,13 @@ function Scenario2() {
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-lg font-bold text-[#111827]">Scenarios</h2>
               <div className="flex gap-2">
-                <button className="px-3 py-1.5 text-xs font-medium bg-white border border-[#e5e7eb] rounded-lg hover:bg-[#f3f4f6] transition-colors">
+                <button className="cursor-pointer px-3 py-1.5 text-xs font-medium bg-white border border-[#e5e7eb] rounded-lg hover:bg-[#f3f4f6] transition-colors">
                   Levers
                 </button>
-                <button className="px-3 py-1.5 text-xs font-medium bg-white border border-[#e5e7eb] rounded-lg hover:bg-[#f3f4f6] transition-colors">
+                <button className="cursor-pointer px-3 py-1.5 text-xs font-medium bg-white border border-[#e5e7eb] rounded-lg hover:bg-[#f3f4f6] transition-colors">
                   Filter
                 </button>
-                <button className="px-3 py-1.5 text-xs font-medium bg-white border border-[#e5e7eb] rounded-lg hover:bg-[#f3f4f6] transition-colors">
+                <button className="cursor-pointer px-3 py-1.5 text-xs font-medium bg-white border border-[#e5e7eb] rounded-lg hover:bg-[#f3f4f6] transition-colors">
                   Sort
                 </button>
               </div>
@@ -1164,11 +1161,10 @@ function Scenario2() {
               {scenariosData.map((scenario) => (
                 <div
                   key={scenario.id}
-                  className={`bg-white border rounded-xl p-4 transition-all ${
-                    comparedScenario === scenario.id
-                      ? 'border-[#00C6C2] ring-2 ring-[#00C6C2]/20'
-                      : 'border-[#e5e7eb]'
-                  }`}
+                  className={`bg-white border rounded-xl p-4 transition-all ${comparedScenario === scenario.id
+                    ? 'border-[#00C6C2] ring-2 ring-[#00C6C2]/20'
+                    : 'border-[#e5e7eb]'
+                    }`}
                 >
                   <div className="mb-3">
                     <div className="flex items-start justify-between">
@@ -1197,17 +1193,16 @@ function Scenario2() {
                   <div className="flex gap-2">
                     <button
                       onClick={() => setComparedScenario(comparedScenario === scenario.id ? null : scenario.id)}
-                      className={`flex-1 px-3 py-2 text-sm font-medium rounded-lg transition-colors ${
-                        comparedScenario === scenario.id
-                          ? 'bg-[#00C6C2] text-white'
-                          : 'bg-white border border-[#e5e7eb] text-[#111827] hover:bg-[#f3f4f6]'
-                      }`}
+                      className={`cursor-pointer flex-1 px-3 py-2 text-sm font-medium rounded-lg transition-colors ${comparedScenario === scenario.id
+                        ? 'bg-[#00C6C2] text-white'
+                        : 'bg-white border border-[#e5e7eb] text-[#111827] hover:bg-[#f3f4f6]'
+                        }`}
                     >
                       {comparedScenario === scenario.id ? 'Comparing' : 'Compare'}
                     </button>
                     <button
                       onClick={() => setViewingScenario(scenario)}
-                      className="flex-1 px-3 py-2 bg-white border border-[#e5e7eb] text-[#111827] text-sm font-medium rounded-lg hover:bg-[#f3f4f6] transition-colors"
+                      className="cursor-pointer flex-1 px-3 py-2 bg-white border border-[#e5e7eb] text-[#111827] text-sm font-medium rounded-lg hover:bg-[#f3f4f6] transition-colors"
                     >
                       View
                     </button>
@@ -1238,7 +1233,7 @@ function Scenario2() {
                 </div>
                 <button
                   onClick={() => setViewingScenario(null)}
-                  className="p-2 hover:bg-[#f3f4f6] rounded-lg transition-colors"
+                  className="cursor-pointer p-2 hover:bg-[#f3f4f6] rounded-lg transition-colors"
                 >
                   <svg className="w-5 h-5 text-[#6b7280]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -1284,13 +1279,13 @@ function Scenario2() {
                     setComparedScenario(viewingScenario.id)
                     setViewingScenario(null)
                   }}
-                  className="flex-1 px-4 py-2.5 bg-[#00C6C2] hover:bg-[#00B0AC] text-white text-sm font-medium rounded-lg transition-colors"
+                  className="cursor-pointer flex-1 px-4 py-2.5 bg-[#00C6C2] hover:bg-[#00B0AC] text-white text-sm font-medium rounded-lg transition-colors"
                 >
                   Compare This Scenario
                 </button>
                 <button
                   onClick={() => setViewingScenario(null)}
-                  className="px-4 py-2.5 bg-white border border-[#e5e7eb] text-[#111827] text-sm font-medium rounded-lg hover:bg-[#f3f4f6] transition-colors"
+                  className="cursor-pointer px-4 py-2.5 bg-white border border-[#e5e7eb] text-[#111827] text-sm font-medium rounded-lg hover:bg-[#f3f4f6] transition-colors"
                 >
                   Close
                 </button>
