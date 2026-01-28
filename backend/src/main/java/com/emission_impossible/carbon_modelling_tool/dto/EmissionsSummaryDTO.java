@@ -1,5 +1,50 @@
 package com.emission_impossible.carbon_modelling_tool.dto;
 
+
+/**
+ * A Data Transfer Object (DTO).
+ *
+ * <p>
+ * A DTO is a simple object whose only job is to carry data from one part of an
+ * application to another. In a Spring Boot application, DTOs are most commonly
+ * used to move data between:
+ * </p>
+ *
+ * <ul>
+ *   <li>The backend (server) and the frontend (user interface)</li>
+ *   <li>The database layer and the API layer</li>
+ *   <li>Different internal layers of the application</li>
+ * </ul>
+ *
+ * <p>
+ * Why DTOs are useful:
+ * </p>
+ *
+ * <ul>
+ *   <li>
+ *     <b>Safety:</b> DTOs prevent sensitive or internal data from being exposed.
+ *     Only the fields you explicitly choose are shared.
+ *   </li>
+ *   <li>
+ *     <b>Simplicity:</b> They contain only plain data, making them easy to send
+ *     over the network (for example as JSON in an API response).
+ *   </li>
+ *   <li>
+ *     <b>Separation of concerns:</b> DTOs keep your internal database models
+ *     separate from what the outside world sees, allowing each to change
+ *     independently.
+ *   </li>
+ *   <li>
+ *     <b>Stability:</b> If your database structure changes, your API does not
+ *     necessarily have to break, as long as the DTO stays the same.
+ *   </li>
+ * </ul>
+ *
+ * <p>
+ * In short: this class acts as a clean, controlled container for emissions-related
+ * data when it is being transferred between different parts of the system.
+ * </p>
+ */
 public class EmissionsSummaryDTO {
 
     private double totalValue;
