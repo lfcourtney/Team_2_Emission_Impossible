@@ -6,7 +6,6 @@ export default function ScenarioSidebar({ steps, currentStep, setCurrentStep }) 
             {/* Sidebar Header */}
             <div className="p-6 border-b border-white/5">
                 <div className="flex items-center gap-3 text-white">
-                    <div className="w-8 h-8 rounded-lg bg-secondary text-primary flex items-center justify-center font-bold">S</div>
                     <span className="font-heading font-bold text-lg">Scenario Builder</span>
                 </div>
             </div>

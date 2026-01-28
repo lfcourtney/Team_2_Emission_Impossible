@@ -2,6 +2,7 @@
 import { useState, useRef, useEffect } from 'react';
 // Import icons from lucide-react
 import { MessageSquare, X, Send, Sparkles, Bot } from 'lucide-react';
+import { useLocation } from 'react-router-dom';
 
 /**
  * This component renders an inteactive chat interface for Carbon Pilot AI.
@@ -57,19 +58,13 @@ export default function CarbonPilot() {
         }, 1500);
     };
 
-    return (
-        <>
-            {/* Toggle Button */}
-            <button
-                onClick={() => setIsOpen(!isOpen)}
-                className={`fixed bottom-6 right-6 z-50 p-4 rounded-full shadow-2xl transition-all duration-300 hover:scale-110 flex items-center justify-center
-                ${isOpen ? 'bg-red-500 rotate-90' : 'bg-gradient-to-r from-secondary to-blue-500 animate-bounce-subtle'}`}
-            >
-                {isOpen ? <X className="text-white" size={24} /> : <Bot className="text-primary" size={28} />}
-            </button>
+    const needsClearance = useLocation().pathname === '/build-scenario';
+    const bottomPosition = needsClearance ? 'bottom-30' : 'bottom-6';
 
+    return (
+        <div className={`fixed right-6 z-50 ${bottomPosition}`}>
             {/* Chat Interface */}
-            <div className={`fixed bottom-24 right-6 z-50 w-[380px] h-[500px] bg-primary/95 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl flex flex-col transition-all duration-300 origin-bottom-right
+            <div className={`absolute bottom-full right-0 mb-4 w-[380px] h-[500px] bg-primary/95 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl flex flex-col transition-all duration-300 origin-bottom-right
                 ${isOpen ? 'scale-100 opacity-100' : 'scale-0 opacity-0 pointer-events-none'}`}>
 
                 {/* Header */}
@@ -147,6 +142,15 @@ export default function CarbonPilot() {
                     </div>
                 </div>
             </div>
-        </>
+
+            {/* Toggle Button */}
+            <button
+                onClick={() => setIsOpen(!isOpen)}
+                className={`p-4 rounded-full shadow-2xl transition-all duration-300 hover:scale-110 flex items-center justify-center
+                ${isOpen ? 'bg-red-500 rotate-90' : 'bg-gradient-to-r from-secondary to-blue-500 animate-bounce-subtle'}`}
+            >
+                {isOpen ? <X className="text-white" size={24} /> : <Bot className="text-primary" size={28} />}
+            </button>
+        </div>
     );
 }
