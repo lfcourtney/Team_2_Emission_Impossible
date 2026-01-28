@@ -219,7 +219,7 @@ export default function Login() {
                 {/* Video */}
                 <video className="absolute inset-0 w-full h-full object-cover opacity-80" autoPlay loop muted playsInline>
                     <source
-                        src="https://videos.pexels.com/video-files/3129671/3129671-uhd_2560_1440_30fps.mp4"
+                        src="/public/intro.mp4"
                         type="video/mp4"
                     />
                 </video>
@@ -237,6 +237,7 @@ export default function Login() {
                             {getGreetingMessage()}
                         </h2>
                         
+                        {/* Statistics Grid */}
                         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8">
                             <div className="bg-white/5 backdrop-blur-md border border-white/10 p-4 rounded-2xl hover:bg-white/10 transition-colors cursor-default group">
                                 <div className="bg-white/10 w-10 h-10 rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
