@@ -40,6 +40,7 @@ CarbonIQ: A web‑based carbon modelling tool (Java Spring) to show customers po
             <li><a href="#user-personas">User Personas</a></li>
             <li><a href="#user-stories">User Stories</a></li>
             <li><a href="#work-breakdown-structure-wbs">Work Breakdown Structure (WBS)</a></li>
+            <li><a href="#swimlane-diagram-aka-activity-diagram">Swimlane Diagram</a></li>
             <li><a href="#uml-class-diagram">UML Class Diagram</a></li>
             <li><a href="#code-coverage">Spring Boot Backend Code Coverage</a></li>
             </ul>
@@ -136,6 +137,12 @@ System Design Document (SDD) outlines specifications used to build the system; a
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+#### Swimlane Diagram (aka Activity Diagram)
+
+![Swimlane Diagram](/images/swim_lane.png)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 #### UML Class Diagram
 
 ![UML Class Diagram](/images/uml_class_diagram.png)
@@ -181,7 +188,7 @@ CREATE DATABASE `carbon-iq`;
   - [x] Skills matrix
   - [x] User stories; at least 3 personas
   - [x] Work Breakdown Structure (WBS)
-  - [ ] Swim-lane diagram (or UML activity diagram)
+  - [x] Swim-lane diagram (or UML activity diagram)
   - [x] UML class diagram
   - [ ] Gantt chart (alternatively burnup or burndown chart)
   - [ ] Consider technical debts. Need to mention this in presentation.
