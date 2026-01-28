@@ -6,6 +6,7 @@ import { seedDatabase } from './fakeBackend/SeedData';
 // Pages
 import Login from './pages/Login';
 import Overview from './pages/Overview';
+import Hub from './pages/Hub';
 import Analysis from './pages/Analysis';
 import Calculator from './pages/Calculator';
 import BuildScenario from './pages/BuildScenario';
@@ -16,26 +17,14 @@ import { RibbonProvider } from './contexts/RibbonContext';
 seedDatabase();
 
 // Protected Route Wrapper Component
-// Specifically, is a React *functional component*.
-// Like any React component, it receives its inputs via props.
-const ProtectedRoute = ({ children, title }) => {
-
-  // The first argument we care about here is `children`.
-  // `children` represents any child components wrapped inside <ProtectedRoute>...</ProtectedRoute>
-  // For example: <ProtectedRoute><Overview /></ProtectedRoute>
-
-  // We access authentication state from the AuthContext using the custom hook.
+const ProtectedRoute = ({ children, title, useLayout = true }) => {
   const { isAuthenticated } = useAuth();
 
-  // If the user is NOT authenticated,
-  // immediately redirect them to the login page.
-  // <Navigate /> is a React Router component used for programmatic redirects.
   if (!isAuthenticated) return <Navigate to="/login" />;
 
+  // If useLayout is false, render children directly (full screen)
+  if (!useLayout) return children;
 
-  // If the user *is* authenticated,
-  // render the Layout component and pass in the page title.
-  // The `children` are rendered *inside* the Layout component.
   return <Layout title={title}>{children}</Layout>;
 };
 
@@ -48,7 +37,15 @@ function App() {
             <Routes>
               <Route path="/login" element={<Login />} />
 
+              {/* Hub (Faux Landing Page) */}
               <Route path="/" element={
+                <ProtectedRoute useLayout={false}>
+                  <Hub />
+                </ProtectedRoute>
+              } />
+
+              {/* Main Dashboard - Moved from '/' */}
+              <Route path="/dashboard" element={
                 <ProtectedRoute title="Dashboard Overview">
                   <Overview />
                 </ProtectedRoute>

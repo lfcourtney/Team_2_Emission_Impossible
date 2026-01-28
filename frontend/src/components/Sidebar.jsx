@@ -8,7 +8,7 @@ export default function Sidebar() {
     const { logout } = useAuth();
 
     const menuItems = [
-        { path: '/', icon: LayoutDashboard, label: 'Overview' },
+        { path: '/dashboard', icon: LayoutDashboard, label: 'Overview' },
         { path: '/analysis', icon: BarChart3, label: 'Analysis' },
         { path: '/calculator', icon: Calculator, label: 'Calculator' },
         { path: '/build-scenario', icon: GitBranch, label: 'Scenario Builder' },
@@ -19,7 +19,10 @@ export default function Sidebar() {
     return (
         <div className="h-screen w-20 lg:w-64 bg-primary border-r border-white/5 flex flex-col transition-all duration-300 fixed left-0 top-0 z-40">
             {/* Logo Area */}
-            <div className="h-20 flex items-center justify-center lg:justify-start lg:px-8 border-b border-white/5">
+            <div 
+                className="h-20 flex items-center justify-center lg:justify-start lg:px-8 border-b border-white/5 cursor-pointer hover:bg-white/5 transition-colors"
+                onClick={() => navigate('/')}
+            >
                 <div className="w-10 h-10 bg-secondary rounded-lg flex items-center justify-center text-primary font-bold shadow-[0_0_15px_rgba(0,198,194,0.3)]">
                     <Leaf size={24} />
                 </div>
