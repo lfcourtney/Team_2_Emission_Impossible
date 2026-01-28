@@ -2,7 +2,7 @@ import { TrendingDown } from 'lucide-react';
 
 export default function LiveEstimate({ liveImpact }) {
     return (
-        <div className="bg-emerald-500/10 border border-emerald-500/20 rounded-xl p-4">
+        <div className="p-4">
             <div className="flex items-center justify-between mb-2">
                 <span className="text-secondary text-xs uppercase font-bold tracking-wider">Live Estimate</span>
                 <TrendingDown size={14} className="text-secondary" />

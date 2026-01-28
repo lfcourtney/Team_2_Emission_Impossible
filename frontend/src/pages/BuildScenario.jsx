@@ -205,7 +205,7 @@ export default function BuildScenario() {
 
   // WIZARD VIEW - DASHBOARD LAYOUT
   return (
-    <div className="h-full rounded-3xl overflow-hidden flex flex-col lg:flex-row shadow-2xl">
+    <div className="h-full w-full overflow-hidden flex flex-col lg:flex-row">
       {/* SIDEBAR */}
       <div className="lg:w-80 bg-black/20 border-r border-white/10 flex flex-col">
           <ScenarioSidebar 
@@ -215,7 +215,7 @@ export default function BuildScenario() {
           />
           
           {/* Live Monitor / Bottom Sidebar */}
-          <div className="p-4 bg-black/20 border-t border-white/5">
+          <div className="p-2 bg-black/20 border-t border-white/5">
               <LiveEstimate liveImpact={liveImpact} />
           </div>
       </div>

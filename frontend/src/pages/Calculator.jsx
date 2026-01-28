@@ -114,7 +114,7 @@ export default function Calculator() {
     const activeProjection = mode === 'existing' ? projectionExisting : projectionProject;
 
     return (
-        <div className="space-y-6">
+        <div className="p-6 lg:p-8 space-y-6">
             
             {/* Mode Switcher */}
             <div className="flex justify-center mb-4">

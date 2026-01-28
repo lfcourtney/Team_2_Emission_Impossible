@@ -62,7 +62,7 @@ export default function Analysis() {
     };
 
     return (
-        <div className="space-y-6 relative">
+        <div className="space-y-6 p-6 lg:p-8 relative">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                 <div>
                      <h2 className="text-2xl font-heading font-bold text-white">Emission Records</h2>
