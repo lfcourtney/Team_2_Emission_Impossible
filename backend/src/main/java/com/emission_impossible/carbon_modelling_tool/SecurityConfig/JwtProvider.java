@@ -43,6 +43,11 @@ public class JwtProvider {
         return String.join(",",auths);
     }
 
+    /**
+     * JSON web token (JWT) contains the users email. Unhash the JWT, and the email will be displayed as a plain string. This method takes the hashed JWT and returns the email contained within the JWT as a plain string.
+     * @param jwt JSON web token (JWT)
+     * @return The email contained within the JWT as a plain string
+     */
 
     @SuppressWarnings("deprecation")
     public static String getEmailFromJwtToken(String jwt) {
