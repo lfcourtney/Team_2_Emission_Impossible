@@ -8,16 +8,14 @@ import {
   MapPin, 
   Clock, 
   ArrowRight, 
-  ArrowLeft, 
-  CheckCircle2, 
-  Save,
-  HelpCircle,
-  FileText,
-  TrendingDown,
-  AlertTriangle
+  ArrowLeft,
+  FileText
 } from 'lucide-react';
 import { LocationService } from '../fakeBackend/services/LocationService';
 import { PieChart, Pie, Cell, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip as RechartsTooltip, Legend } from 'recharts';
+import ScenarioSidebar from '../components/ScenarioBuilder/ScenarioSidebar';
+import LiveEstimate from '../components/ScenarioBuilder/LiveEstimate';
+import ScenarioForm from '../components/ScenarioBuilder/ScenarioForm';
 
 const steps = [
   { id: 1, name: 'Project Scope', icon: Server, description: 'Define the scope and lifecycle' },
@@ -112,7 +110,7 @@ export default function BuildScenario() {
   const handleNext = () => {
     if (currentStep < 6) {
       setCurrentStep(currentStep + 1);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      // Removed window.scrollTo because we will use a scrollable div in the dashboard layout
     } else {
       setShowReport(true);
     }
@@ -123,142 +121,6 @@ export default function BuildScenario() {
         setShowReport(false);
     } else if (currentStep > 1) {
       setCurrentStep(currentStep - 1);
-    }
-  };
-
-  const inputClass = "w-full bg-primary/50 border border-white/10 focus:border-secondary rounded-xl px-4 py-3 text-white placeholder-gray-500 outline-none transition-all focus:ring-1 focus:ring-secondary/50";
-  const labelClass = "block text-sm font-medium text-gray-300 mb-1.5 ml-1";
-  const cardClass = "bg-white/5 border border-white/10 rounded-2xl p-6 shadow-xl animate-in slide-in-from-right-4 duration-500";
-
-  const renderStepContent = () => {
-    switch (currentStep) {
-      case 1: // Project Scope
-        return (
-          <div className="space-y-6">
-            <div className={cardClass}>
-              <h3 className="text-lg font-heading font-semibold text-white mb-4 flex items-center gap-2">
-                <Server className="w-5 h-5 text-secondary" /> Project Basics
-              </h3>
-              <div className="grid gap-6">
-                <div>
-                  <label className={labelClass}>Project Name</label>
-                  <input type="text" name="projectName" value={formData.projectName} onChange={handleInputChange} className={inputClass} />
-                </div>
-                 <div>
-                  <label className={labelClass}>Duration (Months)</label>
-                  <input type="number" name="durationMonths" value={formData.durationMonths} onChange={handleInputChange} className={inputClass} />
-                </div>
-              </div>
-            </div>
-          </div>
-        );
-      case 2: // Infrastructure
-        return (
-            <div className="space-y-6">
-                <div className={cardClass}>
-                    <h3 className="text-lg font-heading font-semibold text-white mb-4 flex items-center gap-2">
-                        <Cloud className="w-5 h-5 text-secondary" /> Infrastructure Scale
-                    </h3>
-                    <div className="grid gap-6">
-                        <div>
-                            <label className={labelClass}>Environments (Dev, Test, Stage, Prod)</label>
-                            <input type="number" name="environmentCount" value={formData.environmentCount} onChange={handleInputChange} className={inputClass} />
-                            <p className="text-xs text-gray-400 mt-1">More environments = more idle compute waste.</p>
-                        </div>
-                        <div>
-                            <label className={labelClass}>Est. Storage (TB)</label>
-                            <input type="number" name="storageTB" value={formData.storageTB} onChange={handleInputChange} className={inputClass} />
-                        </div>
-                    </div>
-                </div>
-            </div>
-        );
-      case 3: // AI
-        return (
-             <div className="space-y-6">
-                <div className={cardClass}>
-                    <h3 className="text-lg font-heading font-semibold text-white mb-4 flex items-center gap-2">
-                        <Cpu className="w-5 h-5 text-secondary" /> Compute Intensity (AI/ML)
-                    </h3>
-                    <div className="grid gap-6">
-                        <div className="bg-yellow-500/10 border border-yellow-500/20 p-4 rounded-xl flex gap-3">
-                            <AlertTriangle className="text-yellow-500 shrink-0" size={20} />
-                            <p className="text-sm text-yellow-200">AI Model training is extremely energy intensive. Only fill this if you are training custom models.</p>
-                        </div>
-                        <div className="grid grid-cols-2 gap-4">
-                             <div>
-                                <label className={labelClass}>GPU Count</label>
-                                <input type="number" name="gpuCount" value={formData.gpuCount} onChange={handleInputChange} className={inputClass} />
-                            </div>
-                            <div>
-                                <label className={labelClass}>Training Hours / Month</label>
-                                <input type="number" name="trainingHours" value={formData.trainingHours} onChange={handleInputChange} className={inputClass} />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        );
-       case 4: // Workforce
-         return (
-            <div className="space-y-6">
-                <div className={cardClass}>
-                    <h3 className="text-lg font-heading font-semibold text-white mb-4 flex items-center gap-2">
-                        <Users className="w-5 h-5 text-secondary" /> Team Impact
-                    </h3>
-                    <div className="grid gap-6">
-                        <div>
-                             <label className={labelClass}>Team Size (FTEs)</label>
-                             <input type="number" name="teamSize" value={formData.teamSize} onChange={handleInputChange} className={inputClass} />
-                        </div>
-                        <div>
-                            <label className={labelClass}>Remote Work %</label>
-                            <input type="range" name="remotePercent" min="0" max="100" value={formData.remotePercent} onChange={handleInputChange} className="w-full h-2 bg-primary rounded-lg appearance-none cursor-pointer accent-secondary" />
-                            <div className="flex justify-between text-xs text-gray-400 mt-1">
-                                <span>0% (Full Office)</span>
-                                <span className="text-secondary font-bold">{formData.remotePercent}%</span>
-                                <span>100% (Remote)</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-         );
-       case 5: // Location
-         return (
-             <div className="space-y-6">
-                <div className={cardClass}>
-                    <h3 className="text-lg font-heading font-semibold text-white mb-4 flex items-center gap-2">
-                        <MapPin className="w-5 h-5 text-secondary" /> Primary Location
-                    </h3>
-                     <div>
-                        <label className={labelClass}>Region</label>
-                        <select name="officeLocation" value={formData.officeLocation} onChange={handleInputChange} className={inputClass}>
-                            {locations.map(loc => <option key={loc.id} value={loc.id}>{loc.city}, {loc.country}</option>)}
-                            <option value="other">Other (Global Avg)</option>
-                        </select>
-                    </div>
-                </div>
-             </div>
-         );
-       case 6: // Timeline
-          return (
-             <div className="space-y-6">
-                 <div className={cardClass}>
-                    <h3 className="text-lg font-heading font-semibold text-white mb-4 flex items-center gap-2">
-                        <Clock className="w-5 h-5 text-secondary" /> Review
-                    </h3>
-                    <div className="text-center py-10">
-                        <div className="inline-flex items-center justify-center p-4 bg-secondary/20 rounded-full mb-4 text-secondary">
-                            <FileText size={48} />
-                        </div>
-                        <h2 className="text-2xl font-bold text-white mb-2">Ready to generate report?</h2>
-                        <p className="text-gray-400 max-w-md mx-auto">We've gathered all the necessary data points to estimate your project's carbon footprint.</p>
-                    </div>
-                 </div>
-             </div>
-          );
-      default: return null;
     }
   };
 
@@ -341,85 +203,66 @@ export default function BuildScenario() {
       )
   }
 
-  // WIZARD VIEW
+  // WIZARD VIEW - DASHBOARD LAYOUT
   return (
-    <div className="flex flex-col lg:flex-row gap-8">
-      {/* Navigation & Live Ticker Sidebar */}
-      <div className="lg:w-80 flex-shrink-0 flex flex-col gap-6">
-          {/* Nav */}
-          <div className="bg-white/5 rounded-2xl border border-white/10 p-4">
-            <h4 className="text-gray-400 text-xs font-bold uppercase tracking-wider mb-4 px-2">Scenario Steps</h4>
-            <nav className="space-y-1">
-              {steps.map((step) => {
-                const isActive = currentStep === step.id;
-                const isCompleted = currentStep > step.id;
-                const Icon = step.icon;
-                return (
-                  <button
-                    key={step.id}
-                    onClick={() => { if (step.id < currentStep) setCurrentStep(step.id); }}
-                    disabled={step.id > currentStep}
-                    className={`w-full flex items-center gap-3 p-3 rounded-xl text-left transition-all duration-200 ${isActive ? 'bg-secondary text-primary font-bold' : ''} ${step.id > currentStep ? 'opacity-50' : 'hover:bg-white/5'}`}
-                  >
-                    <Icon size={18} />
-                    <span className="text-sm">{step.name}</span>
-                    {isCompleted && <CheckCircle2 size={14} className="ml-auto text-secondary" />}
-                  </button>
-                );
-              })}
-            </nav>
-          </div>
-
-          {/* Live Impact Ticker */}
-          <div className="bg-gradient-to-br from-secondary/20 to-primary border border-secondary/20 rounded-2xl p-6 sticky top-4">
-               <div className="flex items-center gap-2 mb-4 text-secondary">
-                   <TrendingDown size={20} />
-                   <span className="font-bold text-sm uppercase tracking-wider">Live Estimate</span>
-               </div>
-               
-               <div className="space-y-4">
-                   <div>
-                       <div className="text-xs text-gray-400 uppercase mb-1">Monthly Footprint</div>
-                       <div className="text-3xl font-bold text-white">{liveImpact.monthly.toFixed(0)} <span className="text-sm font-normal text-gray-500">kg</span></div>
-                   </div>
-                   
-                   <div className="h-px bg-white/10 my-2"></div>
-                   
-                   <div className="space-y-2">
-                       {liveImpact.breakdown.map((item, i) => (
-                           <div key={i} className="flex justify-between text-xs">
-                               <span className="text-gray-300 flex items-center gap-2">
-                                   <div className="w-2 h-2 rounded-full" style={{backgroundColor: item.color}}></div>
-                                   {item.name}
-                               </span>
-                               <span className="text-white font-mono">{(item.value / formData.durationMonths).toFixed(0)}</span>
-                           </div>
-                       ))}
-                   </div>
-               </div>
+    <div className="h-full rounded-3xl overflow-hidden flex flex-col lg:flex-row shadow-2xl">
+      {/* SIDEBAR */}
+      <div className="lg:w-80 bg-black/20 border-r border-white/10 flex flex-col">
+          <ScenarioSidebar 
+              steps={steps} 
+              currentStep={currentStep} 
+              setCurrentStep={setCurrentStep} 
+          />
+          
+          {/* Live Monitor / Bottom Sidebar */}
+          <div className="p-4 bg-black/20 border-t border-white/5">
+              <LiveEstimate liveImpact={liveImpact} />
           </div>
       </div>
 
-      {/* Main Form Area */}
-      <div className="flex-1">
-        {renderStepContent()}
+      {/* MAIN CONTENT */}
+      <div className="flex-1 flex flex-col relative bg-gradient-to-br from-white/5 to-transparent">
+        {/* Header */}
+        <div className="px-8 py-6 border-b border-white/5 flex justify-between items-center">
+             <div>
+                 <h2 className="text-2xl font-heading font-bold text-white">{steps[currentStep-1].name}</h2>
+                 <p className="text-sm text-gray-400">{steps[currentStep-1].description}</p>
+             </div>
+             {/* Step counter */}
+             <div className="text-xs font-mono text-gray-500 border border-white/10 px-3 py-1 rounded-full">
+                 Step {currentStep} / {steps.length}
+             </div>
+        </div>
 
-        <div className="mt-8 flex items-center justify-between border-t border-white/10 pt-6">
-          <button
-            onClick={handleBack}
-            disabled={currentStep === 1}
-            className={`flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all ${currentStep === 1 ? 'text-gray-600 opacity-0' : 'text-gray-300 hover:text-white hover:bg-white/5'}`}
-          >
-            <ArrowLeft className="w-4 h-4" /> Back
-          </button>
+        {/* Content Body */}
+        <div className="flex-1 overflow-y-auto p-4 sm:p-8">
+            <div className="max-w-3xl mx-auto pt-4">
+                <ScenarioForm 
+                    currentStep={currentStep} 
+                    formData={formData} 
+                    handleInputChange={handleInputChange} 
+                    locations={locations} 
+                />
+            </div>
+        </div>
 
-          <button
-            onClick={handleNext}
-            className="group flex items-center gap-2 px-8 py-3 bg-secondary text-primary hover:bg-white font-bold rounded-xl shadow-lg transition-all duration-300 transform hover:scale-[1.02]"
-          >
-            {currentStep === 6 ? 'Generate Report' : 'Continue'} 
-            {currentStep === 6 ? <FileText className="w-4 h-4" /> : <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />}
-          </button>
+        {/* Action Footer */}
+        <div className="p-6 border-t border-white/5 bg-black/10 backdrop-blur-md flex justify-between items-center">
+             <button
+                onClick={handleBack}
+                disabled={currentStep === 1}
+                className={`flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all ${currentStep === 1 ? 'text-gray-600 opacity-0 cursor-default' : 'text-gray-400 hover:text-white hover:bg-white/5'}`}
+             >
+                <ArrowLeft className="w-4 h-4" /> Back
+             </button>
+
+             <button
+                onClick={handleNext}
+                className="group flex items-center gap-3 px-8 py-3 bg-secondary text-primary hover:bg-white font-bold rounded-xl shadow-[0_0_20px_rgba(0,198,194,0.3)] transition-all duration-300"
+             >
+                {currentStep === 6 ? 'Generate Report' : 'Continue'} 
+                {currentStep === 6 ? <FileText className="w-4 h-4" /> : <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />}
+             </button>
         </div>
       </div>
     </div>

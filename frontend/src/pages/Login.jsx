@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { ArrowRight, Leaf, CheckCircle, ArrowLeft, AlertCircle, BarChart3, Globe, ShieldCheck } from 'lucide-react';
@@ -46,17 +46,16 @@ export default function Login() {
     };
 
     // Define login messages
-    function getGreetingMessage() {
+    const greetingMessage = useMemo(() => {
+        const loginMessages = [
+            "Sustainability starts here.",
+            "Empower your green initiatives.",
+            "Data-driven environmental impact.",
+            "Sustainability meets Intelligence.",
+        ];
         const index = Math.floor(Math.random() * loginMessages.length);
         return loginMessages[index];
-    }
-
-    const loginMessages = [
-        "Sustainability starts here.",
-        "Empower your green initiatives.",
-        "Data-driven environmental impact.",
-        "Sustainability meets Intelligence.",
-    ]
+    }, []);    // Memoize to avoid changing on every render. Calc only on component mount.
 
     return (
         <div className="min-h-screen flex flex-col lg:flex-row bg-primary text-white">
@@ -234,7 +233,7 @@ export default function Login() {
 
                         {/* Page Greeting */}
                         <h2 className="text-4xl sm:text-5xl font-heading font-bold text-white mb-6 leading-tight drop-shadow-lg">
-                            {getGreetingMessage()}
+                            {greetingMessage}
                         </h2>
                         
                         {/* Statistics Grid */}

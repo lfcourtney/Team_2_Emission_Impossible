@@ -130,7 +130,7 @@ export default function Overview() {
 
     // The return statement contains the JSX that defines the structure of the Overview page. (HTML-like syntax)
     return (
-        <div className="space-y-6">
+        <div className="p-6 lg:p-8 space-y-6">
             {/* Top Stats Row */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <StatCard

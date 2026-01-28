@@ -21,7 +21,7 @@ export default function Layout({ children, title = "Dashboard" }) {
 
                 <Ribbon />
                 
-                <main className="flex-1 p-6 lg:p-8 overflow-x-hidden relative">
+                <main className="flex-1 overflow-x-hidden relative">
                     {/* This wrapper centers the content and adds animation to child elements */}
                     <div className="max-w-7xl mx-auto w-full space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500 flex-1 flex flex-col">
                         {children}
