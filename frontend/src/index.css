@@ -1,3 +1,4 @@
+@import url('https://fonts.cdnfonts.com/css/avenir-next-lt-pro');
 @import "tailwindcss";
 
 @theme {
@@ -6,15 +7,15 @@
     --font-body: "Avenir Next LT Pro", "Avenir Next", Avenir, sans-serif;
 
     /* --- Color Palette --- */
-    /* Primary: Deep Midnight Teal (Backgrounds, Text, Navbar) */
+    /* Primary: Midnight Black (Backgrounds, Text, Navbar) */
     --color-primary: #052831;
     --color-primary-foreground: #ffffff;
     
-    /* Secondary: Electric Cyan (Accents, Buttons, Graphs, Highlights) */
+    /* Secondary: Teal (Accents, Buttons, Graphs, Highlights) */
     --color-secondary: #00c6c2;
     --color-secondary-foreground: #052831;
 
-    /* Base: Warm Cream (Page Backgrounds, Cards) */
+    /* Base: Putty (Page Backgrounds, Cards) */
     --color-accent: #fdf7ea;
     --color-accent-foreground: #052831;
 }
