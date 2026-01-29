@@ -321,7 +321,7 @@ export default function Calculator() {
 
 
                     {/* ROW 3: CTA */}
-                    <div className="bg-black/40 border border-white/10 border-l-4 border-l-secondary rounded-xl p-6 flex flex-col md:flex-row items-center justify-between gap-6 hover:bg-black/60 transition-colors cursor-pointer group" onClick={() => navigate('/build')}>
+                    <div className="bg-black/40 border border-white/10 border-l-4 border-l-secondary rounded-xl p-6 flex flex-col md:flex-row items-center justify-between gap-6 hover:bg-black/60 transition-colors cursor-pointer group" onClick={() => navigate('/build-scenario')}>
                         <div>
                             <h4 className="text-lg font-bold text-white mb-1 group-hover:text-secondary transition-colors">Start Building a Project Scenario</h4>
                             <p className="text-gray-400 text-sm">Take these strategic targets and apply them to a specific project roadmap.</p>
