@@ -1,5 +1,5 @@
 import { useNavigate, useLocation } from 'react-router-dom';
-import { LayoutDashboard, BarChart3, Calculator, User, LogOut, Settings, Leaf } from 'lucide-react';
+import { LayoutDashboard, BarChart3, Calculator, User, LogOut, Settings, Leaf, Braces } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 
 export default function Sidebar() {
@@ -11,6 +11,7 @@ export default function Sidebar() {
         { path: '/dashboard', icon: LayoutDashboard, label: 'Overview' },
         { path: '/analysis', icon: BarChart3, label: 'Analysis' },
         { path: '/calculator', icon: Calculator, label: 'Calculator' },
+        { path: '/build-scenario', icon: Braces, label: 'Build Scenario' },
     ];
 
     const isActive = (path) => location.pathname === path;

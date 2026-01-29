@@ -96,7 +96,7 @@ export default function ScenarioForm({ currentStep, formData, handleInputChange,
                     <div>
                         <label className={labelClass}>Region</label>
                         <select name="officeLocation" value={formData.officeLocation} onChange={handleInputChange} className={inputClass}>
-                            {locations.map(loc => <option key={loc.id} value={loc.id}>{loc.city}, {loc.country}</option>)}
+                            {locations.map(loc => <option key={loc.id} value={loc.id}>{loc.name} - {loc.region}</option>)}
                             <option value="other">Other (Global Avg)</option>
                         </select>
                         <p className="text-xs text-gray-500 mt-2">Grid intensity varies significantly by region.</p>
