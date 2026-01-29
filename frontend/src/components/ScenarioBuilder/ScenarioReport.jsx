@@ -2,7 +2,7 @@ import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip as RechartsTooltip, L
 
 export default function ScenarioReport({ formData, liveImpact, handleBack }) {
     return (
-        <div className="space-y-8 animate-in zoom-in-95 duration-500">
+        <div className="space-y-8 p-10 animate-in zoom-in-95 duration-500">
             {/* Header */}
             <div className="flex justify-between items-start">
                 <div>
